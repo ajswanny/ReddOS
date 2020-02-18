@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		147E442C23FC4493001699A8 /* HomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147E442B23FC4493001699A8 /* HomeView.storyboard */; };
+		147E442E23FC449C001699A8 /* InboxView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147E442D23FC449C001699A8 /* InboxView.storyboard */; };
+		147E443023FC44A3001699A8 /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 147E442F23FC44A3001699A8 /* AccountView.storyboard */; };
 		148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5223E0AB0600BECD84 /* AppDelegate.swift */; };
 		148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */; };
 		148B7F5723E0AB0600BECD84 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5623E0AB0600BECD84 /* FirstViewController.swift */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		147E442B23FC4493001699A8 /* HomeView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeView.storyboard; sourceTree = "<group>"; };
+		147E442D23FC449C001699A8 /* InboxView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InboxView.storyboard; sourceTree = "<group>"; };
+		147E442F23FC44A3001699A8 /* AccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountView.storyboard; sourceTree = "<group>"; };
 		148B7F4F23E0AB0600BECD84 /* ReddOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReddOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B7F5223E0AB0600BECD84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +86,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		147E443123FC44A9001699A8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				147E442F23FC44A3001699A8 /* AccountView.storyboard */,
+				147E442B23FC4493001699A8 /* HomeView.storyboard */,
+				147E442D23FC449C001699A8 /* InboxView.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		148B7F4623E0AB0600BECD84 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +119,7 @@
 		148B7F5123E0AB0600BECD84 /* ReddOS */ = {
 			isa = PBXGroup;
 			children = (
+				147E443123FC44A9001699A8 /* Storyboards */,
 				148B7F5223E0AB0600BECD84 /* AppDelegate.swift */,
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
 				148B7F5623E0AB0600BECD84 /* FirstViewController.swift */,
@@ -202,6 +219,7 @@
 				TargetAttributes = {
 					148B7F4E23E0AB0600BECD84 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 					148B7F6923E0AB0700BECD84 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -240,6 +258,9 @@
 			files = (
 				148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */,
 				148B7F6123E0AB0600BECD84 /* Assets.xcassets in Resources */,
+				147E442C23FC4493001699A8 /* HomeView.storyboard in Resources */,
+				147E443023FC44A3001699A8 /* AccountView.storyboard in Resources */,
+				147E442E23FC449C001699A8 /* InboxView.storyboard in Resources */,
 				148B7F5C23E0AB0600BECD84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MB59FVVXCR;
 				INFOPLIST_FILE = ReddOS/Info.plist;
@@ -451,6 +473,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandpeople.ReddOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -460,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MB59FVVXCR;
 				INFOPLIST_FILE = ReddOS/Info.plist;
@@ -469,6 +494,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sandpeople.ReddOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
