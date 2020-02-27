@@ -14,10 +14,18 @@ import Foundation
 class Submission {
     
     var author: Redditor
+    
+    // The title of the submission.
     var title: String
+    
+    // Time the submission was created
     var creationDate: Date
-    var body: String
-    var link: String
+    
+    // The submissions’ selftext - an empty string if a link post.
+    var selftext: String
+    
+    // The URL the submission links to, or the permalink if a selfpost.
+    var url: URL
     
     // Alphanumeric ID
     var id: String
@@ -36,8 +44,8 @@ class Submission {
         self.subreddit = subreddit
         self.comments = comments
         self.title = submissionContent.title
-        self.body = submissionContent.body
-        self.link = submissionContent.link
+        self.selftext = submissionContent.selftext
+        self.url = submissionContent.url
     }
     
     // Create a Comment for a Submission

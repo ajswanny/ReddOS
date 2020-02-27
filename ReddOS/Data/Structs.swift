@@ -22,6 +22,6 @@ public struct UserContent {
 
 public struct SubmissionContent {
     var title: String
-    var body: String
-    var link: String
+    var selftext: String
+    var url: URL
 }
