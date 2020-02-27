@@ -11,19 +11,9 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    struct FakeRedditUser {
-        let username = "fakeUsername"
-        let password = "fakePassword"
-        let subscribedSubreddits = ["news", "gifs", "aww", "askreddit"] // Case sensitive?
-        let friendNames = ["aFriend"] // Must convert to actual objects
-        let posts = ["aPost"] // Must convert to actual objects
-    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let fakeRedditUser = FakeRedditUser()
         
         return true
     }
