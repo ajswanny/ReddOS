@@ -102,7 +102,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14861D402407991B00D18976 /* Data */ = {
+		143788E9240877CC00B66388 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				14861D402407991B00D18976 /* RedditData */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		14861D402407991B00D18976 /* RedditData */ = {
 			isa = PBXGroup;
 			children = (
 				14861D412407992D00D18976 /* Redditor.swift */,
@@ -114,7 +122,7 @@
 				14861D4D2407A91600D18976 /* Message.swift */,
 				14861D512408189000D18976 /* Structs.swift */,
 			);
-			path = Data;
+			path = RedditData;
 			sourceTree = "<group>";
 		};
 		148B7F4623E0AB0600BECD84 = {
@@ -140,7 +148,7 @@
 		148B7F5123E0AB0600BECD84 /* ReddOS */ = {
 			isa = PBXGroup;
 			children = (
-				14861D402407991B00D18976 /* Data */,
+				143788E9240877CC00B66388 /* API */,
 				145234CF23FEE418003D4B13 /* AccountView.storyboard */,
 				145234CC23FEE3BB003D4B13 /* InboxView.storyboard */,
 				145234C923FEE324003D4B13 /* HomeView.storyboard */,
