@@ -104,6 +104,7 @@ class AuthenticationController: NSObject {
     }
     
     // MARK: Authentication Methods
+    /// The main method to use in view controllers
     /// Validates authentication and performs it if it all data is provided correctly
     public func attemptAuthentication(fromView: ASWebAuthenticationPresentationContextProviding) {
         // Do validation
