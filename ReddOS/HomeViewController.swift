@@ -27,14 +27,17 @@ class HomeViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Hot thread", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "hotThread", for: indexPath)
         let submisson = hotSubmissions[indexPath.row]
         cell.textLabel!.text = submisson.title
        // cell.textLabel?.text = submisson.subreddit
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        87
+    }
 
-}
-//
 }
 
 class HomeViewCell: UITableViewCell {
@@ -43,10 +46,6 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var hotThreadSubReddit: UILabel!
     @IBOutlet weak var upVote: UIButton!
     @IBOutlet weak var downVote: UIButton!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
 }
 
