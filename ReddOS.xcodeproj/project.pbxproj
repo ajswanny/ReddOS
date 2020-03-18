@@ -30,8 +30,8 @@
 		148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */; };
 		148B7F6F23E0AB0700BECD84 /* ReddOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F6E23E0AB0700BECD84 /* ReddOSTests.swift */; };
 		148B7F7A23E0AB0700BECD84 /* ReddOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */; };
-		14DD20EE2421830200D6D487 /* AuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20ED2421830200D6D487 /* AuthenticationSession.swift */; };
 		14DD20F0242186C300D6D487 /* AuthenticationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */; };
+		14DD20F224218BF800D6D487 /* AuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20F124218BF800D6D487 /* AuthenticationSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +81,8 @@
 		148B7F7523E0AB0700BECD84 /* ReddOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReddOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReddOSUITests.swift; sourceTree = "<group>"; };
 		148B7F7B23E0AB0700BECD84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14DD20ED2421830200D6D487 /* AuthenticationSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationSession.swift; path = ../../../../../../.Trash/AuthenticationSession.swift; sourceTree = "<group>"; };
 		14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnums.swift; sourceTree = "<group>"; };
+		14DD20F124218BF800D6D487 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +123,7 @@
 		143788EA2408786700B66388 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				14DD20ED2421830200D6D487 /* AuthenticationSession.swift */,
+				14DD20F124218BF800D6D487 /* AuthenticationSession.swift */,
 				14652541241C24B20038181E /* AuthenticationController.swift */,
 				14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */,
 			);
@@ -348,8 +348,8 @@
 				148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */,
 				148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */,
 				148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */,
+				14DD20F224218BF800D6D487 /* AuthenticationSession.swift in Sources */,
 				14861D4E2407A91600D18976 /* Message.swift in Sources */,
-				14DD20EE2421830200D6D487 /* AuthenticationSession.swift in Sources */,
 				14861D4424079C3300D18976 /* Subreddit.swift in Sources */,
 				14861D5024080F5C00D18976 /* User.swift in Sources */,
 				14861D4A2407A32400D18976 /* Comment.swift in Sources */,
