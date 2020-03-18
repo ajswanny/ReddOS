@@ -25,7 +25,12 @@ class Submission {
     var selftext: String
     
     // The URL the submission links to, or the permalink if a selfpost.
-    var url: URL
+    var url: URL?
+    var urlValue: String {
+        didSet {
+            // Implement detection and loading of URL (image of link)
+        }
+    }
     
     // Alphanumeric ID
     var id: String
@@ -37,15 +42,15 @@ class Submission {
     var comments: [Comment]?
     
     // Default init
-    init(author: Redditor, creationDate: Date, id: String, subreddit: Subreddit, comments: [Comment]?, submissionContent: SubmissionContent) {
+    init(author: Redditor, creationDate: Date, id: String, subreddit: Subreddit, comments: [Comment]?, title: String, selftext: String, url: String) {
         self.author = author
         self.creationDate = creationDate
         self.id = id
         self.subreddit = subreddit
         self.comments = comments
-        self.title = submissionContent.title
-        self.selftext = submissionContent.selftext
-        self.url = submissionContent.url
+        self.title = title
+        self.selftext = selftext
+        self.urlValue = url
     }
     
     // Create a Comment for a Submission
