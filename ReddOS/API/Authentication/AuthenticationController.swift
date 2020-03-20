@@ -76,13 +76,9 @@ enum AuthenticationTypes {
     case guestUser
 }
 
-
 /**
- Manages all authentication the currently logged-in user.
- Reddit OAuth-authentication details can be found at: https://github.com/reddit-archive/reddit/wiki/oauth2
- 
- In order to authenticate a new user, set up an AuthenticationController in a ViewController, then set its `presentationContextProvider` to that ViewController.
- This allows you to call `attemp`
+ Enables and controls Reddit authentication.
+ Authentication can be performed for a new user, a previously logged-in user, or a guest session.
  */
 class AuthenticationController {
     // TODO: Convert closures to methods for readability

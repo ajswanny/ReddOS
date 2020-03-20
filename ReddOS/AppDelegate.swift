@@ -13,9 +13,14 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var sampleData = SampleData()
+    var authenticationController: AuthenticationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize variables
+        self.authenticationController = AuthenticationController()
+        
         return true
     }
 

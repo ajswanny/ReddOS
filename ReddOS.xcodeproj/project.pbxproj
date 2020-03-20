@@ -85,6 +85,7 @@
 		14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnums.swift; sourceTree = "<group>"; };
 		14DD20F124218BF800D6D487 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
 		14F56464242533E0009A0AD6 /* RedditAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAccounts.swift; sourceTree = "<group>"; };
+		14F5646624256C9E009A0AD6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +130,7 @@
 				14652541241C24B20038181E /* AuthenticationController.swift */,
 				14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */,
 				14F56464242533E0009A0AD6 /* RedditAccounts.swift */,
+				14F5646624256C9E009A0AD6 /* README.md */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
