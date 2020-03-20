@@ -27,17 +27,18 @@ public struct AuthenticationConfiguration {
     ///
     public var state = "reddos-debugging"
     
-    ///
-    public var duration = "temporary"
+    /// Temporary scope does not return a refresh token
+    public var duration = "permanent"
     
-    /// Initial authentication URL (temporary valuesa at the moment)
+    /// Initial authorization URL to retrieve code for access token
     public var authorizationURL: String {
-        let url = "\(baseAuthorizationURL)client_id=\(clientId)&response_type=code&state=\(state)&redirect_uri=\(redirectUri)&duration=\(duration)&scope=\(scope)"
-        return "https://www.reddit.com/api/v1/authorize.compact?client_id=XIt7mz1GlhOx1w&response_type=code&state=test_state&redirect_uri=reddos://https://github.com/ajswanny/ReddOS&duration=temporary&scope=identity,edit"
+        get {
+            return "\(baseAuthorizationURL)client_id=\(clientId)&response_type=code&state=\(state)&redirect_uri=\(redirectUri)&duration=\(duration)&scope=\(scope)"
+        }
     }
     
     /// Final authentication URL to retrieve an authorization token
-    public var authenticationTokenURL = "https://www.reddit.com/api/v1/access_token"
+    public var authenticationTokenURLValue = "https://www.reddit.com/api/v1/access_token"
     
     /// Identifier for URL for succesful authorization
     public var callbackURLScheme = "reddos"
@@ -79,8 +80,12 @@ enum AuthenticationTypes {
 /**
  Manages all authentication the currently logged-in user.
  Reddit OAuth-authentication details can be found at: https://github.com/reddit-archive/reddit/wiki/oauth2
+ 
+ In order to authenticate a new user, set up an AuthenticationController in a ViewController, then set its `presentationContextProvider` to that ViewController.
+ This allows you to call `attemp`
  */
-class AuthenticationController: NSObject {
+class AuthenticationController {
+    // TODO: Convert closures to methods for readability
     
     // MARK: Properties
     /// Access to essential data in order to successfully authenticate a user
@@ -89,9 +94,6 @@ class AuthenticationController: NSObject {
     /// The session to authenticate a new account
     public var webAuthSession: ASWebAuthenticationSession?
     
-    /// The view from which to bring up the authentication view
-    public var presentationContextProvider: ASWebAuthenticationPresentationContextProviding?
-    
     /// TODO: Implement
     public var isAuthenticated: Bool {
         return self.userSession?.refreshToken != nil
@@ -99,11 +101,6 @@ class AuthenticationController: NSObject {
     
     /// OAuth authentication session for current user
     var userSession: AuthenticationSession?
-    
-    /// Public access to self.userSession
-    public var activeUserSession: AuthenticationSession? {
-        return self.userSession
-    }
     
     /// TODO: Implement creation. Should perhaps use a default Reddit account managed by us.
     var applicationSession: AuthenticationSession?
@@ -121,39 +118,23 @@ class AuthenticationController: NSObject {
     }
     
     // MARK: Initialization
-    override init() {
+    public init() {
         self.configuration = AuthenticationConfiguration()
-        super.init()
     }
     
-    // MARK: Authentication Methods
-    /// The main method to use in view controllers
-    /// Validates authentication and performs it if it all data is provided correctly
-    public func attemptAuthentication(fromView: ASWebAuthenticationPresentationContextProviding, for userType: AuthenticationTypes = .guestUser) {
-        // Check if this is a new-authentication or re-authentication
-        switch userType {
-            case .newUser:
-                authenticate()
-            case .savedUser:
-                reauthenticate()
-            case .guestUser:
-                initGuestSession()
-        }
+    /// Create a new authentication session for a new user
+    private func authenticateNewUser(fromView presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
         
-    }
-    
-    /// Create a new authentication session
-    /// TODO: Initialize `applicationSession` or `userSession`
-    private func authenticate() {
-        
-        // Validate the authentication URL
-        guard let authURL = URL(string: configuration.authorizationURL) else {
+        // Validate the authorization URL
+        guard let authorizationURL = URL(string: configuration.authorizationURL) else {
             return
         }
         
         // Create session object
-        let session = ASWebAuthenticationSession(url: authURL, callbackURLScheme: configuration.callbackURLScheme)
+        let authorizationSession = ASWebAuthenticationSession(url: authorizationURL, callbackURLScheme: configuration.callbackURLScheme)
         { callbackURL, error in
+        /// The completion closure for completion of the authorization session
+        /// TODO: Implement handling of a deny of access by the user
             
             // Validate the data sent through the callback
             guard
@@ -162,37 +143,131 @@ class AuthenticationController: NSObject {
                 let queryItems: [String: String] = callbackURL.queryParameters
             else {
                 // TODO: Handle the error
-                return
+                fatalError()
             }
             
             // Fetch the code to eaxchange for a bearer token
-            let code = queryItems["code"]!
+            guard let code = queryItems["code"] else {
+                fatalError()
+            }
             
-            // Perform POST request with `code` to get the authorization token
-            
-            
-            // Check for successful reception of the code for the retrieval of a bearer token
-            print(queryItems)
+            // Fetch the access token to make API calls
+            self.retrieveAccessToken(usingCode: code)
             
         }
         
-        /// Set the base view for the authentication safari view (was validated in `attemptAuthentication(fromView:)`
-        session.presentationContextProvider = self.presentationContextProvider!
+        // Set the base view for the authentication safari view
+        authorizationSession.presentationContextProvider = presentationContextProvider
         
         // Start the session
-        session.start()
+        authorizationSession.start()
         
     }
     
     /// Re-authenticate the current user
-    /// TODO: Implement
-    private func reauthenticate() {
-        
+    private func reauthenticateCurrentUser() {
+        // TODO: Implement
     }
     
     /// Initialize a read-only session
-    /// TODO: Implement
-    private func initGuestSession() {
+    private func authenticateGuestSession() {
+        // TODO: Implement
+    }
+    
+    /// Constructs a POST request in order to receive an access token that allows interaction with the Reddit API endpoints
+    private func accessTokenRequest(usingCode code: String) -> URLRequest? {
+        // TODO: Simplify
+        
+        // Init request object
+        guard let authenticationTokenURL = URL(string: configuration.authenticationTokenURLValue) else {
+            return nil
+        }
+        var request = URLRequest(url: authenticationTokenURL)
+        
+        // Set method
+        request.httpMethod = "POST"
+        
+        // Set values for POST headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        // The body of this post request
+        var requestBody: Data? {
+            
+            // Necessary parameters to obtain a Reddit access token
+            var parameters = [String: Any]()
+            parameters["grant_type"] = "authorization_code"
+            parameters["code"] = code
+            parameters["redirect_uri"] = configuration.redirectUri
+            let bodyParameters = parameters
+            
+            // Construct package from parameters
+            var urlComponents = URLComponents()
+            urlComponents.queryItems = bodyParameters.map({ (key, value) -> URLQueryItem in
+                return URLQueryItem(name: key, value: "\(value)")
+            })
+            let bodyString = urlComponents.percentEncodedQuery
+            
+            return bodyString?.data(using: String.Encoding.utf8)
+            
+        }
+        request.httpBody = requestBody
+        
+        // Set authorization values
+        var authorizationValue: String {
+            let loginString = "\(configuration.clientId):"
+            let loginData = loginString.data(using: String.Encoding.utf8)
+            if let loginBase64 = loginData?.base64EncodedString(options: []) {
+                return "Basic \(loginBase64)"
+            } else {
+                return "Basic"
+            }
+        }
+        request.setValue(authorizationValue, forHTTPHeaderField: "Authorization")
+        
+        return request
+        
+    }
+    
+    /// Fetches the access token from Reddit using an already received authorization code
+    private func retrieveAccessToken(usingCode code: String) {
+        
+        // TODO: Modify this section to allow for re-authentication
+        // Construct the correct request from `code`
+        guard let request = accessTokenRequest(usingCode: code) else {
+            fatalError()
+        }
+        
+        // Set up and execute the necessary POST request
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            // Verify a desirable response was received
+            guard let data = data, let _ = response as? HTTPURLResponse, error == nil else {
+                fatalError()
+            }
+            
+            // Validate received data
+            guard
+                let json = try? JSONSerialization.jsonObject(with: data, options: []),
+                let dictionary = json as? [String: Any],
+                let accessToken = dictionary["access_token"] as? String,
+                let tokenType = dictionary["token_type"] as? String,
+                let expiresIn = dictionary["expires_in"] as? Double,
+                let scope = dictionary["scope"] as? String,
+                let refreshToken = dictionary["refresh_token"] as? String
+            else {
+                fatalError()
+            }
+            
+            // Store the received data
+            self.userSession?.accessToken = accessToken
+            self.userSession?.tokenType = tokenType
+            self.userSession?.expirationDate = Date().addingTimeInterval(expiresIn)
+            self.userSession?.scope = scope
+            self.userSession?.refreshToken = refreshToken
+            
+        }
+        task.resume()
         
     }
     

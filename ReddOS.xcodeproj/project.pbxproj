@@ -32,6 +32,7 @@
 		148B7F7A23E0AB0700BECD84 /* ReddOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */; };
 		14DD20F0242186C300D6D487 /* AuthenticationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */; };
 		14DD20F224218BF800D6D487 /* AuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20F124218BF800D6D487 /* AuthenticationSession.swift */; };
+		14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F56464242533E0009A0AD6 /* RedditAccounts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		148B7F7B23E0AB0700BECD84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnums.swift; sourceTree = "<group>"; };
 		14DD20F124218BF800D6D487 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
+		14F56464242533E0009A0AD6 /* RedditAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAccounts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				14DD20F124218BF800D6D487 /* AuthenticationSession.swift */,
 				14652541241C24B20038181E /* AuthenticationController.swift */,
 				14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */,
+				14F56464242533E0009A0AD6 /* RedditAccounts.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				14652544241C3A890038181E /* Reddit.swift in Sources */,
 				148B7F5723E0AB0600BECD84 /* FirstViewController.swift in Sources */,
 				14861D522408189000D18976 /* Structs.swift in Sources */,
+				14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */,
 				14861D422407992D00D18976 /* Redditor.swift in Sources */,
 				14652542241C24B20038181E /* AuthenticationController.swift in Sources */,
 				148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */,
