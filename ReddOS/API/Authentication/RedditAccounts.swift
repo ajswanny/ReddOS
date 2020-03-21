@@ -8,7 +8,9 @@
 
 import Foundation
 
-/// Account to use for debugging
+/**
+ Account to use for debugging
+ */
 public struct DebugAccount {
     let username = "reddosmanagers"
     let password = "reddosAccount!"
@@ -17,7 +19,9 @@ public struct DebugAccount {
     let clientSecret = "k_TPBkSTUoIFnaWPA1080gLz9Mc"
 }
 
-/// Account to use for a guest session
+/**
+ Account to use for a guest session
+ */
 public struct GuestUserAccount {
     let username = ""
     let password = ""

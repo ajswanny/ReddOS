@@ -13,20 +13,30 @@ import Foundation
  */
 class Redditor {
     
+    // MARK: Properties
+    /// The username
     var username: String
+    
+    /// The total karma of this Redditor
     var karma: Int
+    
+    /// A list of friends
     var friends: [Redditor]
     
-    // This value will be dynamically loaded
+    /// The link to this Redditor's URL. This value will be dynamically loaded
     var profilePictureUrl: String? {
         didSet {
             // Implement instantiation of profilePicture here
         }
     }
     
-    // Actual profile picture data that can be converted to UIImage
+    /// Actual profile picture data that can be converted to a UIImage
     var profilePicture: Data?
     
+    // MARK: Initialization
+    /**
+     Default init
+     */
     init(username: String, karma: Int, friends: [Redditor]) {
         self.username = username
         self.karma = karma

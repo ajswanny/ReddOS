@@ -13,16 +13,30 @@ import Foundation
  */
 class Subreddit {
     
-    // Technical name
+    // MARK: Properties
+    /// Technical name
     var fullName: String
     
-    // Name publicly shown to users
+    /// Name publicly shown to users
     var displayName: String
     
-    // The list of currently `Hot` Submissions
+    /// The list of currently `Hot` Submissions
     var hotSubmissions: [Submission]
     
-    // Default init
+    /// The link to this Redditor's URL. This value will be dynamically loaded
+    var profilePictureUrl: String? {
+        didSet {
+            // Implement instantiation of profilePicture here
+        }
+    }
+    
+    /// Actual profile picture data that can be converted to a UIImage
+    var profilePicture: Data?
+    
+    // MARK: Initialization
+    /**
+     Default init
+     */
     init(fullName: String, displayName: String, hotSubmissions: [Submission]) {
         self.fullName = fullName
         self.displayName = displayName

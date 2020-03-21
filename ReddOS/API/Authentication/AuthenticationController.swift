@@ -92,7 +92,7 @@ class AuthenticationController {
     
     /// TODO: Implement
     public var isAuthenticated: Bool {
-        return self.userSession?.refreshToken != nil
+        return self.userSession?.accessToken != nil
     }
     
     /// OAuth authentication session for current user
@@ -118,7 +118,9 @@ class AuthenticationController {
         self.configuration = AuthenticationConfiguration()
     }
     
-    /// Create a new authentication session for a new user
+    /**
+     Create a new authentication session for a new user
+     */
     private func authenticateNewUser(fromView presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
         
         // Validate the authorization URL
@@ -160,17 +162,23 @@ class AuthenticationController {
         
     }
     
-    /// Re-authenticate the current user
+    /**
+     Re-authenticate the current user
+     */
     private func reauthenticateCurrentUser() {
         // TODO: Implement
     }
     
-    /// Initialize a read-only session
+    /**
+     Initialize a read-only session
+     */
     private func authenticateGuestSession() {
         // TODO: Implement
     }
     
-    /// Constructs a POST request in order to receive an access token that allows interaction with the Reddit API endpoints
+    /**
+     Constructs a POST request in order to receive an access token that allows interaction with the Reddit API endpoints
+     */
     private func accessTokenRequest(usingCode code: String) -> URLRequest? {
         // TODO: Simplify
         
@@ -225,7 +233,9 @@ class AuthenticationController {
         
     }
     
-    /// Fetches the access token from Reddit using an already received authorization code
+    /**
+     Fetches the access token from Reddit using an already received authorization code
+     */
     private func retrieveAccessToken(usingCode code: String) {
         
         // TODO: Modify this section to allow for re-authentication
@@ -268,7 +278,9 @@ class AuthenticationController {
     }
     
     // MARK: Helper Methods
-    // Retrieves the specified value from a URL's query items
+    /**
+     Retrieves the specified value from a URL's query items
+     */
     func getQueryStringParameter(url: String, param: String) -> String? {
         guard let url = URLComponents(string: url) else { return nil }
         return url.queryItems?.first(where: { $0.name == param })?.value

@@ -11,35 +11,30 @@ import Foundation
 /**
  Implementation of a comment to a `Submission`.
  */
-class Comment {
+class Comment: RedditContent {
     
-    var author: Redditor
+    // MARK: Properties
+    /// The username of the author of this Comment
+    var authorName: String
+    
+    /// The text content of this comment
     var body: String
     
-    // Alphanumeric ID
-    var id: String
-    
-    // The Submission this Comment belongs to
+    /// The Submission this Comment belongs to
     var submission: Submission
     
-    // The Subreddit this Comment's Submission belongs to
-    var subreddit: Subreddit
-    
-    // Set of Comments that are replies to this Comment
-    // More formal data structure needs to be defined in the future (somthing like PRAW's CommentForest)
-    var replies: [Comment]?
+    /// Set of Comments that are replies to this Comment
+    var replies: [Comment]? // TODO: More formal data structure needs to be defined in the future (somthing like PRAW's CommentForest)
  
-    // Default init
-    init(author: Redditor, body: String, id: String, submission: Submission, subreddit: Subreddit, replies: [Comment]?) {
-        self.author = author
+    // MARK: Initialization
+    /**
+     Default init
+     */
+    init(authorName: String, body: String, id: String, submission: Submission, userScore: Int, totalScore: Int) {
+        self.authorName = authorName
         self.body = body
-        self.id = id
         self.submission = submission
-        self.subreddit = subreddit
-        self.replies = replies
+        super.init(id: id, userScore: userScore, totalScore: totalScore)
     }
-    
-    func upvote() {}
-    func downvote() {}
     
 }
