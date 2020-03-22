@@ -13,6 +13,7 @@
 		145234D123FEE418003D4B13 /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145234CF23FEE418003D4B13 /* AccountView.storyboard */; };
 		14652542241C24B20038181E /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14652541241C24B20038181E /* AuthenticationController.swift */; };
 		14652544241C3A890038181E /* Reddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14652543241C3A890038181E /* Reddit.swift */; };
+		146A5FAD24277DAF00F08D19 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A5FAC24277DAF00F08D19 /* Endpoints.swift */; };
 		14861D422407992D00D18976 /* Redditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861D412407992D00D18976 /* Redditor.swift */; };
 		14861D4424079C3300D18976 /* Subreddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861D4324079C3300D18976 /* Subreddit.swift */; };
 		14861D482407A24600D18976 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861D472407A24600D18976 /* Submission.swift */; };
@@ -61,6 +62,7 @@
 		145234D023FEE418003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountView.storyboard; sourceTree = "<group>"; };
 		14652541241C24B20038181E /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		14652543241C3A890038181E /* Reddit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reddit.swift; sourceTree = "<group>"; };
+		146A5FAC24277DAF00F08D19 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		14861D412407992D00D18976 /* Redditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redditor.swift; sourceTree = "<group>"; };
 		14861D4324079C3300D18976 /* Subreddit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subreddit.swift; sourceTree = "<group>"; };
 		14861D472407A24600D18976 /* Submission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				14652543241C3A890038181E /* Reddit.swift */,
+				146A5FAC24277DAF00F08D19 /* Endpoints.swift */,
 				143788EA2408786700B66388 /* Authentication */,
 				14861D402407991B00D18976 /* Models */,
 			);
@@ -359,6 +362,7 @@
 				14861D422407992D00D18976 /* Redditor.swift in Sources */,
 				14652542241C24B20038181E /* AuthenticationController.swift in Sources */,
 				148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */,
+				146A5FAD24277DAF00F08D19 /* Endpoints.swift in Sources */,
 				148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */,
 				148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */,
 				14DD20F224218BF800D6D487 /* AuthenticationSession.swift in Sources */,
