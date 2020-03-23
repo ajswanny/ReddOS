@@ -25,7 +25,6 @@
 		14861D522408189000D18976 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861D512408189000D18976 /* SampleData.swift */; };
 		148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5223E0AB0600BECD84 /* AppDelegate.swift */; };
 		148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */; };
-		148B7F5723E0AB0600BECD84 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5623E0AB0600BECD84 /* FirstViewController.swift */; };
 		148B7F5923E0AB0600BECD84 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5823E0AB0600BECD84 /* SecondViewController.swift */; };
 		148B7F5C23E0AB0600BECD84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148B7F5A23E0AB0600BECD84 /* Main.storyboard */; };
 		148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5D23E0AB0600BECD84 /* ReddOS.xcdatamodeld */; };
@@ -33,8 +32,11 @@
 		148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */; };
 		148B7F6F23E0AB0700BECD84 /* ReddOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F6E23E0AB0700BECD84 /* ReddOSTests.swift */; };
 		148B7F7A23E0AB0700BECD84 /* ReddOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */; };
+		14B9B6A82428F944002DC903 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6A72428F944002DC903 /* HomeViewController.swift */; };
+		14B9B6AA24292EED002DC903 /* UserAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */; };
+		14B9B6AC24293DB3002DC903 /* AuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6AB24293DB3002DC903 /* AuthenticationSession.swift */; };
 		14DD20F0242186C300D6D487 /* AuthenticationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */; };
-		14DD20F224218BF800D6D487 /* AuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20F124218BF800D6D487 /* AuthenticationSession.swift */; };
+		14DD20F224218BF800D6D487 /* GuestAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DD20F124218BF800D6D487 /* GuestAuthenticationSession.swift */; };
 		14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F56464242533E0009A0AD6 /* RedditAccounts.swift */; };
 		14F564702425BD99009A0AD6 /* RedditContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5646F2425BD99009A0AD6 /* RedditContent.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +78,6 @@
 		148B7F4F23E0AB0600BECD84 /* ReddOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReddOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B7F5223E0AB0600BECD84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		148B7F5623E0AB0600BECD84 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		148B7F5823E0AB0600BECD84 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		148B7F5B23E0AB0600BECD84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		148B7F5E23E0AB0600BECD84 /* ReddOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReddOS.xcdatamodel; sourceTree = "<group>"; };
@@ -89,8 +90,11 @@
 		148B7F7523E0AB0700BECD84 /* ReddOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReddOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReddOSUITests.swift; sourceTree = "<group>"; };
 		148B7F7B23E0AB0700BECD84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14B9B6A72428F944002DC903 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationSession.swift; sourceTree = "<group>"; };
+		14B9B6AB24293DB3002DC903 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
 		14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnums.swift; sourceTree = "<group>"; };
-		14DD20F124218BF800D6D487 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
+		14DD20F124218BF800D6D487 /* GuestAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestAuthenticationSession.swift; sourceTree = "<group>"; };
 		14F56464242533E0009A0AD6 /* RedditAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAccounts.swift; sourceTree = "<group>"; };
 		14F5646624256C9E009A0AD6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14F5646F2425BD99009A0AD6 /* RedditContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditContent.swift; sourceTree = "<group>"; };
@@ -136,7 +140,9 @@
 		143788EA2408786700B66388 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				14DD20F124218BF800D6D487 /* AuthenticationSession.swift */,
+				14DD20F124218BF800D6D487 /* GuestAuthenticationSession.swift */,
+				14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */,
+				14B9B6AB24293DB3002DC903 /* AuthenticationSession.swift */,
 				14652541241C24B20038181E /* AuthenticationController.swift */,
 				14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */,
 				14F56464242533E0009A0AD6 /* RedditAccounts.swift */,
@@ -185,15 +191,13 @@
 		148B7F5123E0AB0600BECD84 /* ReddOS */ = {
 			isa = PBXGroup;
 			children = (
-				145234CF23FEE418003D4B13 /* AccountView.storyboard */,
-				145234CC23FEE3BB003D4B13 /* InboxView.storyboard */,
-				145234C923FEE324003D4B13 /* HomeView.storyboard */,
+				14B9B6A42428F7A6002DC903 /* Storyboards */,
 				148B7F5223E0AB0600BECD84 /* AppDelegate.swift */,
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
-				148B7F5623E0AB0600BECD84 /* FirstViewController.swift */,
 				148B7F5823E0AB0600BECD84 /* SecondViewController.swift */,
-				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
+				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
 				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
+				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
 				148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */,
 				148B7F6523E0AB0600BECD84 /* Info.plist */,
 				148B7F5D23E0AB0600BECD84 /* ReddOS.xcdatamodeld */,
@@ -218,6 +222,16 @@
 				148B7F7B23E0AB0700BECD84 /* Info.plist */,
 			);
 			path = ReddOSUITests;
+			sourceTree = "<group>";
+		};
+		14B9B6A42428F7A6002DC903 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				145234CF23FEE418003D4B13 /* AccountView.storyboard */,
+				145234CC23FEE3BB003D4B13 /* InboxView.storyboard */,
+				145234C923FEE324003D4B13 /* HomeView.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,19 +370,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DD20F0242186C300D6D487 /* AuthenticationEnums.swift in Sources */,
+				14B9B6AA24292EED002DC903 /* UserAuthenticationSession.swift in Sources */,
 				148B7F5923E0AB0600BECD84 /* SecondViewController.swift in Sources */,
 				14652544241C3A890038181E /* Reddit.swift in Sources */,
-				148B7F5723E0AB0600BECD84 /* FirstViewController.swift in Sources */,
 				14F564702425BD99009A0AD6 /* RedditContent.swift in Sources */,
 				14861D522408189000D18976 /* SampleData.swift in Sources */,
+				14B9B6A82428F944002DC903 /* HomeViewController.swift in Sources */,
 				14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */,
 				14861D422407992D00D18976 /* Redditor.swift in Sources */,
 				14652542241C24B20038181E /* AuthenticationController.swift in Sources */,
+				14B9B6AC24293DB3002DC903 /* AuthenticationSession.swift in Sources */,
 				148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */,
 				146A5FAD24277DAF00F08D19 /* Endpoints.swift in Sources */,
 				148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */,
 				148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */,
-				14DD20F224218BF800D6D487 /* AuthenticationSession.swift in Sources */,
+				14DD20F224218BF800D6D487 /* GuestAuthenticationSession.swift in Sources */,
 				14861D4E2407A91600D18976 /* Message.swift in Sources */,
 				14861D4424079C3300D18976 /* Subreddit.swift in Sources */,
 				14861D5024080F5C00D18976 /* User.swift in Sources */,

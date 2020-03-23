@@ -96,10 +96,10 @@ class AuthenticationController {
     }
     
     /// OAuth authentication session for current user
-    var userSession: AuthenticationSession?
+    var userSession: UserAuthenticationSession?
     
-    /// TODO: Implement creation. Should perhaps use a default Reddit account managed by us.
-    var applicationSession: AuthenticationSession
+    /// TODO: Implement creation
+    var guestSession: GuestAuthenticationSession
     
     /// The active session: logged in or not
     var activeSession: AuthenticationSession? {
@@ -108,7 +108,7 @@ class AuthenticationController {
                 return self.userSession
             } else {
                 // This will determine whether or not to load default data for the front page
-                return self.applicationSession
+                return self.guestSession
             }
         }
     }
@@ -118,17 +118,16 @@ class AuthenticationController {
         // TODO: Implement checking existing user session & pre-loading
         
         self.configuration = AuthenticationConfiguration()
-        self.applicationSession = AuthenticationSession()   // TODO: Implement
-        self.userSession = AuthenticationSession()
+        self.userSession = UserAuthenticationSession()
+        self.guestSession = GuestAuthenticationSession()
+        
     }
     
+    // MARK: Authentication
     /**
      Create a new authentication session for a new user
      */
-    private func authenticateNewUser(fromView presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
-        
-        // Initialize the new user session
-        self.userSession = AuthenticationSession()
+    public func authenticateNewUser(fromView presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
         
         // Validate the authorization URL
         guard let authorizationURL = URL(string: configuration.authorizationURL) else {
@@ -229,6 +228,8 @@ class AuthenticationController {
                 userSession.refreshToken = refreshToken
                 
             }
+            
+            print(dictionary)
             
         }
         task.resume()

@@ -127,26 +127,29 @@ class Reddit {
      */
     public func newUrlRequest(method: HTTPRequestType, endpoint: APIEndpoint) -> URLRequest? {
         
-        // Init the URL request
-        guard let url = URL(string: endpoint.fullEndpoint) else {
-            return nil
-        }
-        var request = URLRequest(url: url)
+//        // Init the URL request
+//        guard let url = URL(string: endpoint.fullEndpoint) else {
+//            return nil
+//        }
+//        var request = URLRequest(url: url)
+//
+//        // Set request method and metadata
+//        request.httpMethod = method.rawValue
+//        request.setValue("application/json", forHTTPHeaderField: "Accept")
+//
+//        // Set authorization values
+//        guard let accessToken = authenticationController.activeSession?.accessToken else {
+//            return nil
+//        }
+//        let authorizationString = "bearer \(accessToken)"
+//        request.setValue(authorizationString, forHTTPHeaderField: "Authorization")
+//
+//        return request
         
-        // Set request method and metadata
-        request.httpMethod = method.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        
-        // Set authorization values
-        guard let accessToken = authenticationController.activeSession?.accessToken else {
-            return nil
-        }
-        let authorizationString = "bearer \(accessToken)"
-        request.setValue(authorizationString, forHTTPHeaderField: "Authorization")
-        
-        return request
+        return nil
         
     }
+    
     
     public func execute(request: URLRequest, completion: @escaping RequestCompletionHandler) {
         // TODO: Implement
