@@ -152,14 +152,10 @@ class AuthenticationController {
             }
             
             // Fetch the code to eaxchange for a bearer token
-            guard let code = queryItems["code"] else {
-                fatalError()
-            }
+            guard let code = queryItems["code"] else { fatalError() }
             
             // Create the access token POST request for a new user session
-            guard let newUserAccessTokenRequest = self.newUserAccessTokenRequest(usingAuthorizationCode: code) else {
-                fatalError()
-            }
+            guard let newUserAccessTokenRequest = self.newUserAccessTokenRequest(usingAuthorizationCode: code) else { fatalError() }
             
             // Fetch the access token to make API calls
             self.retrieveAccessToken(for: .newUser, usingRequest: newUserAccessTokenRequest)
@@ -215,9 +211,7 @@ class AuthenticationController {
             }
             
             // Ensure self.userSession has been initialized
-            guard let userSession = self.userSession else {
-                fatalError()
-            }
+            guard let userSession = self.userSession else { fatalError() }
             
             // Store the received data necessary for both .newUser and .existingUser
             userSession.accessToken = accessToken
@@ -248,9 +242,7 @@ class AuthenticationController {
         // TODO: Simplify
         
         // Init request object
-        guard let authenticationTokenURL = URL(string: configuration.authenticationTokenURLValue) else {
-            return nil
-        }
+        guard let authenticationTokenURL = URL(string: configuration.authenticationTokenURLValue) else { return nil }
         var request = URLRequest(url: authenticationTokenURL)
         
         // Set method
