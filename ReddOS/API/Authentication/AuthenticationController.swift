@@ -70,9 +70,9 @@ public struct AuthenticationConfiguration {
 }
 
 /// The different ways to authenticate
-enum AuthenticationTypes {
+enum AuthenticationType {
     case newUser
-    case savedUser
+    case existingUser
     case guestUser
 }
 
@@ -92,14 +92,14 @@ class AuthenticationController {
     
     /// TODO: Implement
     public var isAuthenticated: Bool {
-        return self.userSession?.accessToken != nil
+        return self.userSession?.refreshToken != nil
     }
     
     /// OAuth authentication session for current user
     var userSession: AuthenticationSession?
     
     /// TODO: Implement creation. Should perhaps use a default Reddit account managed by us.
-    var applicationSession: AuthenticationSession?
+    var applicationSession: AuthenticationSession
     
     /// The active session: logged in or not
     var activeSession: AuthenticationSession? {
@@ -115,13 +115,20 @@ class AuthenticationController {
     
     // MARK: Initialization
     public init() {
+        // TODO: Implement checking existing user session & pre-loading
+        
         self.configuration = AuthenticationConfiguration()
+        self.applicationSession = AuthenticationSession()   // TODO: Implement
+        self.userSession = AuthenticationSession()
     }
     
     /**
      Create a new authentication session for a new user
      */
     private func authenticateNewUser(fromView presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
+        
+        // Initialize the new user session
+        self.userSession = AuthenticationSession()
         
         // Validate the authorization URL
         guard let authorizationURL = URL(string: configuration.authorizationURL) else {
@@ -149,15 +156,18 @@ class AuthenticationController {
                 fatalError()
             }
             
+            // Create the access token POST request for a new user session
+            guard let newUserAccessTokenRequest = self.newUserAccessTokenRequest(usingAuthorizationCode: code) else {
+                fatalError()
+            }
+            
             // Fetch the access token to make API calls
-            self.retrieveAccessToken(usingCode: code)
+            self.retrieveAccessToken(for: .newUser, usingRequest: newUserAccessTokenRequest)
             
         }
         
-        // Set the base view for the authentication safari view
+        // Set the base view for the authentication safari view and start the auth session
         authorizationSession.presentationContextProvider = presentationContextProvider
-        
-        // Start the session
         authorizationSession.start()
         
     }
@@ -177,72 +187,12 @@ class AuthenticationController {
     }
     
     /**
-     Constructs a POST request in order to receive an access token that allows interaction with the Reddit API endpoints
+     Fetches the access token from Reddit for a user session using an already received authorization code
+     - Parameters:
+        - authticationType: A new or existing user
+        - code: The code returned by the authorization request
      */
-    private func accessTokenRequest(usingCode code: String) -> URLRequest? {
-        // TODO: Simplify
-        
-        // Init request object
-        guard let authenticationTokenURL = URL(string: configuration.authenticationTokenURLValue) else {
-            return nil
-        }
-        var request = URLRequest(url: authenticationTokenURL)
-        
-        // Set method
-        request.httpMethod = "POST"
-        
-        // Set values for POST headers
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        
-        // The body of this post request
-        var requestBody: Data? {
-            
-            // Necessary parameters to obtain a Reddit access token
-            var parameters = [String: Any]()
-            parameters["grant_type"] = "authorization_code"
-            parameters["code"] = code
-            parameters["redirect_uri"] = configuration.redirectUri
-            let bodyParameters = parameters
-            
-            // Construct package from parameters
-            var urlComponents = URLComponents()
-            urlComponents.queryItems = bodyParameters.map({ (key, value) -> URLQueryItem in
-                return URLQueryItem(name: key, value: "\(value)")
-            })
-            let bodyString = urlComponents.percentEncodedQuery
-            
-            return bodyString?.data(using: String.Encoding.utf8)
-            
-        }
-        request.httpBody = requestBody
-        
-        // Set authorization values
-        var authorizationValue: String {
-            let loginString = "\(configuration.clientId):"
-            let loginData = loginString.data(using: String.Encoding.utf8)
-            if let loginBase64 = loginData?.base64EncodedString(options: []) {
-                return "Basic \(loginBase64)"
-            } else {
-                return "Basic"
-            }
-        }
-        request.setValue(authorizationValue, forHTTPHeaderField: "Authorization")
-        
-        return request
-        
-    }
-    
-    /**
-     Fetches the access token from Reddit using an already received authorization code
-     */
-    private func retrieveAccessToken(usingCode code: String) {
-        
-        // TODO: Modify this section to allow for re-authentication
-        // Construct the correct request from `code`
-        guard let request = accessTokenRequest(usingCode: code) else {
-            fatalError()
-        }
+    private func retrieveAccessToken(for authenticationType: AuthenticationType, usingRequest request: URLRequest) {
         
         // Set up and execute the necessary POST request
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -259,21 +209,100 @@ class AuthenticationController {
                 let accessToken = dictionary["access_token"] as? String,
                 let tokenType = dictionary["token_type"] as? String,
                 let expiresIn = dictionary["expires_in"] as? Double,
-                let scope = dictionary["scope"] as? String,
-                let refreshToken = dictionary["refresh_token"] as? String
+                let scope = dictionary["scope"] as? String
             else {
                 fatalError()
             }
             
-            // Store the received data
-            self.userSession?.accessToken = accessToken
-            self.userSession?.tokenType = tokenType
-            self.userSession?.expirationDate = Date().addingTimeInterval(expiresIn)
-            self.userSession?.scope = scope
-            self.userSession?.refreshToken = refreshToken
+            // Ensure self.userSession has been initialized
+            guard let userSession = self.userSession else {
+                fatalError()
+            }
+            
+            // Store the received data necessary for both .newUser and .existingUser
+            userSession.accessToken = accessToken
+            userSession.tokenType = tokenType
+            userSession.expirationDate = Date().addingTimeInterval(expiresIn)
+            userSession.scope = scope
+            
+            // If this is authenticationg a new user, record the newly received refresh token
+            if authenticationType == .newUser {
+                
+                // Read the refresh token for a new user
+                guard let refreshToken = dictionary["refresh_token"] as? String else {
+                    fatalError()
+                }
+                userSession.refreshToken = refreshToken
+                
+            }
             
         }
         task.resume()
+        
+    }
+    
+    /**
+     Constructs a POST request in order to receive an access token for a new user that allows interaction with the Reddit API endpoints. Authenticating a new user and re-authenticating an existing user both require different body parameters (see [Retrieving the access token]( https://github.com/reddit-archive/reddit/wiki/oauth2#retrieving-the-access-token)).
+     */
+    private func newUserAccessTokenRequest(usingAuthorizationCode authorizationCode: String) -> URLRequest? {
+        // TODO: Simplify
+        
+        // Init request object
+        guard let authenticationTokenURL = URL(string: configuration.authenticationTokenURLValue) else {
+            return nil
+        }
+        var request = URLRequest(url: authenticationTokenURL)
+        
+        // Set method
+        request.httpMethod = "POST"
+        
+        // Set values for POST headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        // Set authorization values (same for .newUser and .existingUser)
+        var authorizationValue: String {
+            let loginString = "\(configuration.clientId):"
+            let loginData = loginString.data(using: String.Encoding.utf8)
+            if let loginBase64 = loginData?.base64EncodedString(options: []) {
+                return "Basic \(loginBase64)"
+            } else {
+                return "Basic"
+            }
+        }
+        request.setValue(authorizationValue, forHTTPHeaderField: "Authorization")
+        // TODO: All above can be generalized for .newUser and .existingUser
+        
+        // The body of this post request
+        var requestBody: Data? {
+            
+            // Necessary parameters to obtain a Reddit access & refresh token
+            var parameters = [String: Any]()
+            parameters["grant_type"] = "authorization_code"
+            parameters["code"] = authorizationCode
+            parameters["redirect_uri"] = configuration.redirectUri
+            
+            // Construct package from parameters
+            var urlComponents = URLComponents()
+            urlComponents.queryItems = parameters.map({ (key, value) -> URLQueryItem in
+                return URLQueryItem(name: key, value: "\(value)")
+            })
+            let bodyString = urlComponents.percentEncodedQuery
+            
+            return bodyString?.data(using: String.Encoding.utf8)
+            
+        }
+        request.httpBody = requestBody
+        
+        return request
+        
+    }
+    
+    /**
+     Constructs a POST request in order to receive an access token for an existing user. Authenticating a new user and re-authenticating an existing user both require different body parameters (see [Refreshing the token]( https://github.com/reddit-archive/reddit/wiki/oauth2#refreshing-the-token)).
+     */
+    private func existingUserAccessTokenRequest() {
+        
         
     }
     

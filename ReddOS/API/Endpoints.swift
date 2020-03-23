@@ -87,19 +87,6 @@ public enum APIEndpointBase: String {
 }
 
 /**
- 
- */
-public enum RequestType: String {
-    
-    ///
-    case get = "GET"
-    
-    ///
-    case post = "POST"
-    
-}
-
-/**
  Implements creation of a full API endpoint, allowing for the easy incorporation of query parameters.
  */
 public class APIEndpoint {
@@ -112,22 +99,27 @@ public class APIEndpoint {
     var baseEndpoint: APIEndpointBase
     
     /// Constructs the full endpoint with given params
-    var fullEndpoint: String? {
+    var fullEndpoint: String {
         
-        // The list of query items to be constructed from self.params
-        var queryItems = [NSURLQueryItem]()
-        for param in parameters {
-            queryItems.append(NSURLQueryItem(name: param.key, value: param.value))
+        if let parameters = self.parameters {
+            // The list of query items to be constructed from self.params
+            var queryItems = [NSURLQueryItem]()
+            for param in parameters {
+                queryItems.append(NSURLQueryItem(name: param.key, value: param.value))
+            }
+            
+            // Construct and return full url as string
+            let urlComponents = NSURLComponents(string: "\(host)\(baseEndpoint)")
+            // TODO: Improve validation
+            return urlComponents?.url?.absoluteString ?? ""
+        } else {
+            return "\(host)\(baseEndpoint)"
         }
-        
-        // Construct and return full url as string
-        let urlComponents = NSURLComponents(string: "\(host)\(baseEndpoint)")
-        return urlComponents?.url?.absoluteString
         
     }
     
     /// The list of parameters to be included as query parameters in the final URL
-    var parameters: [String: String]
+    var parameters: [String: String]?
     
     // MARK: Initialization
     /**
@@ -141,14 +133,18 @@ public class APIEndpoint {
         for param in parameters {
             if let val = param.value as? Int {
                 let val_string = "\(val)"
-                self.parameters[param.key] = val_string
+                self.parameters![param.key] = val_string
             } else if let val = param.value as? String {
-                self.parameters[param.key] = val
+                self.parameters![param.key] = val
             } else {
                 fatalError()
             }
         }
         
+    }
+    
+    init(base: APIEndpointBase) {
+        self.baseEndpoint = base
     }
     
 }
