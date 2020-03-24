@@ -1,43 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o4c-Bm-Qlg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uSq-y3-hsT">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
-        <scene sceneID="5PC-CK-IjD">
+        <!--Home View Controller-->
+        <scene sceneID="vNy-TM-bft">
             <objects>
-                <tableViewController id="o4c-Bm-Qlg" customClass="HomeViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dw1-YV-kc5">
+                <tableViewController id="f7o-na-TjQ" customClass="HomeViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BP0-ii-p5P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <progressView key="tableFooterView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="Kof-mF-uQl">
+                            <rect key="frame" x="0.0" y="143" width="414" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </progressView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VwV-Eo-dmz">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hotThread" rowHeight="87" id="TzK-q8-Uez" customClass="HomeViewCell" customModule="ReddOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VwV-Eo-dmz" id="jQ2-PD-nIY">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TzK-q8-Uez" id="xjd-I6-dB2">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcg-3z-wND">
+                                            <rect key="frame" x="11" y="4" width="108" height="78"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXg-ib-F2x">
+                                            <rect key="frame" x="335" y="43" width="69" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Downvote"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StC-ek-KGT">
+                                            <rect key="frame" x="127" y="12" width="196" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mC-uP-3i2">
+                                            <rect key="frame" x="127" y="47" width="196" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOp-X2-56J">
+                                            <rect key="frame" x="344" y="7" width="50" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Upvote"/>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="downVote" destination="gXg-ib-F2x" id="OPh-UJ-GLQ"/>
+                                    <outlet property="hotThreadImage" destination="dcg-3z-wND" id="ggz-DY-jxi"/>
+                                    <outlet property="hotThreadSubReddit" destination="2mC-uP-3i2" id="hEO-Qi-3oI"/>
+                                    <outlet property="hotThreadTitle" destination="StC-ek-KGT" id="ueJ-FX-YrQ"/>
+                                    <outlet property="upVote" destination="nOp-X2-56J" id="BEa-6P-ACU"/>
+                                    <segue destination="bOA-VM-XWF" kind="show" id="WVo-XG-eRv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="o4c-Bm-Qlg" id="nvX-85-RQD"/>
-                            <outlet property="delegate" destination="o4c-Bm-Qlg" id="9pJ-zb-Qry"/>
+                            <outlet property="dataSource" destination="f7o-na-TjQ" id="cdb-0k-OR8"/>
+                            <outlet property="delegate" destination="f7o-na-TjQ" id="OrS-Be-v2W"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Home" image="first" id="PWu-jY-Fmq"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" id="L6r-s0-kMn"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V29-oQ-oqv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sdo-8T-Y8r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="-842"/>
+            <point key="canvasLocation" x="2855" y="-1389"/>
+        </scene>
+        <!--Detail View -->
+        <scene sceneID="5mQ-pE-RMg">
+            <objects>
+                <viewController title="Detail View " id="bOA-VM-XWF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tq9-ji-wSH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title of Submission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJf-bO-J1T">
+                                <rect key="frame" x="124" y="108" width="191" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I8-np-IlJ" userLabel="Downvote">
+                                <rect key="frame" x="364" y="230" width="20" height="49"/>
+                                <state key="normal" title="Downvote" image="chevron.down" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Submission Body Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6w-aP-W0O">
+                                <rect key="frame" x="20" y="137" width="329" height="142"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ex9-9f-Wxr" userLabel="Upvote">
+                                <rect key="frame" x="364" y="162" width="30" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="5aa-6e-AKo"/>
+                                </constraints>
+                                <state key="normal" title="Upvote" image="chevron.up" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="trailing" secondItem="tq9-ji-wSH" secondAttribute="trailingMargin" id="DZE-SP-b5U"/>
+                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="leading" secondItem="D6w-aP-W0O" secondAttribute="trailing" constant="15" id="FAt-gm-VTx"/>
+                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="top" secondItem="5eX-oo-1hk" secondAttribute="top" constant="62" id="Fuh-DJ-OPX"/>
+                            <constraint firstItem="D6w-aP-W0O" firstAttribute="top" secondItem="rJf-bO-J1T" secondAttribute="bottom" constant="8" symbolic="YES" id="Oas-F0-Ck5"/>
+                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="leading" secondItem="1I8-np-IlJ" secondAttribute="leading" id="Qea-8V-bXy"/>
+                            <constraint firstItem="5eX-oo-1hk" firstAttribute="trailing" secondItem="rJf-bO-J1T" secondAttribute="trailing" constant="65" id="SWz-QC-v39"/>
+                            <constraint firstItem="rJf-bO-J1T" firstAttribute="top" secondItem="5eX-oo-1hk" secondAttribute="top" constant="34" id="UAR-L5-l1a"/>
+                            <constraint firstItem="rJf-bO-J1T" firstAttribute="trailing" secondItem="D6w-aP-W0O" secondAttribute="trailing" id="dAJ-rH-kpZ"/>
+                            <constraint firstItem="1I8-np-IlJ" firstAttribute="top" secondItem="Ex9-9f-Wxr" secondAttribute="bottom" constant="8" symbolic="YES" id="svZ-y9-Bfr"/>
+                            <constraint firstItem="rJf-bO-J1T" firstAttribute="leading" secondItem="tq9-ji-wSH" secondAttribute="leadingMargin" id="u6K-2F-CZa"/>
+                            <constraint firstItem="rJf-bO-J1T" firstAttribute="leading" secondItem="D6w-aP-W0O" secondAttribute="leading" id="weB-I2-Bne"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5eX-oo-1hk"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Dya-aH-Mkm" appends="YES" id="Zc7-bv-nmw"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="srV-Wv-VBC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BcD-4W-nwY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Dya-aH-Mkm">
+                    <rectEdge key="edges" left="YES"/>
+                </screenEdgePanGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="4577" y="-1390"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="i53-SZ-cMA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="80F-b4-sPj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="b9X-m3-1Ey"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FuV-gH-0Mr">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bOA-VM-XWF" kind="relationship" relationship="rootViewController" id="hkt-qu-SWh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4bo-qu-Oey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3622" y="-725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wqV-68-fWM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uSq-y3-hsT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Zu-OG-25Z">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="f7o-na-TjQ" kind="relationship" relationship="rootViewController" id="JaM-EX-IFM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wRH-jq-IRC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1931.8840579710147" y="-725.22321428571422"/>
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="chevron.down" catalog="system" width="64" height="36"/>
+        <image name="chevron.up" catalog="system" width="64" height="36"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="WVo-XG-eRv"/>
+    </inferredMetricsTieBreakers>
 </document>
