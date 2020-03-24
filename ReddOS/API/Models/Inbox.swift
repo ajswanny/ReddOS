@@ -13,23 +13,20 @@ import Foundation
  */
 class Inbox {
     
+    // MARK: Properties
+    /// The list of messages that are comments to this user's created content
     var commentReplies: [Comment]?
+    
+    /// The list of messages that are private messages
     var privateMessages: [Message]?
     
-    // Default init
+    // MARK: Initialization
+    /**
+     Default init
+     */
     init(commentReplies: [Comment]?, privateMessages: [Message]?) {
         self.commentReplies = commentReplies
         self.privateMessages = privateMessages
     }
-    
-    // Send a message from current user to a recipient
-    func sendMessage(recipient: Redditor) {}
-    
-    // Marking messages/comment replies as read dismisses them from Inbox
-    func markAsRead(commentReply: Comment) {}
-    func markAsRead(privateMessage: Message) {}
-    
-    // Fetch new received Messages/Comment replies
-    func refresh() {}
     
 }
