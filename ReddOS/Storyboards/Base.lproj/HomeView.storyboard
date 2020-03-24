@@ -14,6 +14,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <progressView key="tableFooterView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="OMd-uE-wkV">
+                            <rect key="frame" x="0.0" y="99.5" width="414" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </progressView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VwV-Eo-dmz">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>

@@ -193,6 +193,7 @@
 				148B7F6523E0AB0600BECD84 /* Info.plist */,
 				148B7F5D23E0AB0600BECD84 /* ReddOS.xcdatamodeld */,
 				143788E9240877CC00B66388 /* API */,
+				1444704324227FA400425CF4 /* FirstViewController.swift */,
 			);
 			path = ReddOS;
 			sourceTree = "<group>";
@@ -330,9 +331,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1444703C24227DD000425CF4 /* HomeView.storyboard in Resources */,
 				148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */,
 				148B7F6123E0AB0600BECD84 /* Assets.xcassets in Resources */,
-				145234CB23FEE324003D4B13 /* HomeView.storyboard in Resources */,
 				145234D123FEE418003D4B13 /* AccountView.storyboard in Resources */,
 				145234CE23FEE3BB003D4B13 /* InboxView.storyboard in Resources */,
 				148B7F5C23E0AB0600BECD84 /* Main.storyboard in Resources */,
@@ -381,6 +382,7 @@
 				146B1A1B2427E3380034D92E /* HTTPRequestType.swift in Sources */,
 				1428804E2426C427007BDEE2 /* Replyable.swift in Sources */,
 				14861D482407A24600D18976 /* Submission.swift in Sources */,
+				1444704424227FA400425CF4 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,14 +418,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		145234C923FEE324003D4B13 /* HomeView.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				145234CA23FEE324003D4B13 /* Base */,
-			);
-			name = HomeView.storyboard;
-			sourceTree = "<group>";
-		};
 		145234CC23FEE3BB003D4B13 /* InboxView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
