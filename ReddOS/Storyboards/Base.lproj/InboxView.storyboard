@@ -34,6 +34,14 @@
                                     <action selector="test:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="SgP-ts-eRB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbm-xz-f9V">
+                                <rect key="frame" x="160" y="654" width="94" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Test API Calls"/>
+                                <connections>
+                                    <action selector="testAPICalls:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="9M3-wM-2qZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>

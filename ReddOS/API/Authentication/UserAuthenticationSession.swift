@@ -8,14 +8,11 @@
 
 import Foundation
 
-class UserAuthenticationSession: AuthenticationSession {
+class AuthenticationSession {
     
     // MARK: Properties
     /// Username of the authenticated account
     var username: String?
-    
-    /// Access scope for the authenticated user
-    var scope: String?
     
     /// The refresh token retrieved during the initial request for an access token
     var refreshToken: String?
@@ -29,8 +26,21 @@ class UserAuthenticationSession: AuthenticationSession {
     /// Expiration date of the access token
     var expirationDate: Date?
     
+    /// Whether or not this session is within safe time limit
+    var isWithinTimeLimit: Bool {
+        if let expirationDate = self.expirationDate {
+            return expirationDate.timeIntervalSinceNow > 30
+        } else {
+            return false
+        }
+    }
+    
     // MARK: Initialization
     init() {
+    }
+    
+    init(username: String) {
+        self.username = username
     }
     
 }

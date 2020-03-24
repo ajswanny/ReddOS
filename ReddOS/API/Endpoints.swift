@@ -93,7 +93,7 @@ public class APIEndpoint {
     
     // MARK: Properties
     /// Host for endpoints
-    var host = "oauth.reddit.com"
+    var host = "https://oauth.reddit.com"
     
     /// The base for this endpoint
     var baseEndpoint: APIEndpointBase
@@ -113,7 +113,7 @@ public class APIEndpoint {
             // TODO: Improve validation
             return urlComponents?.url?.absoluteString ?? ""
         } else {
-            return "\(host)\(baseEndpoint)"
+            return "\(host)\(baseEndpoint.rawValue)"
         }
         
     }

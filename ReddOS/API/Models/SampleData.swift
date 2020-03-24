@@ -15,7 +15,6 @@ public struct SampleData {
     
     // MARK: Properties
     var subreddit: Subreddit
-    var redditor: Redditor
     var submission: Submission
     var inbox: Inbox
     var user: User
@@ -25,8 +24,7 @@ public struct SampleData {
         
         // Construct values
         self.subreddit = Subreddit(fullName: "fullname", displayName: "Sample Subreddit", hotSubmissions: [])
-        self.redditor = Redditor(username: "normal_redditor", karma: 0, friends: [])
-        self.submission = Submission(authorName: redditor.username, creationDate: Date(), id: "0x0", parentSubreddit: subreddit, title: "Submission title", selftext: "Submission body content", urlValue: "https://www.google.com/", userScore: 1, totalScore: 10)
+        self.submission = Submission(authorName: "sample_author", creationDate: Date(), id: "0x0", parentSubreddit: subreddit, title: "Submission title", selftext: "Submission body content", urlValue: "https://www.google.com/", userScore: 1, totalScore: 10)
         self.inbox = Inbox(commentReplies: [], privateMessages: [])
         let subscriptions = [subreddit]
         let blockedRedditors = [String]()

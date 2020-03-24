@@ -91,15 +91,15 @@ class AuthenticationController {
     public var webAuthSession: ASWebAuthenticationSession?
     
     /// TODO: Implement
-    public var isAuthenticated: Bool {
+    public var userIsAuthenticated: Bool {
         return self.userSession?.refreshToken != nil
     }
     
     /// OAuth authentication session for current user
-    var userSession: UserAuthenticationSession?
+    var userSession: AuthenticationSession?
     
     /// TODO: Implement creation
-    var guestSession: GuestAuthenticationSession
+    var guestSession: AuthenticationSession
     
     /// The active session: logged in or not
     var activeSession: AuthenticationSession? {
@@ -118,8 +118,8 @@ class AuthenticationController {
         // TODO: Implement checking existing user session & pre-loading
         
         self.configuration = AuthenticationConfiguration()
-        self.userSession = UserAuthenticationSession()
-        self.guestSession = GuestAuthenticationSession()
+        self.userSession = AuthenticationSession()
+        self.guestSession = AuthenticationSession()
         
     }
     
@@ -204,7 +204,7 @@ class AuthenticationController {
                 let accessToken = dictionary["access_token"] as? String,
                 let tokenType = dictionary["token_type"] as? String,
                 let expiresIn = dictionary["expires_in"] as? Double,
-                let scope = dictionary["scope"] as? String
+                let _ = dictionary["scope"] as? String
             else {
                 fatalError()
             }
@@ -216,7 +216,6 @@ class AuthenticationController {
             userSession.accessToken = accessToken
             userSession.tokenType = tokenType
             userSession.expirationDate = Date().addingTimeInterval(expiresIn)
-            userSession.scope = scope
             
             // If this is authenticationg a new user, record the newly received refresh token
             if authenticationType == .newUser {
@@ -229,7 +228,7 @@ class AuthenticationController {
                 
             }
             
-            print(dictionary)
+            print(self.activeSession?.accessToken)
             
         }
         task.resume()

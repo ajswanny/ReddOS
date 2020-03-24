@@ -15,43 +15,60 @@ import Foundation
 /**
  `User` is the main, authenticated user for the application.
  */
-class User: Redditor {
+class User {
+    
+    /// The username
+    var username: String?
+    
+    /// The total karma of this Redditor
+    var karma: Int?
+    
+    /// A list of friends
+    var friends: [String]?
+    
+    /// The link to this Redditor's URL. This value will be dynamically loaded
+    var profilePictureUrl: String? {
+        didSet {
+            // Implement instantiation of profilePicture here
+        }
+    }
+    
+    /// Actual profile picture data that can be converted to a UIImage
+    var profilePicture: Data?
     
     // MARK: Properties
     /// Refrence to the app's reddit instance
     var reddit: Reddit?
     
     /// List of subreddits the user is a subscriber of
-    var subscriptions: [Subreddit]
+    var subscriptions: [Subreddit]?
     
     /// List of redditors' names this user has blocked
-    var blockedRedditors: [String]
+    var blockedRedditors: [String]?
     
     /// Reference to the user's Inbox instance
-    var inbox: Inbox
+    var inbox: Inbox?
     
     /// The front page (the 'BEST' Submissions)
-    var front: [Submission]
+    var front: [Submission]?
     
     // MARK: Initialization
     /**
      Default init
      */
-    init(reddit: Reddit, username: String, karma: Int, friends: [Redditor], subscriptions: [Subreddit], blockedRedditors: [String], front: [Submission], inbox: Inbox) {
+    init(reddit: Reddit) {
         self.reddit = reddit
-        self.subscriptions = subscriptions
-        self.blockedRedditors = blockedRedditors
-        self.front = front
-        self.inbox = inbox
-        super.init(username: username, karma: karma, friends: friends)
     }
     
-    init(username: String, karma: Int, friends: [Redditor], subscriptions: [Subreddit], blockedRedditors: [String], front: [Submission], inbox: Inbox) {
+    /**
+     
+     */
+    init(username: String, karma: Int, friends: [String], subscriptions: [Subreddit], blockedRedditors: [String], front: [Submission], inbox: Inbox) {
         self.subscriptions = subscriptions
         self.blockedRedditors = blockedRedditors
         self.front = front
         self.inbox = inbox
-        super.init(username: username, karma: karma, friends: friends)
+        self.friends = friends
     }
     
 }
