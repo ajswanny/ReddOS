@@ -13,9 +13,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var sampleData = SampleData()
+    var authenticationController: AuthenticationController?
+    var reddit: Reddit?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize variables
+        self.authenticationController = AuthenticationController()
+        self.reddit = Reddit(authenticationController: self.authenticationController!)
+        
         return true
     }
 

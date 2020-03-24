@@ -28,7 +28,7 @@
         <!--HomeView-->
         <scene sceneID="p42-dB-Slh">
             <objects>
-                <viewControllerPlaceholder storyboardName="HomeView" id="aCl-4r-dUg" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="HomeView" storyboardName="HomeView" id="aCl-4r-dUg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Zf9-9Z-MZ0"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMh-Ez-osH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

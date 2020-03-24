@@ -8,7 +8,9 @@
 
 import Foundation
 
-/// An enumeration of the possible parameters in a callback URL
+/**
+ An enumeration of the possible parameters in a callback URL
+ */
 public enum CallbackParameter: String {
     
     /// A one-time use code that may be exchanged for a bearer token.
@@ -22,7 +24,9 @@ public enum CallbackParameter: String {
     
 }
 
-/// An enumeration of the possible values for a callback error
+/**
+ An enumeration of the possible values for a callback error
+ */
 public enum CallbackError: String {
     
     /// User chose not to grant the app permissions
