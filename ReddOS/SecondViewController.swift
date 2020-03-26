@@ -36,17 +36,13 @@ class SecondViewController: UIViewController, ASWebAuthenticationPresentationCon
     @IBAction func testAPICalls(_ sender: UIButton) {
         
         do {
-            try delegate.reddit?.loadUserFront() { data, error in
-//                print(data)
-            }
+            try delegate.reddit?.initializeUserData() { data, error in print(data!) }
+            try delegate.reddit?.loadUserSubscriptions() { data, error in print(data!.map { subreddit in subreddit.displayName}) }
+            try delegate.reddit?.loadUserBlockedRedditors() { data, error in print(data!) }
+            try delegate.reddit?.loadUserFront() { data, error in print(data!.map { submission in submission.title }) }
+            
         } catch {
             print(error)
-        }
-        
-        do {
-            try delegate.reddit?.initializeUserData(completionHandler: completionExample(data:error:))
-        } catch {
-            //
         }
         
 //        guard let url = URL(string: "https://oauth.reddit.com/api/v1/me") else {

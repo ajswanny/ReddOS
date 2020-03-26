@@ -39,7 +39,7 @@ class Subreddit {
         self.displayName = displayName
     }
     
-    init(fullName: String, displayName: String, headerImgURL: String) {
+    init(fullName: String, displayName: String, headerImgURL: String?) {
         self.fullName = fullName
         self.displayName = displayName
         self.headerImgURL = headerImgURL

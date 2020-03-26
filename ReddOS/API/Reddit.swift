@@ -112,7 +112,8 @@ class Reddit {
                 self.user?.username = username
                 self.user?.karma = linkKarma + commentKarma
                 self.user?.profilePictureUrl = profilePictureURL
-                completionHandler(body, nil)
+                let userData: [String: Any] = ["username": username, "karma": linkKarma + commentKarma, "profilePictureURL": profilePictureURL]
+                completionHandler(userData, nil)
                 
             } else {
                 completionHandler(nil, error)
@@ -139,7 +140,7 @@ class Reddit {
             if let body = body {
                 
                 // Convert to list of Subreddits
-                let subreddits = self.parseUserSubscriptions(using: body)
+                let subreddits = self.parseUserSubscriptions(fromData: body)
                 self.user?.subscriptions = subreddits
                 completionHandler(subreddits, nil)
                 
@@ -153,7 +154,7 @@ class Reddit {
     /**
      Parses raw dictionaries into a list of Subreddits
      */
-    private func parseUserSubscriptions(using data: [String: Any]) -> [Subreddit] {
+    private func parseUserSubscriptions(fromData data: [String: Any]) -> [Subreddit] {
         
         //Get list of raw values
         guard let data = data["data"] as? [String: Any], let subreddits = data["children"] as? [[String: Any]] else { fatalError() }
@@ -164,7 +165,7 @@ class Reddit {
             guard let subredditData = subreddit["data"] as? [String: Any] else { fatalError() }
             let fullname = subredditData["name"] as! String
             let displayName = subredditData["display_name"] as! String
-            let headerImgURL = subredditData["header_img"] as! String
+            let headerImgURL = subredditData["header_img"] as? String ?? nil
             let newSubreddit = Subreddit(fullName: fullname, displayName: displayName, headerImgURL: headerImgURL)
             subredditObjects.append(newSubreddit)
         }
@@ -188,7 +189,7 @@ class Reddit {
             if let body = body {
                 
                 // Convert to list of blocked redditors
-                let blockedRedditors = self.parseBlockedRedditors(using: body)
+                let blockedRedditors = self.parseBlockedRedditors(fromData: body)
                 self.user?.blockedRedditors = blockedRedditors
                 completionHandler(blockedRedditors, nil)
                 
@@ -202,11 +203,12 @@ class Reddit {
     /**
      Parses raw dictionaries into a list of the names of the redditors the authenticated user has blocked
      */
-    private func parseBlockedRedditors(using data: [String: Any]) -> [String] {
+    private func parseBlockedRedditors(fromData data: [String: Any]) -> [String] {
         
         // Validate
         guard let data = data["data"] as? [String: Any], let blockedRedditorsData = data["children"] as? [[String: Any]] else { fatalError() }
         
+        // Parse
         var blockedRedditors = [String]()
         for blockedRedditorData in blockedRedditorsData {
             let username = blockedRedditorData["name"] as! String
@@ -225,28 +227,17 @@ class Reddit {
         
         // Fetch "front"
         let frontEndpoint = APIEndpoint(base: .front)
-        let frontRequest = newUrlRequest(method: .get, endpoint: frontEndpoint)
-        
-        // Execute and return unpacked data as as dict of Any ([String : Any])
-        guard let request = frontRequest else {
+        guard let frontRequest = newUrlRequest(method: .get, endpoint: frontEndpoint) else {
             throw RedditError.userNotAuthenticated
         }
-        execute(request) { body, error in
+        
+        // Execute and return unpacked data as as dict of Any ([String : Any])
+        execute(frontRequest) { body, error in
             if let body = body {
                 
-                // Get list of Submission data
-                guard let data = body["data"] as? [String: Any], let submissions = data["children"] as? [[String: Any]] else { fatalError() }
-            
-                // Parse data into Submission objects
-                var submissionObjects = [Submission]()
-                for submission in submissions {
-                    guard let submissionData = submission["data"] as? [String: Any] else { fatalError() }
-                    let newSubmission = self.constructSubmission(fromData: submissionData)
-                    submissionObjects.append(newSubmission)
-                }
-                
-                self.user?.front = submissionObjects
-                completionHandler(submissionObjects, nil)
+                let front = self.parseUserFront(fromData: body)
+                self.user?.front = front
+                completionHandler(front, nil)
                 
             } else {
                 completionHandler(nil, error)
@@ -258,30 +249,45 @@ class Reddit {
     /**
      Creates a new Submission from a dictionary of values
      */
-    private func constructSubmission(fromData data: [String: Any]) -> Submission {
-        let authorName = data["author"] as! String
-        let creationDate = Date(timeIntervalSince1970: data["created_utc"] as! Double)
-        let id = data["name"] as! String
-        let parentSubredditName = data["subreddit_name_prefixed"] as! String
-        let title = data["title"] as! String
-        let selftext = data["selftext"] as! String
-        let urlValue = data["url"] as! String
-        var userScore: Int {
-            let value = data["likes"]
-            if value == nil {
-                return 0
-            } else {
-                let value = value as! Bool
-                if value {
-                    return 1
+    private func parseUserFront(fromData data: [String: Any]) -> [Submission] {
+        
+        // Get list of Submission data
+        guard let data = data["data"] as? [String: Any], let submissionData = data["children"] as? [[String: Any]] else { fatalError() }
+        
+        // Parse data into Submission objects
+        var submissions = [Submission]()
+        for submissionData in submissionData {
+
+            guard let submissionData = submissionData["data"] as? [String: Any] else { fatalError() }
+            let authorName = submissionData["author"] as! String
+            let creationDate = Date(timeIntervalSince1970: submissionData["created_utc"] as! Double)
+            let id = submissionData["name"] as! String
+            let parentSubredditName = submissionData["subreddit_name_prefixed"] as! String
+            let title = submissionData["title"] as! String
+            let selftext = submissionData["selftext"] as! String
+            let urlValue = submissionData["url"] as! String
+            var userScore: Int {
+                let value = submissionData["likes"]
+                if value == nil {
+                    return 0
                 } else {
-                    return -1
+                    let value = value as! Bool
+                    if value {
+                        return 1
+                    } else {
+                        return -1
+                    }
                 }
             }
+            let totalScore = submissionData["score"] as! Int
+            
+            let newSubmission = Submission(authorName: authorName, creationDate: creationDate, id: id, parentSubredditName: parentSubredditName, title: title, selftext: selftext, urlValue: urlValue, userScore: 0, totalScore: totalScore)
+            submissions.append(newSubmission)
+            
         }
-        let totalScore = data["score"] as! Int
-        let newSubmission = Submission(authorName: authorName, creationDate: creationDate, id: id, parentSubredditName: parentSubredditName, title: title, selftext: selftext, urlValue: urlValue, userScore: 0, totalScore: totalScore)
-        return newSubmission
+        
+        return submissions
+        
     }
     
     // MARK: Vote
