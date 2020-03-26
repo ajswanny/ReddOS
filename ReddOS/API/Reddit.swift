@@ -36,13 +36,18 @@ class Reddit {
     /// Reference to the authentication controller
     var authenticationController: AuthenticationController
     
-    /// The type for completion handlers of API request methods
-    public typealias RequestFunctionCompletionHandler = (RequestExecutionResult?, Error?) -> Void    // TODO: Determine final type of first param
-    public typealias RequestExecutionResult = [String: Any]
-    public typealias RequestExecutionCompletionHandler = (RequestExecutionResult?, Error?) -> Void
-    
     /// Authenticated user
     var user: User?
+    
+    public typealias MarkAsReadCompletionHandler = (Error?) -> Void
+    public typealias RefreshInboxCompletionHandler = (Error?) -> Void
+    public typealias ReplyCompletionHandler  = (Error?) -> Void
+    public typealias VoteCompletionHandler = (Int?, Error?) -> Void
+    public typealias LoadUserFrontCompletionHandler = ([Submission]?, Error?) -> Void
+    public typealias LoadBlockedRedditorsCompletionHandler = ([String]?, Error?) -> Void
+    public typealias LoadUserSubscriptionsCompletionHandler = ([Subreddit]?, Error?) -> Void
+    public typealias LoadUserFriendsCompletionHandler = ([String]?, Error?) -> Void
+    public typealias InitUserDataCompletionHandler = ([String: Any]?, Error?) -> Void
     
     // MARK: Initialization
     /**
@@ -50,6 +55,7 @@ class Reddit {
      */
     public init(authenticationController: AuthenticationController) {
         self.authenticationController = authenticationController
+        self.user = User()
     }
     
     /**
@@ -79,46 +85,35 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func initializeUserData(completionHandler: @escaping RequestFunctionCompletionHandler) throws {
+    public func initializeUserData(completionHandler: @escaping InitUserDataCompletionHandler) throws {
         
         // Validate session
         try validateUserSession()
         
         // Fetch "me"
         let meEndpoint = APIEndpoint(base: .me)
-        let meRequest = newUrlRequest(method: .get, endpoint: meEndpoint)
-        
-        // Execute and return unpacked data as as dict of Any ([String : Any])
-        guard let request = meRequest else {
+        guard let meRequest = newUrlRequest(method: .get, endpoint: meEndpoint) else {
             throw RedditError.userNotAuthenticated
         }
-        execute(request) { data, error in
-            if let data = data {
-                completionHandler(data, nil)
-            } else {
-                completionHandler(nil, error)
-            }
-        }
-        
-    }
     
-    // MARK: User Friends
-    public func loadUserFriends(completionHandler: @escaping RequestFunctionCompletionHandler) throws {
-        
-        // Validate session
-        try validateUserSession()
-        
-        // Fetch "friends"
-        let friendsEndpoint = APIEndpoint(base: .friends)
-        let friendsRequest = newUrlRequest(method: .get, endpoint: friendsEndpoint)
-        
         // Execute and return unpacked data as as dict of Any ([String : Any])
-        guard let request = friendsRequest else {
-            throw RedditError.userNotAuthenticated
-        }
-        execute(request) { data, error in
-            if let data = data {
-                completionHandler(data, nil)
+        execute(meRequest) { body, error in
+            if let body = body {
+                // Convert to User properties
+                guard
+                    let username = body["name"] as? String,
+                    let linkKarma = body["link_karma"] as? Int,
+                    let commentKarma = body["comment_karma"] as? Int,
+                    let profilePictureURL = body["icon_img"] as? String
+                else {
+                    fatalError()
+                }
+                
+                self.user?.username = username
+                self.user?.karma = linkKarma + commentKarma
+                self.user?.profilePictureUrl = profilePictureURL
+                completionHandler(body, nil)
+                
             } else {
                 completionHandler(nil, error)
             }
@@ -127,7 +122,7 @@ class Reddit {
     }
     
     // MARK: User Subscriptions
-    public func loadUserSubscriptions(completionHandler: @escaping RequestFunctionCompletionHandler) throws {
+    public func loadUserSubscriptions(completionHandler: @escaping LoadUserSubscriptionsCompletionHandler) throws {
         
         // Validate session
         try validateUserSession()
@@ -140,9 +135,14 @@ class Reddit {
         guard let request = subscriptionsRequest else {
             throw RedditError.userNotAuthenticated
         }
-        execute(request) { data, error in
-            if let data = data {
-                completionHandler(data, nil)
+        execute(request) { body, error in
+            if let body = body {
+                
+                // Convert to list of Subreddits
+                let subreddits = self.parseUserSubscriptions(using: body)
+                self.user?.subscriptions = subreddits
+                completionHandler(subreddits, nil)
+                
             } else {
                 completionHandler(nil, error)
             }
@@ -150,20 +150,75 @@ class Reddit {
         
     }
     
+    /**
+     Parses raw dictionaries into a list of Subreddits
+     */
+    private func parseUserSubscriptions(using data: [String: Any]) -> [Subreddit] {
+        
+        //Get list of raw values
+        guard let data = data["data"] as? [String: Any], let subreddits = data["children"] as? [[String: Any]] else { fatalError() }
+        
+        // Parse data
+        var subredditObjects = [Subreddit]()
+        for subreddit in subreddits {
+            guard let subredditData = subreddit["data"] as? [String: Any] else { fatalError() }
+            let fullname = subredditData["name"] as! String
+            let displayName = subredditData["display_name"] as! String
+            let headerImgURL = subredditData["header_img"] as! String
+            let newSubreddit = Subreddit(fullName: fullname, displayName: displayName, headerImgURL: headerImgURL)
+            subredditObjects.append(newSubreddit)
+        }
+        
+        return subredditObjects
+        
+    }
+    
     // MARK: Blocked Redditors
-    public func loadUserBlockedRedditors(completionHandler: @escaping RequestFunctionCompletionHandler) throws {
+    public func loadUserBlockedRedditors(completionHandler: @escaping LoadBlockedRedditorsCompletionHandler) throws {
         
         // Validate session
         try validateUserSession()
         
         // Fetch "blocked"
         let blockedEndpoint = APIEndpoint(base: .blockedRedditors)
-        let blockedRequest = newUrlRequest(method: .get, endpoint: blockedEndpoint)
+        guard let blockedRedditorsRequest = newUrlRequest(method: .get, endpoint: blockedEndpoint) else {
+            throw RedditError.userNotAuthenticated
+        }
+        execute(blockedRedditorsRequest) { body, error in
+            if let body = body {
+                
+                // Convert to list of blocked redditors
+                let blockedRedditors = self.parseBlockedRedditors(using: body)
+                self.user?.blockedRedditors = blockedRedditors
+                completionHandler(blockedRedditors, nil)
+                
+            } else {
+                completionHandler(nil, error)
+            }
+        }
+        
+    }
+    
+    /**
+     Parses raw dictionaries into a list of the names of the redditors the authenticated user has blocked
+     */
+    private func parseBlockedRedditors(using data: [String: Any]) -> [String] {
+        
+        // Validate
+        guard let data = data["data"] as? [String: Any], let blockedRedditorsData = data["children"] as? [[String: Any]] else { fatalError() }
+        
+        var blockedRedditors = [String]()
+        for blockedRedditorData in blockedRedditorsData {
+            let username = blockedRedditorData["name"] as! String
+            blockedRedditors.append(username)
+        }
+        
+        return blockedRedditors
         
     }
     
     // MARK: User Front
-    public func loadUserFront(completionHandler: @escaping RequestFunctionCompletionHandler) throws {
+    public func loadUserFront(completionHandler: @escaping LoadUserFrontCompletionHandler) throws {
         
         // Validate session
         try validateUserSession()
@@ -172,6 +227,61 @@ class Reddit {
         let frontEndpoint = APIEndpoint(base: .front)
         let frontRequest = newUrlRequest(method: .get, endpoint: frontEndpoint)
         
+        // Execute and return unpacked data as as dict of Any ([String : Any])
+        guard let request = frontRequest else {
+            throw RedditError.userNotAuthenticated
+        }
+        execute(request) { body, error in
+            if let body = body {
+                
+                // Get list of Submission data
+                guard let data = body["data"] as? [String: Any], let submissions = data["children"] as? [[String: Any]] else { fatalError() }
+            
+                // Parse data into Submission objects
+                var submissionObjects = [Submission]()
+                for submission in submissions {
+                    guard let submissionData = submission["data"] as? [String: Any] else { fatalError() }
+                    let newSubmission = self.constructSubmission(fromData: submissionData)
+                    submissionObjects.append(newSubmission)
+                }
+                
+                self.user?.front = submissionObjects
+                completionHandler(submissionObjects, nil)
+                
+            } else {
+                completionHandler(nil, error)
+            }
+        }
+        
+    }
+    
+    /**
+     Creates a new Submission from a dictionary of values
+     */
+    private func constructSubmission(fromData data: [String: Any]) -> Submission {
+        let authorName = data["author"] as! String
+        let creationDate = Date(timeIntervalSince1970: data["created_utc"] as! Double)
+        let id = data["name"] as! String
+        let parentSubredditName = data["subreddit_name_prefixed"] as! String
+        let title = data["title"] as! String
+        let selftext = data["selftext"] as! String
+        let urlValue = data["url"] as! String
+        var userScore: Int {
+            let value = data["likes"]
+            if value == nil {
+                return 0
+            } else {
+                let value = value as! Bool
+                if value {
+                    return 1
+                } else {
+                    return -1
+                }
+            }
+        }
+        let totalScore = data["score"] as! Int
+        let newSubmission = Submission(authorName: authorName, creationDate: creationDate, id: id, parentSubredditName: parentSubredditName, title: title, selftext: selftext, urlValue: urlValue, userScore: 0, totalScore: totalScore)
+        return newSubmission
     }
     
     // MARK: Vote
@@ -180,7 +290,7 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping RequestFunctionCompletionHandler) {
+    public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping VoteCompletionHandler) {
         // TODO: Implement
         
     }
@@ -191,7 +301,7 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func reply(to target: Replyable, withContent content: String, completionHandler: @escaping RequestFunctionCompletionHandler) {
+    public func reply(to target: Replyable, withContent content: String, completionHandler: @escaping ReplyCompletionHandler) {
         // TODO: Implement
         
     }
@@ -201,7 +311,7 @@ class Reddit {
      Fetch new received Messages/Comment replies
      - Parameter completionHandler: The callback for when this request completes
      */
-    public func refreshInbox(completionHandler: @escaping RequestFunctionCompletionHandler) {
+    public func refreshInbox(completionHandler: @escaping RefreshInboxCompletionHandler) {
         // TODO: Implement
         
     }
@@ -212,7 +322,7 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func markAsRead(commentReply: Comment, completionHandler: @escaping RequestFunctionCompletionHandler) {
+    public func markAsRead(commentReply: Comment, completionHandler: MarkAsReadCompletionHandler) {
         // TODO: Implement
         
     }
@@ -222,7 +332,7 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func markAsRead(privateMessage: Message, completionHandler: @escaping RequestFunctionCompletionHandler) {
+    public func markAsRead(privateMessage: Message, completionHandler: @escaping MarkAsReadCompletionHandler) {
         // TODO: Implement
         
     }
@@ -260,7 +370,7 @@ class Reddit {
     /**
      Executes a URL request for Reddit API, unpacks, and returns result to a provided completion  handler
      */
-    public func execute(_ request: URLRequest, completion: @escaping RequestExecutionCompletionHandler) {
+    private func execute(_ request: URLRequest, completion: @escaping ([String: Any]?, Error?) -> Void) {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -277,6 +387,8 @@ class Reddit {
             else {
                 fatalError()
             }
+            
+//            print(response)
             
             // Return data
             completion(package, nil)

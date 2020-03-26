@@ -23,8 +23,8 @@ public struct SampleData {
     init() {
         
         // Construct values
-        self.subreddit = Subreddit(fullName: "fullname", displayName: "Sample Subreddit", hotSubmissions: [])
-        self.submission = Submission(authorName: "sample_author", creationDate: Date(), id: "0x0", parentSubreddit: subreddit, title: "Submission title", selftext: "Submission body content", urlValue: "https://www.google.com/", userScore: 1, totalScore: 10)
+        self.subreddit = Subreddit(fullName: "fullname", displayName: "Sample Subreddit")
+        self.submission = Submission(authorName: "sample_author", creationDate: Date(), id: "0x0", parentSubredditName: "r/subreddit", title: "Submission title", selftext: "Submission body content", urlValue: "https://www.google.com/", userScore: 1, totalScore: 10)
         self.inbox = Inbox(commentReplies: [], privateMessages: [])
         let subscriptions = [subreddit]
         let blockedRedditors = [String]()

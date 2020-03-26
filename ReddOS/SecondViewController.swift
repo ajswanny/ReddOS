@@ -29,14 +29,24 @@ class SecondViewController: UIViewController, ASWebAuthenticationPresentationCon
         
     }
     
+    func completionExample(data: [String: Any]?, error: Error?) {
+        
+    }
+    
     @IBAction func testAPICalls(_ sender: UIButton) {
         
         do {
-            try delegate.reddit?.initializeUserData() { data, error in
-                print("success")
+            try delegate.reddit?.loadUserFront() { data, error in
+//                print(data)
             }
         } catch {
             print(error)
+        }
+        
+        do {
+            try delegate.reddit?.initializeUserData(completionHandler: completionExample(data:error:))
+        } catch {
+            //
         }
         
 //        guard let url = URL(string: "https://oauth.reddit.com/api/v1/me") else {

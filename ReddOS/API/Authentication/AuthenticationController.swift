@@ -216,19 +216,16 @@ class AuthenticationController {
             userSession.accessToken = accessToken
             userSession.tokenType = tokenType
             userSession.expirationDate = Date().addingTimeInterval(expiresIn)
-            
             // If this is authenticationg a new user, record the newly received refresh token
             if authenticationType == .newUser {
-                
                 // Read the refresh token for a new user
                 guard let refreshToken = dictionary["refresh_token"] as? String else {
                     fatalError()
                 }
                 userSession.refreshToken = refreshToken
-                
             }
             
-            print(self.activeSession?.accessToken)
+            print(userSession.accessToken)
             
         }
         task.resume()

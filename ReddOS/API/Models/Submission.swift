@@ -34,7 +34,7 @@ class Submission: RedditContent {
     }
     
     /// The Subreddit this Submission was posted in
-    var parentSubreddit: Subreddit
+    var parentSubredditName: String
     
     /// More formal data structure needs to be defined in the future (somthing like PRAW's CommentForest)
     var comments: [Comment]?
@@ -43,10 +43,10 @@ class Submission: RedditContent {
     /**
      Default init
      */
-    init(authorName: String, creationDate: Date, id: String, parentSubreddit: Subreddit, title: String, selftext: String, urlValue: String, userScore: Int, totalScore: Int) {
+    init(authorName: String, creationDate: Date, id: String, parentSubredditName: String, title: String, selftext: String, urlValue: String, userScore: Int, totalScore: Int) {
         self.authorName = authorName
         self.creationDate = creationDate
-        self.parentSubreddit = parentSubreddit
+        self.parentSubredditName = parentSubredditName
         self.title = title
         self.selftext = selftext
         self.urlValue = urlValue

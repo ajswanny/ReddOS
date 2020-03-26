@@ -17,6 +17,8 @@ import Foundation
  */
 class User {
     
+    // MARK: Properties
+    
     /// The username
     var username: String?
     
@@ -35,11 +37,7 @@ class User {
     
     /// Actual profile picture data that can be converted to a UIImage
     var profilePicture: Data?
-    
-    // MARK: Properties
-    /// Refrence to the app's reddit instance
-    var reddit: Reddit?
-    
+
     /// List of subreddits the user is a subscriber of
     var subscriptions: [Subreddit]?
     
@@ -56,8 +54,7 @@ class User {
     /**
      Default init
      */
-    init(reddit: Reddit) {
-        self.reddit = reddit
+    init() {
     }
     
     /**
