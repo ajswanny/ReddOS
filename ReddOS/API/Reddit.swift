@@ -123,6 +123,9 @@ class Reddit {
     }
     
     // MARK: User Subscriptions
+    /**
+     Executes a call to the Reddit API to fetch all the Subreddits the currently authenticated user is subscribed to.
+     */
     public func loadUserSubscriptions(completionHandler: @escaping LoadUserSubscriptionsCompletionHandler) throws {
         
         // Validate session
@@ -175,6 +178,9 @@ class Reddit {
     }
     
     // MARK: Blocked Redditors
+    /**
+     Executes a call to the Reddit API to fetch all the blocked redditors for the currently authenticated user.
+     */
     public func loadUserBlockedRedditors(completionHandler: @escaping LoadBlockedRedditorsCompletionHandler) throws {
         
         // Validate session
@@ -220,6 +226,9 @@ class Reddit {
     }
     
     // MARK: User Front
+    /**
+     Executes a call to the Reddit API to fetch all the Submissions in the currently authenticated user's front page.
+     */
     public func loadUserFront(completionHandler: @escaping LoadUserFrontCompletionHandler) throws {
         
         // Validate session
@@ -247,7 +256,7 @@ class Reddit {
     }
     
     /**
-     Creates a new Submission from a dictionary of values
+     Parses submission data into a list of submission objects
      */
     private func parseUserFront(fromData data: [String: Any]) -> [Submission] {
         
