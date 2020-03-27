@@ -216,7 +216,7 @@ class AuthenticationController {
         // TODO: Implement
     }
     
-    // MARK: Access Token Retrieval
+    // MARK: Token Request Creation
     /**
      Constructs a POST request in order to receive an access token for a new user that allows interaction with the Reddit API endpoints. Authenticating a new user and re-authenticating an existing user both require different body parameters (see [Retrieving the access token]( https://github.com/reddit-archive/reddit/wiki/oauth2#retrieving-the-access-token)).
      */
@@ -283,6 +283,7 @@ class AuthenticationController {
         
     }
     
+    // MARK: Token Retrieval
     /**
      Fetches the access token from Reddit for a user session using an already received authorization code
      - Parameters:
