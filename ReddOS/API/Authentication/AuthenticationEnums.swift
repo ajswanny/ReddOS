@@ -42,3 +42,16 @@ public enum CallbackError: String {
     case invalid_request
     
 }
+
+/**
+ The different ways to authenticate a user account
+ */
+public enum UserAuthenticationType: String {
+    
+    /// A new user session
+    case newUser = "new User"
+    
+    /// An existing user session
+    case existingUser = "existing User"
+    
+}
