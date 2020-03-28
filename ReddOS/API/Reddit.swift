@@ -64,7 +64,7 @@ class Reddit {
     private func validateUserSession() throws {
         
         // Ensure user is authenticated
-        if !authenticationController.userIsAuthenticated {
+        if !authenticationController.userIsAuthorizedForAuthentication {
             throw RedditError.userNotAuthenticated
         }
         guard let userSession = authenticationController.userSession else {
