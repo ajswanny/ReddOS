@@ -12,9 +12,31 @@ class HomeViewController: UITableViewController {
     
     var hotSubmissions: [Submission]!
 
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //TODO: steps for getting user front data
+        do{
+            try
+                //call the front and vote endpoint
+                delegate.reddit?.loadUserFront(completionHandler: completionHandler(data:error:))
+        }catch{
+            
+            //leave empty for now
+            
+            }
+        }
+    
+    
+    //take data optional and error otional
+    func completionHandler(data: [String:Any]?, error: Error?) -> Void{
+        //check if data is legit
+        guard let data = data, error == nil else {
+            fatalError()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +52,8 @@ class HomeViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hotThread", for: indexPath)
         let submisson = hotSubmissions[indexPath.row]
         cell.textLabel!.text = submisson.title
-       // cell.textLabel?.text = submisson.subreddit
+        cell.textLabel!.text = submisson.parentSubreddit.displayName
+        //cell.textLabel?.text = submisson.subreddit
         return cell
     }
     
