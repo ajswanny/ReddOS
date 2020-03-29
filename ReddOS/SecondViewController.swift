@@ -29,12 +29,21 @@ class SecondViewController: UIViewController, ASWebAuthenticationPresentationCon
         
     }
     
+    func completionExample(data: [String: Any]?, error: Error?) {
+        
+    }
+    
     @IBAction func testAPICalls(_ sender: UIButton) {
         
+//        print(delegate.reddit?.authenticationController.userSession?.refreshToken)
+//        print("aldh")
+        
         do {
-            try delegate.reddit?.initializeUserData() { data, error in
-                print("success")
-            }
+            try delegate.reddit?.initializeUserData() { data, error in print(data!) }
+            try delegate.reddit?.loadUserSubscriptions() { data, error in print(data!.map { subreddit in subreddit.displayName}) }
+            try delegate.reddit?.loadUserBlockedRedditors() { data, error in print(data!) }
+            try delegate.reddit?.loadUserFront() { data, error in print(data!.map { submission in submission.title }) }
+
         } catch {
             print(error)
         }

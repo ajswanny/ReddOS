@@ -20,27 +20,29 @@ class Subreddit {
     /// Name publicly shown to users
     var displayName: String
     
-    /// The list of currently `Hot` Submissions
-    var hotSubmissions: [Submission]
-    
     /// The link to this Redditor's URL. This value will be dynamically loaded
-    var profilePictureUrl: String? {
+    var headerImgURL: String? {
         didSet {
             // Implement instantiation of profilePicture here
         }
     }
     
     /// Actual profile picture data that can be converted to a UIImage
-    var profilePicture: Data?
+    var headerImg: Data?
     
     // MARK: Initialization
     /**
      Default init
      */
-    init(fullName: String, displayName: String, hotSubmissions: [Submission]) {
+    init(fullName: String, displayName: String) {
         self.fullName = fullName
         self.displayName = displayName
-        self.hotSubmissions = hotSubmissions
+    }
+    
+    init(fullName: String, displayName: String, headerImgURL: String?) {
+        self.fullName = fullName
+        self.displayName = displayName
+        self.headerImgURL = headerImgURL
     }
     
 }
