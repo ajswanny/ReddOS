@@ -96,10 +96,17 @@ class AuthenticationController {
         self.guestSession = AuthenticationSession()
         
         // Initialize user session
+//        if let encoded = try? JSONEncoder().encode(guestSession) {
+//            UserDefaults.standard.set(encoded, forKey: "blog")
+//        }
+//
+//        if let blogData = UserDefaults.standard.data(forKey: "blog"),
+//            let blog = try? JSONDecoder().decode(AuthenticationSession.self, from: blogData) {
+//        }
+        
         previousUserSession = loadUserSession()
         if previousUserSession?.refreshToken != nil {
             reauthenticateCurrentUser()
-//            userSession = previousUserSession
             print("Reauthenticated")
         } else {
             print("User session is not authorized for authentication; foregoing re-authentication.")
@@ -294,7 +301,7 @@ class AuthenticationController {
             }
             
             #if DEBUG
-            print("Successfully stored the access token for: \(authenticationType.rawValue)")
+            print("Successfully stored the access token for: \(authenticationType.rawValue).")
             #endif
             
             // Set current user session to newUserSession
@@ -329,6 +336,8 @@ class AuthenticationController {
      */
     private func loadUserSession() -> AuthenticationSession {
         
+        print(userSessionDataStore.absoluteString)
+        
         do {
             let data = try Data(contentsOf: userSessionDataStore)
             guard let object = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? AuthenticationSession else { fatalError() }
@@ -341,6 +350,7 @@ class AuthenticationController {
             #endif
             return object
         } catch {
+            print(error.localizedDescription)
             fatalError()
         }
         

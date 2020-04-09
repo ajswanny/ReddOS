@@ -22,7 +22,7 @@ public struct ObjectTypePrefixes {
 }
 
 public enum RedditError: Error {
-    case userNotAuthenticated
+    case userNotAuthenticated 
     case authorizationExpired
     case networkConnectionLost
 }
@@ -244,6 +244,7 @@ class Reddit {
         execute(frontRequest) { body, error in
             if let body = body {
                 
+                print(self.fCompleted)
                 let front = self.parseUserFront(fromData: body)
                 self.user?.front = front
                 completionHandler(front, nil)
@@ -305,8 +306,18 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping VoteCompletionHandler) {
-        // TODO: Implement
+    public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping VoteCompletionHandler) throws {
+        
+        // Validate session
+        try validateUserSession()
+        
+        // Construct the request
+        let endpointParameters: [String: Any] = ["id": redditContent.id, "direction": direction]
+        let voteEndpoint = APIEndpoint(base: .vote, parameters: endpointParameters)
+        guard let voteRequest = newUrlRequest(method: .get, endpoint: voteEndpoint) else {
+            throw RedditError.userNotAuthenticated
+        }
+        
         
     }
     
@@ -382,6 +393,17 @@ class Reddit {
         
     }
       
+    private var observation: NSKeyValueObservation?
+    private var fCompleted: Double?
+    private typealias ChangeHandler = (Progress, NSKeyValueObservedChange<Double>) -> Void
+    
+    func completionExample(progress: Progress, _: NSKeyValueObservedChange<Double>) {
+        print("progress: ", progress.fractionCompleted)
+        if progress.fractionCompleted == 1.0 {
+            // Done
+        }
+    }
+    
     /**
      Executes a URL request for Reddit API, unpacks, and returns result to a provided completion  handler
      */
@@ -409,7 +431,20 @@ class Reddit {
             completion(package, nil)
             
         }
+        
+//        observation = task.progress.observe(\.fractionCompleted) { progress, _ in
+//            print("progress: ", progress.fractionCompleted)
+//            if progress.fractionCompleted == 1.0 {
+//                self.fCompleted = progress.fractionCompleted
+//            }
+//        }
+        
+        observation = task.progress.observe(\.fractionCompleted, changeHandler: completionExample(progress:_:))
+        
+        
         task.resume()
+        
+        print(task.progress)
         
     }
     

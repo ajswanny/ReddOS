@@ -126,9 +126,7 @@
 		143788E9240877CC00B66388 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				14652543241C3A890038181E /* Reddit.swift */,
-				146A5FAC24277DAF00F08D19 /* Endpoints.swift */,
-				146B1A1A2427E3380034D92E /* HTTPRequestType.swift */,
+				1473B5B424362D3900B6246D /* Base */,
 				143788EA2408786700B66388 /* Authentication */,
 				14861D402407991B00D18976 /* Models */,
 			);
@@ -147,6 +145,16 @@
 				146ED5A2242E9BE9004AC686 /* userSession.ser */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		1473B5B424362D3900B6246D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				14652543241C3A890038181E /* Reddit.swift */,
+				146A5FAC24277DAF00F08D19 /* Endpoints.swift */,
+				146B1A1A2427E3380034D92E /* HTTPRequestType.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		14861D402407991B00D18976 /* Models */ = {

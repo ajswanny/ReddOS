@@ -29,8 +29,14 @@ class SecondViewController: UIViewController, ASWebAuthenticationPresentationCon
         
     }
     
-    func completionExample(data: [String: Any]?, error: Error?) {
-        
+    func completionExample(data: [Submission]?, error: Error?) {
+        guard let submissionList = data else {
+            fatalError()
+        }
+        // Use 'submissionList'
+        for submission in submissionList {
+            print(submission.title)
+        }
     }
     
     @IBAction func testAPICalls(_ sender: UIButton) {
@@ -43,6 +49,8 @@ class SecondViewController: UIViewController, ASWebAuthenticationPresentationCon
             try delegate.reddit?.loadUserSubscriptions() { data, error in print(data!.map { subreddit in subreddit.displayName}) }
             try delegate.reddit?.loadUserBlockedRedditors() { data, error in print(data!) }
             try delegate.reddit?.loadUserFront() { data, error in print(data!.map { submission in submission.title }) }
+            
+            try delegate.reddit?.loadUserFront(completionHandler: completionExample(data:error:))
 
         } catch {
             print(error)
