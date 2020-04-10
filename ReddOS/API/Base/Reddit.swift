@@ -331,37 +331,6 @@ class Reddit {
         
     }
     
-    // MARK: Inbox
-    /**
-     Fetch new received Messages/Comment replies
-     - Parameter completionHandler: The callback for when this request completes
-     */
-    public func refreshInbox(completionHandler: @escaping RefreshInboxCompletionHandler) {
-        // TODO: Implement
-        
-    }
-    
-    // MARK: Mark as read
-    /**
-     Mark a comment in the inbox as read to dismiss it
-     - Parameters:
-        - completionHandler: The callback for when this request completes
-     */
-    public func markAsRead(commentReply: Comment, completionHandler: MarkAsReadCompletionHandler) {
-        // TODO: Implement
-        
-    }
-    
-    /**
-     Mark a private message as read to dismiss it
-     - Parameters:
-        - completionHandler: The callback for when this request completes
-     */
-    public func markAsRead(privateMessage: Message, completionHandler: @escaping MarkAsReadCompletionHandler) {
-        // TODO: Implement
-        
-    }
-    
     // MARK: Methods
     /**
      Creates a new HTTP request.
