@@ -313,6 +313,9 @@ class AuthenticationController {
             // Set current user session to newUserSession
             self.userSession = newAuthenticationSession
             
+            // Notify App
+            NotificationCenter.default.post(name: .onAuthenticated, object: nil)
+            
         }
         task.resume()
         

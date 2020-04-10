@@ -18,19 +18,18 @@ class HomeViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //TODO: steps for getting user front data
-        do{
-            try
-                //call the front and vote endpoint
-                delegate.reddit?.loadUserFront(completionHandler:completionHandler(data:error:))
-            
-        }catch{
+        do {
+            try delegate.reddit?.loadUserFront(completionHandler:completionHandler(data:error:))
+        } catch {
             print(error.localizedDescription)
-            }
         }
+        
+    }
     
     
     //take data optional and error otional
-    func completionHandler(data: [Submission]?, error: Error?) -> Void{
+    func completionHandler(data: [Submission]?, error: Error?) -> Void {
+        
         // Validate data
         guard let submissionList = data, error == nil else {
             fatalError()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--InboxView-->
+        <!--SampleView-->
         <scene sceneID="p42-dB-Slh">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="HomeView" storyboardName="InboxView" id="aCl-4r-dUg" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="SampleView" storyboardName="SampleView" id="aCl-4r-dUg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Zf9-9Z-MZ0"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMh-Ez-osH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -38,7 +38,7 @@
         <!--HomeView-->
         <scene sceneID="jhg-G9-VAu">
             <objects>
-                <viewControllerPlaceholder storyboardName="HomeView" id="iJO-jA-8vl" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="HomeView" storyboardName="HomeView" id="iJO-jA-8vl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="MXY-NN-NOP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pb3-ib-Kd5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -48,7 +48,7 @@
         <!--AccountView-->
         <scene sceneID="8Iy-OE-5ZN">
             <objects>
-                <viewControllerPlaceholder storyboardName="AccountView" id="SYS-Qg-S1B" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="AccountView" storyboardName="AccountView" id="SYS-Qg-S1B" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="iLt-EN-YY4"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whR-e1-DBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

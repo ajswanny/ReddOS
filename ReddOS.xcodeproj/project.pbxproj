@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1410B379242ECD83004423E3 /* AuthenticationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */; };
 		1428804E2426C427007BDEE2 /* Replyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428804D2426C427007BDEE2 /* Replyable.swift */; };
-		145234CE23FEE3BB003D4B13 /* InboxView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145234CC23FEE3BB003D4B13 /* InboxView.storyboard */; };
+		145234CE23FEE3BB003D4B13 /* SampleView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145234CC23FEE3BB003D4B13 /* SampleView.storyboard */; };
 		145234D123FEE418003D4B13 /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145234CF23FEE418003D4B13 /* AccountView.storyboard */; };
 		14652542241C24B20038181E /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14652541241C24B20038181E /* AuthenticationController.swift */; };
 		14652544241C3A890038181E /* Reddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14652543241C3A890038181E /* Reddit.swift */; };
@@ -24,13 +24,14 @@
 		14861D522408189000D18976 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861D512408189000D18976 /* SampleData.swift */; };
 		148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5223E0AB0600BECD84 /* AppDelegate.swift */; };
 		148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */; };
-		148B7F5923E0AB0600BECD84 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5823E0AB0600BECD84 /* SecondViewController.swift */; };
+		148B7F5923E0AB0600BECD84 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5823E0AB0600BECD84 /* SampleViewController.swift */; };
 		148B7F5C23E0AB0600BECD84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148B7F5A23E0AB0600BECD84 /* Main.storyboard */; };
 		148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F5D23E0AB0600BECD84 /* ReddOS.xcdatamodeld */; };
 		148B7F6123E0AB0600BECD84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 148B7F6023E0AB0600BECD84 /* Assets.xcassets */; };
 		148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */; };
 		148B7F6F23E0AB0700BECD84 /* ReddOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F6E23E0AB0700BECD84 /* ReddOSTests.swift */; };
 		148B7F7A23E0AB0700BECD84 /* ReddOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */; };
+		14A105B724410952007426F9 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A105B624410952007426F9 /* Notifications.swift */; };
 		14B9B6A82428F944002DC903 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6A72428F944002DC903 /* HomeViewController.swift */; };
 		14B9B6AA24292EED002DC903 /* UserAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */; };
 		14D8097A2440E11400CF6721 /* RedditContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D809792440E11400CF6721 /* RedditContentType.swift */; };
@@ -60,7 +61,7 @@
 /* Begin PBXFileReference section */
 		1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationConfiguration.swift; sourceTree = "<group>"; };
 		1428804D2426C427007BDEE2 /* Replyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Replyable.swift; sourceTree = "<group>"; };
-		145234CD23FEE3BB003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/InboxView.storyboard; sourceTree = "<group>"; };
+		145234CD23FEE3BB003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SampleView.storyboard; sourceTree = "<group>"; };
 		145234D023FEE418003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountView.storyboard; sourceTree = "<group>"; };
 		14652541241C24B20038181E /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		14652543241C3A890038181E /* Reddit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reddit.swift; sourceTree = "<group>"; };
@@ -76,7 +77,7 @@
 		148B7F4F23E0AB0600BECD84 /* ReddOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReddOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B7F5223E0AB0600BECD84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		148B7F5823E0AB0600BECD84 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		148B7F5823E0AB0600BECD84 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		148B7F5B23E0AB0600BECD84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		148B7F5E23E0AB0600BECD84 /* ReddOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReddOS.xcdatamodel; sourceTree = "<group>"; };
 		148B7F6023E0AB0600BECD84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		148B7F7523E0AB0700BECD84 /* ReddOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReddOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReddOSUITests.swift; sourceTree = "<group>"; };
 		148B7F7B23E0AB0700BECD84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14A105B624410952007426F9 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		14B9B6A72428F944002DC903 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationSession.swift; sourceTree = "<group>"; };
 		14D809792440E11400CF6721 /* RedditContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditContentType.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				14652543241C3A890038181E /* Reddit.swift */,
 				146A5FAC24277DAF00F08D19 /* Endpoints.swift */,
 				146B1A1A2427E3380034D92E /* HTTPRequestType.swift */,
+				14A105B624410952007426F9 /* Notifications.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -199,7 +202,7 @@
 				14B9B6A42428F7A6002DC903 /* Storyboards */,
 				148B7F5223E0AB0600BECD84 /* AppDelegate.swift */,
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
-				148B7F5823E0AB0600BECD84 /* SecondViewController.swift */,
+				148B7F5823E0AB0600BECD84 /* SampleViewController.swift */,
 				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
 				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
 				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
@@ -234,7 +237,7 @@
 			children = (
 				14E3900A242A6D63007CEFE2 /* HomeView.storyboard */,
 				145234CF23FEE418003D4B13 /* AccountView.storyboard */,
-				145234CC23FEE3BB003D4B13 /* InboxView.storyboard */,
+				145234CC23FEE3BB003D4B13 /* SampleView.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -348,7 +351,7 @@
 				148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */,
 				148B7F6123E0AB0600BECD84 /* Assets.xcassets in Resources */,
 				145234D123FEE418003D4B13 /* AccountView.storyboard in Resources */,
-				145234CE23FEE3BB003D4B13 /* InboxView.storyboard in Resources */,
+				145234CE23FEE3BB003D4B13 /* SampleView.storyboard in Resources */,
 				148B7F5C23E0AB0600BECD84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,10 +377,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A105B724410952007426F9 /* Notifications.swift in Sources */,
 				14DD20F0242186C300D6D487 /* AuthenticationEnums.swift in Sources */,
 				14D8097A2440E11400CF6721 /* RedditContentType.swift in Sources */,
 				14B9B6AA24292EED002DC903 /* UserAuthenticationSession.swift in Sources */,
-				148B7F5923E0AB0600BECD84 /* SecondViewController.swift in Sources */,
+				148B7F5923E0AB0600BECD84 /* SampleViewController.swift in Sources */,
 				14652544241C3A890038181E /* Reddit.swift in Sources */,
 				14F564702425BD99009A0AD6 /* RedditContent.swift in Sources */,
 				14861D522408189000D18976 /* SampleData.swift in Sources */,
@@ -432,12 +436,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		145234CC23FEE3BB003D4B13 /* InboxView.storyboard */ = {
+		145234CC23FEE3BB003D4B13 /* SampleView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				145234CD23FEE3BB003D4B13 /* Base */,
 			);
-			name = InboxView.storyboard;
+			name = SampleView.storyboard;
 			sourceTree = "<group>";
 		};
 		145234CF23FEE418003D4B13 /* AccountView.storyboard */ = {
