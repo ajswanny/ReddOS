@@ -31,8 +31,10 @@ class AuthenticationController {
     /// OAuth authentication session for current user
     var userSession: AuthenticationSession? {
         didSet {
-            print("New value set for AuthenticationController.userSession; saving the object...")
-            saveUserSession()
+            if userSession?.refreshToken != nil {
+                print("New value set for AuthenticationController.userSession; saving the object...")
+                saveUserSession()
+            }
         }
     }
     
@@ -89,19 +91,30 @@ class AuthenticationController {
     }
     
     // MARK: Initialization
+    /**
+     Default init
+     */
     public init() {
-        // TODO: Implement checking existing user session & pre-loading
         
+        // Init config
         self.configuration = AuthenticationConfiguration()
+        
+        // TODO: Implement correct implementation
         self.guestSession = AuthenticationSession()
         
-        // Initialize user session
-        previousUserSession = loadUserSession()
-        if previousUserSession?.refreshToken != nil {
+        // Check for previous user session
+        if let decodedUserSessionData = UserDefaults.standard.data(forKey: "userSession"),
+           let object = try? JSONDecoder().decode(AuthenticationSession.self, from: decodedUserSessionData) {
+            // Store the object
+            self.previousUserSession = object
+            
+            // Reauthenticate
             reauthenticateCurrentUser()
-//            userSession = previousUserSession
-            print("Reauthenticated")
+            print("Successfully reauthenticated")
+            
         } else {
+            // Create new session object
+            self.previousUserSession = AuthenticationSession()
             print("User session is not authorized for authentication; foregoing re-authentication.")
         }
         
@@ -294,11 +307,14 @@ class AuthenticationController {
             }
             
             #if DEBUG
-            print("Successfully stored the access token for: \(authenticationType.rawValue)")
+            print("Successfully stored the access token for: \(authenticationType.rawValue).")
             #endif
             
             // Set current user session to newUserSession
             self.userSession = newAuthenticationSession
+            
+            // Notify App
+            NotificationCenter.default.post(name: .onAuthenticated, object: nil)
             
         }
         task.resume()
@@ -311,16 +327,22 @@ class AuthenticationController {
      */
     private func saveUserSession() {
         
-        do {
-            guard let userSession = self.userSession else { fatalError() }
-            let data = try NSKeyedArchiver.archivedData(withRootObject: userSession, requiringSecureCoding: false)
-            try data.write(to: userSessionDataStore)
-            #if DEBUG
-            print("Successfully serialized the user session object.")
-            #endif
-        } catch {
-            print(error.localizedDescription)
+        // Store user session
+        guard let encoded = try? JSONEncoder().encode(self.userSession) else {
+            fatalError()
         }
+        UserDefaults.standard.set(encoded, forKey: "userSession")
+        
+//        do {
+//            guard let userSession = self.userSession else { fatalError() }
+//            let data = try NSKeyedArchiver.archivedData(withRootObject: userSession, requiringSecureCoding: false)
+//            try data.write(to: userSessionDataStore)
+//            #if DEBUG
+//            print("Successfully serialized the user session object.")
+//            #endif
+//        } catch {
+//            print(error.localizedDescription)
+//        }
         
     }
     
@@ -328,6 +350,8 @@ class AuthenticationController {
      Reloads the stored user session
      */
     private func loadUserSession() -> AuthenticationSession {
+        
+        print(userSessionDataStore.absoluteString)
         
         do {
             let data = try Data(contentsOf: userSessionDataStore)
@@ -341,6 +365,7 @@ class AuthenticationController {
             #endif
             return object
         } catch {
+            print(error.localizedDescription)
             fatalError()
         }
         

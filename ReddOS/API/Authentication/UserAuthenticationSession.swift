@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AuthenticationSession: NSObject, NSCoding {
+class AuthenticationSession: NSObject, NSCoding, Codable {
     
     // MARK: Properties
     

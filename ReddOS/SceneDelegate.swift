@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let _ = (scene as? UIWindowScene) else { return }
         let tabBarController = window?.rootViewController as! UITabBarController
-        let homeNavController = tabBarController.viewControllers![0] as! UINavigationController
+        let homeNavController = tabBarController.viewControllers![1] as! UINavigationController
         let homeController = homeNavController.topViewController as! HomeViewController
         homeController.hotSubmissions = sampleData.user.front
     }

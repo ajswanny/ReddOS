@@ -11,6 +11,7 @@ import Foundation
 /**
  Implementation of the `User`  inbox. Contains all messages and functionality to respond to them.
  */
+@available(*, deprecated, message: "Removed due to drop of Inbox functionality.")
 class Inbox {
     
     // MARK: Properties

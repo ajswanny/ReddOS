@@ -11,6 +11,7 @@ import Foundation
 /**
  Implementation of a private message sent to a Redditor.
  */
+@available(*, deprecated, message: "Removed due to drop of Inbox functionality.")
 class Message: Replyable {
     
     // MARK: Properties

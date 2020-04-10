@@ -9,18 +9,6 @@
 
 import Foundation
 
-/**
- These prefixes are used when communicating with the Reddit API in order to identify a specific kind of Reddit ocject.
- */
-public struct ObjectTypePrefixes {
-    let comment = "t1_"
-    let account = "t2_"
-    let link = "t3_"
-    let message = "t4_"
-    let subreddit = "t5_"
-    let award = "t6_"
-}
-
 public enum RedditError: Error {
     case userNotAuthenticated
     case authorizationExpired
@@ -39,10 +27,8 @@ class Reddit {
     /// Authenticated user
     var user: User?
     
-    public typealias MarkAsReadCompletionHandler = (Error?) -> Void
-    public typealias RefreshInboxCompletionHandler = (Error?) -> Void
     public typealias ReplyCompletionHandler  = (Error?) -> Void
-    public typealias VoteCompletionHandler = (Int?, Error?) -> Void
+    public typealias VoteCompletionHandler = (Error?) -> Void
     public typealias LoadUserFrontCompletionHandler = ([Submission]?, Error?) -> Void
     public typealias LoadBlockedRedditorsCompletionHandler = ([String]?, Error?) -> Void
     public typealias LoadUserSubscriptionsCompletionHandler = ([Subreddit]?, Error?) -> Void
@@ -240,10 +226,10 @@ class Reddit {
             throw RedditError.userNotAuthenticated
         }
         
-        // Execute and return unpacked data as as dict of Any ([String : Any])
+        // Execute and return unpacked data as as a list of Submissions
         execute(frontRequest) { body, error in
             if let body = body {
-                
+    
                 let front = self.parseUserFront(fromData: body)
                 self.user?.front = front
                 completionHandler(front, nil)
@@ -303,10 +289,32 @@ class Reddit {
     /**
      Vote on a submission or comment, providing the direction (-1: downvote, 0: unvote, 1: upvote).
      - Parameters:
-        - completionHandler: The callback for when this request completes
+        - completionHandler: The callback for when this request completes.
      */
-    public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping VoteCompletionHandler) {
-        // TODO: Implement
+    public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping VoteCompletionHandler) throws {
+        
+        // Validate session
+        try validateUserSession()
+        
+        
+        // Construct the request
+        let endpointParameters: [String: Any] = ["id": redditContent.id, "direction": direction]
+        let voteEndpoint = APIEndpoint(base: .vote, parameters: endpointParameters)
+        guard let voteRequest = newUrlRequest(method: .get, endpoint: voteEndpoint) else {
+            throw RedditError.userNotAuthenticated
+        }
+        
+        // Execute the request
+        execute(voteRequest) {  data, error in
+            
+            // Validate
+            if error == nil {
+                completionHandler(nil)
+            } else {
+                fatalError()
+            }
+            
+        }
         
     }
     
@@ -321,44 +329,13 @@ class Reddit {
         
     }
     
-    // MARK: Inbox
-    /**
-     Fetch new received Messages/Comment replies
-     - Parameter completionHandler: The callback for when this request completes
-     */
-    public func refreshInbox(completionHandler: @escaping RefreshInboxCompletionHandler) {
-        // TODO: Implement
-        
-    }
-    
-    // MARK: Mark as read
-    /**
-     Mark a comment in the inbox as read to dismiss it
-     - Parameters:
-        - completionHandler: The callback for when this request completes
-     */
-    public func markAsRead(commentReply: Comment, completionHandler: MarkAsReadCompletionHandler) {
-        // TODO: Implement
-        
-    }
-    
-    /**
-     Mark a private message as read to dismiss it
-     - Parameters:
-        - completionHandler: The callback for when this request completes
-     */
-    public func markAsRead(privateMessage: Message, completionHandler: @escaping MarkAsReadCompletionHandler) {
-        // TODO: Implement
-        
-    }
-    
     // MARK: Methods
     /**
      Creates a new HTTP request.
      - Parameters:
-        - method:
-        - endpoint:
-     - Returns: The newly created URL request
+        - method: GET or POST.
+        - endpoint: The URL for the request to create.
+     - Returns: The newly created URL request.
      */
     public func newUrlRequest(method: HTTPRequestType, endpoint: APIEndpoint) -> URLRequest? {
         
@@ -381,14 +358,18 @@ class Reddit {
         return request
         
     }
-      
+    
+    // MARK: Request Execution
     /**
      Executes a URL request for Reddit API, unpacks, and returns result to a provided completion  handler
+     - Parameters:
+        - request: The URL request to execeute.
+        - completion: The function to call when encountering an error or completiong the request.
+        - observe: If the progress of this request should be observed.
      */
-    private func execute(_ request: URLRequest, completion: @escaping ([String: Any]?, Error?) -> Void) {
+    private func execute(_ request: URLRequest, completion: @escaping ([String: Any]?, Error?) -> Void, observe: Bool = true) {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
             if error != nil {
                 completion(nil, error)
             }
@@ -403,14 +384,27 @@ class Reddit {
                 fatalError()
             }
             
-//            print(response)
-            
             // Return data
             completion(package, nil)
             
         }
+        
+        // Set observation if requested
+        if observe {
+            requestObservation = task.progress.observe(\.fractionCompleted, changeHandler: changeHandler)
+        }
+        
         task.resume()
         
+    }
+    
+    // MARK: Request Observation
+    private var requestObservation: NSKeyValueObservation?
+    func changeHandler(progress: Progress, observedChange: NSKeyValueObservedChange<Double>) {
+        print("Progress for \(progress.fileURL?.absoluteString ?? "unknown resource"): ", progress.fractionCompleted)
+        if progress.fractionCompleted == 1.0 {
+            requestObservation?.invalidate()
+        }
     }
     
 }
