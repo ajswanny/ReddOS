@@ -18,12 +18,18 @@ class HomeViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //TODO: steps for getting user front data
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveAuthenticationNotification), name: .onAuthenticated, object: nil)
+        
+    }
+    
+    @objc func didReceiveAuthenticationNotification(notification: NSNotification){
+        
         do {
             try delegate.reddit?.loadUserFront(completionHandler:completionHandler(data:error:))
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
     
@@ -55,11 +61,12 @@ class HomeViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "hotThread", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "hotThread", for: indexPath) as! HomeViewCell
         let submisson = hotSubmissions[indexPath.row]
-        cell.textLabel!.text = submisson.title
-        cell.textLabel!.text = submisson.parentSubredditName
-        //cell.textLabel?.text = submisson.subreddit
+        cell.hotThreadTitle!.text = submisson.title
+        cell.hotThreadSubReddit.text = submisson.parentSubredditName
+      //  cell.totalVote.text = "\(submisson.totalScore)"
+        print(submisson.totalScore)
         return cell
     }
     
@@ -73,8 +80,7 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var hotThreadImage: UIImageView!
     @IBOutlet weak var hotThreadTitle: UILabel!
     @IBOutlet weak var hotThreadSubReddit: UILabel!
-    @IBOutlet weak var upVote: UIButton!
-    @IBOutlet weak var downVote: UIButton!
-    
+    @IBOutlet weak var totalVote: UILabel!
+
 }
 

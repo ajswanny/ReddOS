@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uSq-y3-hsT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uSq-y3-hsT">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,15 +45,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+6758" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yf6-rb-cRr" userLabel="Upvotes">
-                                            <rect key="frame" x="352" y="11" width="51" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-2391" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgj-xe-bUo" userLabel="Downvotes">
-                                            <rect key="frame" x="354" y="55" width="46" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yf6-rb-cRr" userLabel="totalVote">
+                                            <rect key="frame" x="320" y="33" width="84" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -65,6 +58,7 @@
                                     <outlet property="hotThreadImage" destination="dcg-3z-wND" id="ggz-DY-jxi"/>
                                     <outlet property="hotThreadSubReddit" destination="2mC-uP-3i2" id="hEO-Qi-3oI"/>
                                     <outlet property="hotThreadTitle" destination="StC-ek-KGT" id="ueJ-FX-YrQ"/>
+                                    <outlet property="totalVote" destination="Yf6-rb-cRr" id="8w8-fQ-3P5"/>
                                     <segue destination="bOA-VM-XWF" kind="show" id="WVo-XG-eRv"/>
                                 </connections>
                             </tableViewCell>
@@ -78,7 +72,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdo-8T-Y8r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2855" y="-1389"/>
+            <point key="canvasLocation" x="2853.6231884057975" y="-1389.5089285714284"/>
         </scene>
         <!--Detail View -->
         <scene sceneID="5mQ-pE-RMg">
@@ -179,11 +173,11 @@
             <point key="canvasLocation" x="1931.8840579710147" y="-725.22321428571422"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="chevron.down" catalog="system" width="64" height="36"/>
-        <image name="chevron.up" catalog="system" width="64" height="36"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WVo-XG-eRv"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
+    </resources>
 </document>
