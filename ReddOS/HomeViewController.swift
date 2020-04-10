@@ -31,13 +31,19 @@ class HomeViewController: UITableViewController {
     
     //take data optional and error otional
     func completionHandler(data: [Submission]?, error: Error?) -> Void{
-        //check if data is legit
-        print("testing call")
+        // Validate data
         guard let submissionList = data, error == nil else {
             fatalError()
         }
-        tableView.reloadData()
-        print(submissionList)
+        
+        // Redefine data
+        hotSubmissions = submissionList
+        
+        // Reload UI
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
