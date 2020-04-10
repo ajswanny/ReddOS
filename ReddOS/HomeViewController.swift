@@ -65,8 +65,8 @@ class HomeViewController: UITableViewController {
         let submisson = hotSubmissions[indexPath.row]
         cell.hotThreadTitle!.text = submisson.title
         cell.hotThreadSubReddit.text = submisson.parentSubredditName
-      //  cell.totalVote.text = "\(submisson.totalScore)"
-        print(submisson.totalScore)
+        cell.totalVote.text = "\(submisson.totalScore)"
+//        print(submisson.totalScore)
         return cell
     }
     
