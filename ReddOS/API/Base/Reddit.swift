@@ -243,8 +243,7 @@ class Reddit {
         // Execute and return unpacked data as as dict of Any ([String : Any])
         execute(frontRequest) { body, error in
             if let body = body {
-                
-                print(self.fCompleted)
+    
                 let front = self.parseUserFront(fromData: body)
                 self.user?.front = front
                 completionHandler(front, nil)
@@ -367,9 +366,9 @@ class Reddit {
     /**
      Creates a new HTTP request.
      - Parameters:
-        - method:
-        - endpoint:
-     - Returns: The newly created URL request
+        - method: GET or POST.
+        - endpoint: The URL for the request to create.
+     - Returns: The newly created URL request.
      */
     public func newUrlRequest(method: HTTPRequestType, endpoint: APIEndpoint) -> URLRequest? {
         
@@ -392,25 +391,18 @@ class Reddit {
         return request
         
     }
-      
-    private var observation: NSKeyValueObservation?
-    private var fCompleted: Double?
-    private typealias ChangeHandler = (Progress, NSKeyValueObservedChange<Double>) -> Void
     
-    func completionExample(progress: Progress, _: NSKeyValueObservedChange<Double>) {
-        print("progress: ", progress.fractionCompleted)
-        if progress.fractionCompleted == 1.0 {
-            // Done
-        }
-    }
-    
+    // MARK: Request Execution
     /**
      Executes a URL request for Reddit API, unpacks, and returns result to a provided completion  handler
+     - Parameters:
+        - request: The URL request to execeute.
+        - completion: The function to call when encountering an error or completiong the request.
+        - observe: If the progress of this request should be observed.
      */
-    private func execute(_ request: URLRequest, completion: @escaping ([String: Any]?, Error?) -> Void) {
+    private func execute(_ request: URLRequest, completion: @escaping ([String: Any]?, Error?) -> Void, observe: Bool = true) {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
             if error != nil {
                 completion(nil, error)
             }
@@ -425,27 +417,27 @@ class Reddit {
                 fatalError()
             }
             
-//            print(response)
-            
             // Return data
             completion(package, nil)
             
         }
         
-//        observation = task.progress.observe(\.fractionCompleted) { progress, _ in
-//            print("progress: ", progress.fractionCompleted)
-//            if progress.fractionCompleted == 1.0 {
-//                self.fCompleted = progress.fractionCompleted
-//            }
-//        }
-        
-        observation = task.progress.observe(\.fractionCompleted, changeHandler: completionExample(progress:_:))
-        
+        // Set observation if requested
+        if observe {
+            requestObservation = task.progress.observe(\.fractionCompleted, changeHandler: changeHandler)
+        }
         
         task.resume()
         
-        print(task.progress)
-        
+    }
+    
+    // MARK: Request Observation
+    private var requestObservation: NSKeyValueObservation?
+    func changeHandler(progress: Progress, observedChange: NSKeyValueObservedChange<Double>) {
+        print("Progress for \(progress.fileURL?.absoluteString ?? "unknown resource"): ", progress.fractionCompleted)
+        if progress.fractionCompleted == 1.0 {
+            requestObservation?.invalidate()
+        }
     }
     
 }
