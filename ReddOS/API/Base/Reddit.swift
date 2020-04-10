@@ -9,20 +9,8 @@
 
 import Foundation
 
-/**
- These prefixes are used when communicating with the Reddit API in order to identify a specific kind of Reddit ocject.
- */
-public struct ObjectTypePrefixes {
-    let comment = "t1_"
-    let account = "t2_"
-    let link = "t3_"
-    let message = "t4_"
-    let subreddit = "t5_"
-    let award = "t6_"
-}
-
 public enum RedditError: Error {
-    case userNotAuthenticated 
+    case userNotAuthenticated
     case authorizationExpired
     case networkConnectionLost
 }
@@ -39,10 +27,8 @@ class Reddit {
     /// Authenticated user
     var user: User?
     
-    public typealias MarkAsReadCompletionHandler = (Error?) -> Void
-    public typealias RefreshInboxCompletionHandler = (Error?) -> Void
     public typealias ReplyCompletionHandler  = (Error?) -> Void
-    public typealias VoteCompletionHandler = (Int?, Error?) -> Void
+    public typealias VoteCompletionHandler = (Error?) -> Void
     public typealias LoadUserFrontCompletionHandler = ([Submission]?, Error?) -> Void
     public typealias LoadBlockedRedditorsCompletionHandler = ([String]?, Error?) -> Void
     public typealias LoadUserSubscriptionsCompletionHandler = ([Subreddit]?, Error?) -> Void
@@ -240,7 +226,7 @@ class Reddit {
             throw RedditError.userNotAuthenticated
         }
         
-        // Execute and return unpacked data as as dict of Any ([String : Any])
+        // Execute and return unpacked data as as a list of Submissions
         execute(frontRequest) { body, error in
             if let body = body {
     
@@ -303,12 +289,13 @@ class Reddit {
     /**
      Vote on a submission or comment, providing the direction (-1: downvote, 0: unvote, 1: upvote).
      - Parameters:
-        - completionHandler: The callback for when this request completes
+        - completionHandler: The callback for when this request completes.
      */
     public func vote(onRedditContent redditContent: RedditContent, inDirection direction: Int, completionHandler: @escaping VoteCompletionHandler) throws {
         
         // Validate session
         try validateUserSession()
+        
         
         // Construct the request
         let endpointParameters: [String: Any] = ["id": redditContent.id, "direction": direction]
@@ -317,6 +304,17 @@ class Reddit {
             throw RedditError.userNotAuthenticated
         }
         
+        // Execute the request
+        execute(voteRequest) {  data, error in
+            
+            // Validate
+            if error == nil {
+                completionHandler(nil)
+            } else {
+                fatalError()
+            }
+            
+        }
         
     }
     

@@ -50,7 +50,7 @@ class Submission: RedditContent {
         self.title = title
         self.selftext = selftext
         self.urlValue = urlValue
-        super.init(id: id, userScore: userScore, totalScore: totalScore)
+        super.init(contentType: .link, id: id, userScore: userScore, totalScore: totalScore)
     }
     
 }
