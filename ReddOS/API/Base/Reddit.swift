@@ -27,6 +27,7 @@ class Reddit {
     /// Authenticated user
     var user: User?
     
+    // MARK: Typealiases
     public typealias ReplyCompletionHandler  = (Error?) -> Void
     public typealias VoteCompletionHandler = (Error?) -> Void
     public typealias LoadUserFrontCompletionHandler = ([Submission]?, Error?) -> Void
