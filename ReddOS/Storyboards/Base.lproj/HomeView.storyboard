@@ -6,6 +6,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="vNy-TM-bft">
@@ -15,10 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <progressView key="tableFooterView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="Kof-mF-uQl">
-                            <rect key="frame" x="0.0" y="143" width="414" height="2"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </progressView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hotThread" rowHeight="87" id="TzK-q8-Uez" customClass="HomeViewCell" customModule="ReddOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="87"/>
@@ -30,21 +31,21 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StC-ek-KGT">
                                             <rect key="frame" x="20" y="10" width="303" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yf6-rb-cRr" userLabel="totalVote">
                                             <rect key="frame" x="356" y="47" width="51" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mC-uP-3i2">
                                             <rect key="frame" x="20" y="46" width="196" height="26"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -54,7 +55,7 @@
                                     <outlet property="hotThreadSubReddit" destination="2mC-uP-3i2" id="hEO-Qi-3oI"/>
                                     <outlet property="hotThreadTitle" destination="StC-ek-KGT" id="ueJ-FX-YrQ"/>
                                     <outlet property="totalVote" destination="Yf6-rb-cRr" id="8w8-fQ-3P5"/>
-                                    <segue destination="bOA-VM-XWF" kind="show" id="WVo-XG-eRv"/>
+                                    <segue destination="bOA-VM-XWF" kind="show" identifier="showSubDetail" id="WVo-XG-eRv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -72,49 +73,58 @@
         <!--Detail View -->
         <scene sceneID="5mQ-pE-RMg">
             <objects>
-                <viewController title="Detail View " id="bOA-VM-XWF" sceneMemberID="viewController">
+                <viewController title="Detail View " id="bOA-VM-XWF" customClass="HomeDetailViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tq9-ji-wSH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title of Submission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJf-bO-J1T">
-                                <rect key="frame" x="124" y="108" width="191" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="31" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6w-aP-W0O">
+                                <rect key="frame" x="20" y="137" width="319" height="512"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I8-np-IlJ" userLabel="Downvote">
-                                <rect key="frame" x="364" y="230" width="20" height="49"/>
-                                <state key="normal" title="Downvote" image="chevron.down" catalog="system"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ex9-9f-Wxr" userLabel="Upvote">
+                                <rect key="frame" x="363" y="372" width="20" height="22"/>
+                                <state key="normal" image="chevron.up" catalog="system"/>
+                                <connections>
+                                    <action selector="upVoteSub:" destination="bOA-VM-XWF" eventType="touchUpInside" id="cse-iV-lUW"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Submission Body Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6w-aP-W0O">
-                                <rect key="frame" x="20" y="137" width="329" height="142"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ex9-9f-Wxr" userLabel="Upvote">
-                                <rect key="frame" x="364" y="162" width="30" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I8-np-IlJ" userLabel="Downvote">
+                                <rect key="frame" x="363" y="423" width="20" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="5aa-6e-AKo"/>
+                                    <constraint firstAttribute="width" constant="20" id="n7D-U3-EUe"/>
+                                    <constraint firstAttribute="height" constant="28" id="trL-wJ-O8M"/>
                                 </constraints>
-                                <state key="normal" title="Upvote" image="chevron.up" catalog="system"/>
+                                <state key="normal" image="chevron.down" catalog="system"/>
+                                <connections>
+                                    <action selector="downVoteSub:" destination="bOA-VM-XWF" eventType="touchUpInside" id="gKu-84-7yi"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmn-NO-Cs5" userLabel="Totalvotes">
+                                <rect key="frame" x="347" y="398" width="52" height="20"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="trailing" secondItem="tq9-ji-wSH" secondAttribute="trailingMargin" id="DZE-SP-b5U"/>
-                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="leading" secondItem="D6w-aP-W0O" secondAttribute="trailing" constant="15" id="FAt-gm-VTx"/>
-                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="top" secondItem="5eX-oo-1hk" secondAttribute="top" constant="62" id="Fuh-DJ-OPX"/>
-                            <constraint firstItem="D6w-aP-W0O" firstAttribute="top" secondItem="rJf-bO-J1T" secondAttribute="bottom" constant="8" symbolic="YES" id="Oas-F0-Ck5"/>
-                            <constraint firstItem="Ex9-9f-Wxr" firstAttribute="leading" secondItem="1I8-np-IlJ" secondAttribute="leading" id="Qea-8V-bXy"/>
-                            <constraint firstItem="5eX-oo-1hk" firstAttribute="trailing" secondItem="rJf-bO-J1T" secondAttribute="trailing" constant="65" id="SWz-QC-v39"/>
-                            <constraint firstItem="rJf-bO-J1T" firstAttribute="top" secondItem="5eX-oo-1hk" secondAttribute="top" constant="34" id="UAR-L5-l1a"/>
-                            <constraint firstItem="rJf-bO-J1T" firstAttribute="trailing" secondItem="D6w-aP-W0O" secondAttribute="trailing" id="dAJ-rH-kpZ"/>
-                            <constraint firstItem="1I8-np-IlJ" firstAttribute="top" secondItem="Ex9-9f-Wxr" secondAttribute="bottom" constant="8" symbolic="YES" id="svZ-y9-Bfr"/>
-                            <constraint firstItem="rJf-bO-J1T" firstAttribute="leading" secondItem="tq9-ji-wSH" secondAttribute="leadingMargin" id="u6K-2F-CZa"/>
-                            <constraint firstItem="rJf-bO-J1T" firstAttribute="leading" secondItem="D6w-aP-W0O" secondAttribute="leading" id="weB-I2-Bne"/>
+                            <constraint firstItem="1I8-np-IlJ" firstAttribute="leading" secondItem="D6w-aP-W0O" secondAttribute="trailing" constant="24" id="4sf-DY-WXp"/>
+                            <constraint firstItem="5eX-oo-1hk" firstAttribute="bottom" secondItem="D6w-aP-W0O" secondAttribute="bottom" constant="213" id="CaT-qi-Zsh"/>
+                            <constraint firstItem="D6w-aP-W0O" firstAttribute="top" secondItem="5eX-oo-1hk" secondAttribute="top" constant="49" id="JA6-6T-BUR"/>
+                            <constraint firstItem="1I8-np-IlJ" firstAttribute="top" secondItem="Ex9-9f-Wxr" secondAttribute="bottom" constant="29" id="KHw-XO-KWj"/>
+                            <constraint firstItem="1I8-np-IlJ" firstAttribute="top" secondItem="bmn-NO-Cs5" secondAttribute="bottom" constant="5" id="PpY-cB-0FG"/>
+                            <constraint firstItem="5eX-oo-1hk" firstAttribute="bottom" secondItem="1I8-np-IlJ" secondAttribute="bottom" constant="411" id="QUm-uB-Nqb"/>
+                            <constraint firstItem="5eX-oo-1hk" firstAttribute="trailing" secondItem="1I8-np-IlJ" secondAttribute="trailing" constant="31" id="YoP-jv-Wr8"/>
+                            <constraint firstItem="1I8-np-IlJ" firstAttribute="leading" secondItem="Ex9-9f-Wxr" secondAttribute="leading" id="dW9-f2-ReT"/>
+                            <constraint firstItem="bmn-NO-Cs5" firstAttribute="centerX" secondItem="Ex9-9f-Wxr" secondAttribute="centerX" id="fxX-TN-XGg"/>
+                            <constraint firstItem="1I8-np-IlJ" firstAttribute="trailing" secondItem="Ex9-9f-Wxr" secondAttribute="trailing" id="gUg-2k-zQK"/>
+                            <constraint firstItem="bmn-NO-Cs5" firstAttribute="leading" secondItem="D6w-aP-W0O" secondAttribute="trailing" constant="8" id="gpH-RQ-lTD"/>
+                            <constraint firstItem="bmn-NO-Cs5" firstAttribute="top" secondItem="Ex9-9f-Wxr" secondAttribute="bottom" constant="4" id="ifM-1C-LdW"/>
+                            <constraint firstItem="D6w-aP-W0O" firstAttribute="leading" secondItem="tq9-ji-wSH" secondAttribute="leadingMargin" id="szu-ug-wxL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5eX-oo-1hk"/>
                         <connections>
@@ -122,13 +132,19 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="srV-Wv-VBC"/>
+                    <connections>
+                        <outlet property="bodySummarySubmission" destination="D6w-aP-W0O" id="xvw-WQ-Pm9"/>
+                        <outlet property="downVote" destination="1I8-np-IlJ" id="yjD-dI-6O2"/>
+                        <outlet property="totalVotes" destination="bmn-NO-Cs5" id="xvy-Ij-poO"/>
+                        <outlet property="upVote" destination="Ex9-9f-Wxr" id="sBV-DZ-FYs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BcD-4W-nwY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Dya-aH-Mkm">
                     <rectEdge key="edges" left="YES"/>
                 </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4577" y="-1390"/>
+            <point key="canvasLocation" x="4576.811594202899" y="-1390.1785714285713"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="i53-SZ-cMA">

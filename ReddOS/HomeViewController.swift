@@ -13,6 +13,12 @@ class HomeViewController: UITableViewController {
     var hotSubmissions: [Submission]!
 
     let delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        navigationItem.title = "ReddOS"
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +41,12 @@ class HomeViewController: UITableViewController {
     
     //take data optional and error otional
     func completionHandler(data: [Submission]?, error: Error?) -> Void {
-        
         // Validate data
         guard let submissionList = data, error == nil else {
             fatalError()
         }
-        
         // Redefine data
         hotSubmissions = submissionList
-        
         // Reload UI
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -56,6 +59,8 @@ class HomeViewController: UITableViewController {
         //tableView.reloadData()
     }
 
+    
+    //MARK: - Table View
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return hotSubmissions.count
     }
@@ -73,11 +78,29 @@ class HomeViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         87
     }
+    
+    //MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        switch segue.identifier {
+        case "showSubDetail":
+            if let row = tableView.indexPathForSelectedRow?.row {
+                let submission = hotSubmissions[row]
+                let homeDetailViewController = segue.destination as!
+                    HomeDetailViewController
+                homeDetailViewController.submission = submission
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier")
+        }
+        
+    }
 
 }
 
+
+//MARK: - Home Cell
 class HomeViewCell: UITableViewCell {
-    @IBOutlet weak var hotThreadImage: UIImageView!
+  //  @IBOutlet weak var hotThreadImage: UIImageView!
     @IBOutlet weak var hotThreadTitle: UILabel!
     @IBOutlet weak var hotThreadSubReddit: UILabel!
     @IBOutlet weak var totalVote: UILabel!
