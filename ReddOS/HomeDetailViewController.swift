@@ -17,6 +17,7 @@ class HomeDetailViewController : UIViewController {
     
     //
     var reddit: Reddit!
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
     //TODO: put subreddit title on navigation bar
     var submission: Submission! {
@@ -39,56 +40,72 @@ class HomeDetailViewController : UIViewController {
     
     //MARK: - Submission Vote
     
-    //TODO: complete this
+    //TODO: Reload TableView data 
     func VoteCompletionHandler(error: Error?){
-       
-    }
 
+        
+    }
+    
     //actions for upVote and downVote button
     @IBAction func upVoteSub(_ upVote: UIButton){
-
         //if the totalScore is 0 or -1
         if(submission.userScore == 0 || submission.userScore == -1){
-            //enable it
-            upVote.isEnabled = true
+            print(submission.userScore)
+
             //try to vote
             do {
                 try reddit.vote(onRedditContent: submission, inDirection: 1, completionHandler: VoteCompletionHandler(error:))
             } catch {
                 print(error.localizedDescription)
             }
-        
-            submission.totalScore += 1
-            totalVotes.text = "\(submission.totalScore)"
-            print(submission.totalScore)
             
-        }
-
-        //notify user has voted
-       else if(submission.isUpvoted){
-            //disable button
-            upVote.isEnabled = false
+            if(submission.userScore == -1){
+                submission.userScore += 1
+                //submission.totalScore += 1
+                
+                upVote.isEnabled = true
+                
+            }
+            else{
+                submission.totalScore += 1
+                submission.userScore += 1
+                totalVotes.text = "\(submission.totalScore)"
+                print(submission.userScore)
+                upVote.isEnabled = false
+                downVote.isEnabled = true
+                //print(submission.totalScore)
+            }
         }
     }
-
+    
     @IBAction func downVoteSub(_ downVote: UIButton){
         //if the totalScore is 0 or 1
         if(submission.userScore == 0 || submission.userScore == 1){
-            //enable it
-            downVote.isEnabled = true
+            print(submission.userScore)
+            
+            
             //try to vote
             try! reddit.vote(onRedditContent: submission, inDirection: -1, completionHandler: VoteCompletionHandler(error:))
             
-            submission.totalScore -= 1
-            totalVotes.text = "\(submission.totalScore)"
-            print(submission.totalScore)
+            //label shouldn't change if it zero
+            if(submission.userScore == 1){
+                submission.userScore -= 1
+                downVote.isEnabled = true
+            }
+            else{
+                //update the label
+                submission.totalScore -= 1
+                submission.userScore -= 1
+                totalVotes.text = "\(submission.totalScore)"
+                print(submission.totalScore)
+                downVote.isEnabled = false
+                upVote.isEnabled = true
+                //  downVote.isEnabled = false
+                
+            }
+            
         }
-
-        //notify user has voted
-        else if(submission.isDownvoted){
-            //disable button
-            downVote.isEnabled = false
-        }
+        
     }
-
+    
 }
