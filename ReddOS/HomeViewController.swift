@@ -88,6 +88,7 @@ class HomeViewController: UITableViewController {
                 let homeDetailViewController = segue.destination as!
                     HomeDetailViewController
                 homeDetailViewController.submission = submission
+                homeDetailViewController.reddit = self.delegate.reddit!
             }
         default:
             preconditionFailure("Unexpected segue identifier")

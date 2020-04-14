@@ -52,7 +52,11 @@ class HomeDetailViewController : UIViewController {
             //enable it
             upVote.isEnabled = true
             //try to vote
-            try! reddit.vote(onRedditContent: submission, inDirection: 1, completionHandler: VoteCompletionHandler(error:))
+            do {
+                try reddit.vote(onRedditContent: submission, inDirection: 1, completionHandler: VoteCompletionHandler(error:))
+            } catch {
+                print(error.localizedDescription)
+            }
         
             submission.totalScore += 1
             totalVotes.text = "\(submission.totalScore)"
