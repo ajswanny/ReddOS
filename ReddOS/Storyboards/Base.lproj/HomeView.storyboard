@@ -79,20 +79,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="31" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6w-aP-W0O">
-                                <rect key="frame" x="20" y="137" width="319" height="512"/>
+                                <rect key="frame" x="20" y="137" width="319" height="463"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ex9-9f-Wxr" userLabel="Upvote">
-                                <rect key="frame" x="363" y="372" width="20" height="22"/>
+                                <rect key="frame" x="363" y="323" width="20" height="22"/>
                                 <state key="normal" image="chevron.up" catalog="system"/>
                                 <connections>
                                     <action selector="upVoteSub:" destination="bOA-VM-XWF" eventType="touchUpInside" id="cse-iV-lUW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I8-np-IlJ" userLabel="Downvote">
-                                <rect key="frame" x="363" y="423" width="20" height="28"/>
+                                <rect key="frame" x="363" y="374" width="20" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="n7D-U3-EUe"/>
                                     <constraint firstAttribute="height" constant="28" id="trL-wJ-O8M"/>
@@ -103,7 +103,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmn-NO-Cs5" userLabel="Totalvotes">
-                                <rect key="frame" x="347" y="398" width="52" height="20"/>
+                                <rect key="frame" x="347" y="349" width="52" height="20"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -169,7 +169,11 @@
         <scene sceneID="wqV-68-fWM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uSq-y3-hsT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="house.fill" catalog="system" selectedImage="house.fill" id="NaT-f3-le0">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Zu-OG-25Z">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -190,5 +194,6 @@
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.up" catalog="system" width="128" height="72"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
     </resources>
 </document>
