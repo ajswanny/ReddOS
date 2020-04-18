@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import UIKit
 
 public enum RedditError: Error {
     case userNotAuthenticated
@@ -19,7 +20,10 @@ class Reddit {
     
     // MARK: Properties
     /// Host to make requests after a user is authenticated
-    public var host = "https://oauth.reddit.com"
+    public final var host = "https://oauth.reddit.com"
+    
+    /// Host for images hosted on Reddit
+    public final var imagesHost = "i.redd.it"
     
     /// Reference to the authentication controller
     var authenticationController: AuthenticationController
@@ -255,34 +259,54 @@ class Reddit {
         for submissionData in submissionData {
 
             guard let submissionData = submissionData["data"] as? [String: Any] else { fatalError() }
-            let authorName = submissionData["author"] as! String
-            let creationDate = Date(timeIntervalSince1970: submissionData["created_utc"] as! Double)
-            let id = submissionData["name"] as! String
-            let parentSubredditName = submissionData["subreddit_name_prefixed"] as! String
-            let title = submissionData["title"] as! String
-            let selftext = submissionData["selftext"] as! String
-            let urlValue = submissionData["url"] as! String
-            var userScore: Int {
-                let value = submissionData["likes"]
-                if value == nil {
-                    return 0
-                } else {
-                    let value = value as! Bool
-                    if value {
-                        return 1
-                    } else {
-                        return -1
-                    }
-                }
-            }
-            let totalScore = submissionData["score"] as! Int
-            
-            let newSubmission = Submission(authorName: authorName, creationDate: creationDate, id: id, parentSubredditName: parentSubredditName, title: title, selftext: selftext, urlValue: urlValue, userScore: 0, totalScore: totalScore)
+            let newSubmission = parseSubmission(fromData: submissionData)
             submissions.append(newSubmission)
             
         }
         
         return submissions
+        
+    }
+    
+    private func parseSubmission(fromData submissionData: [String: Any]) -> Submission {
+        
+        // Base values
+        let authorName = submissionData["author"] as! String
+        let creationDate = Date(timeIntervalSince1970: submissionData["created_utc"] as! Double)
+        let id = submissionData["name"] as! String
+        let parentSubredditName = submissionData["subreddit_name_prefixed"] as! String
+        let title = submissionData["title"] as! String
+        let selftext = submissionData["selftext"] as! String
+        
+        // User and total score
+        var userScore: Int {
+            let value = submissionData["likes"]
+            if value == nil {
+                return 0
+            } else {
+                let value = value as! Bool
+                if value {
+                    return 1
+                } else {
+                    return -1
+                }
+            }
+        }
+        let totalScore = submissionData["score"] as! Int
+        
+        // URL value
+        let urlValue = submissionData["url"] as! String
+        let url = URL(string: urlValue)
+        let domain = url?.host
+        var hasImage = false
+        if domain == imagesHost {
+            hasImage = true
+        }
+        
+        // Create the new submission object and return it
+        let newSubmission = Submission(authorName: authorName, creationDate: creationDate, id: id, parentSubredditName: parentSubredditName, title: title, selftext: selftext, urlValue: urlValue, hasImage: hasImage, userScore: userScore, totalScore: totalScore)
+        
+        return newSubmission
         
     }
     

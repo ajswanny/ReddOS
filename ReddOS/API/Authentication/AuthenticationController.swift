@@ -308,6 +308,7 @@ class AuthenticationController {
             
             #if DEBUG
             print("Successfully stored the access token for: \(authenticationType.rawValue).")
+            print("Authenticated with access token: \(newAuthenticationSession.accessToken ?? "")")
             #endif
             
             // Set current user session to newUserSession
