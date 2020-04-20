@@ -40,6 +40,7 @@
 		14E3900C242A6D63007CEFE2 /* HomeView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E3900A242A6D63007CEFE2 /* HomeView.storyboard */; };
 		14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F56464242533E0009A0AD6 /* RedditAccounts.swift */; };
 		14F564702425BD99009A0AD6 /* RedditContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5646F2425BD99009A0AD6 /* RedditContent.swift */; };
+		940E9FBB2446083D009CE7C5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E9FBA2446083D009CE7C5 /* AccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		14F56464242533E0009A0AD6 /* RedditAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAccounts.swift; sourceTree = "<group>"; };
 		14F5646624256C9E009A0AD6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14F5646F2425BD99009A0AD6 /* RedditContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditContent.swift; sourceTree = "<group>"; };
+		940E9FBA2446083D009CE7C5 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				148B7F5223E0AB0600BECD84 /* AppDelegate.swift */,
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
 				148B7F5823E0AB0600BECD84 /* SampleViewController.swift */,
+				940E9FBA2446083D009CE7C5 /* AccountViewController.swift */,
 				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
 				1426144F244611BB0099D410 /* HomeDetailViewController.swift */,
 				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A105B724410952007426F9 /* Notifications.swift in Sources */,
+				940E9FBB2446083D009CE7C5 /* AccountViewController.swift in Sources */,
 				14DD20F0242186C300D6D487 /* AuthenticationEnums.swift in Sources */,
 				14D8097A2440E11400CF6721 /* RedditContentType.swift in Sources */,
 				14B9B6AA24292EED002DC903 /* UserAuthenticationSession.swift in Sources */,
