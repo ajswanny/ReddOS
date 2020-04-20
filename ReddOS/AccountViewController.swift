@@ -45,9 +45,8 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         
         // Or, call a function to load and present all data like:
         // func makeAPICallAndPresentDataInUI()
-        
     }
-    
+    //subreddits objects classes and models
     
     /**
      Tests new-user login.
@@ -61,6 +60,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
      */
     @IBAction func testLoggingOutForUser(_ sender: Any) {
         delegate.authenticationController?.logoutUserSession()
+        print("log out")
     }
     
     /**
