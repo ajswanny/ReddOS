@@ -15,6 +15,7 @@ class HomeDetailViewController : UIViewController {
     @IBOutlet weak var downVote : UIButton!
     @IBOutlet weak var totalVotes : UILabel!
     @IBOutlet weak var subImagee : UIImageView!
+    @IBOutlet weak var subTitle : UILabel!
     
     //
     var reddit: Reddit!
@@ -29,8 +30,19 @@ class HomeDetailViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        bodySummarySubmission.text = submission!.selftext
+        
+        //handle case where submission has no text
+        if(submission!.selftext == ""){
+            bodySummarySubmission.text = "This submission has no text."
+            bodySummarySubmission.font = bodySummarySubmission.font.withSize(32)
+            bodySummarySubmission.textAlignment = .center
+        }
+        else{
+            bodySummarySubmission.text = submission!.selftext
+        }
+        
         totalVotes.text = "\(submission.totalScore)"
+        subTitle.text = submission!.title
         
     }
     
@@ -115,6 +127,8 @@ class HomeDetailViewController : UIViewController {
     
 }
 
+
+//MARK: - Image
 /**
  This extension allows for the download and automatic update of a image linked to by a URL.
  */
