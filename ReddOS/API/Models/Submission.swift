@@ -26,12 +26,12 @@ class Submission: RedditContent {
     /// The submission's selftext (the actual content) - an empty string if a link post.
     var selftext: String
     
-    /// The URL the submission links to, or the permalink if a selfpost.
-    var urlValue: String {
-        didSet {
-            // TODO: Implement detection and loading of URL (image of link)
-        }
-    }
+    /// The value of the URL the submission links to if it contains media, else the link to the submission itself When attempting to load an image for a
+    /// submission, first check if it exists via the `hasImage` property, then load asynchronously.
+    var urlValue: String
+    
+    /// Whether or not this submission contains an image in its content
+    var hasImage: Bool
     
     /// The Subreddit this Submission was posted in
     var parentSubredditName: String
@@ -43,14 +43,21 @@ class Submission: RedditContent {
     /**
      Default init
      */
-    init(authorName: String, creationDate: Date, id: String, parentSubredditName: String, title: String, selftext: String, urlValue: String, userScore: Int, totalScore: Int) {
+    init(authorName: String, creationDate: Date, id: String, parentSubredditName: String, title: String, selftext: String, urlValue: String, hasImage: Bool, userScore: Int, totalScore: Int) {
         self.authorName = authorName
         self.creationDate = creationDate
         self.parentSubredditName = parentSubredditName
         self.title = title
         self.selftext = selftext
         self.urlValue = urlValue
+        self.hasImage = hasImage
         super.init(contentType: .link, id: id, userScore: userScore, totalScore: totalScore)
     }
     
+}
+
+enum ImageState {
+    case exists
+    case isDownloading
+    case hasNoImage
 }
