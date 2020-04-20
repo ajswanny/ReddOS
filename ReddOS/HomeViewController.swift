@@ -108,23 +108,4 @@ class HomeViewCell: UITableViewCell {
 
 }
 
-/**
- This extension allows for the download and automatic update of a image linked to by a URL.
- */
-extension UIImageView {
-    
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                        // Can create a notification or print to notify of success
-                        print("Successfully downloaded the image set to \(image)")
-                    }
-                }
-            }
-        }
-    }
-    
-}
+

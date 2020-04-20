@@ -14,6 +14,7 @@ class HomeDetailViewController : UIViewController {
     @IBOutlet weak var upVote : UIButton!
     @IBOutlet weak var downVote : UIButton!
     @IBOutlet weak var totalVotes : UILabel!
+    @IBOutlet weak var subImagee : UIImageView!
     
     //
     var reddit: Reddit!
@@ -35,6 +36,10 @@ class HomeDetailViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(submission.hasImage){
+            let url = URL(string: submission.urlValue)!
+            subImagee.load(url: url)
+        }
     }
     
     
@@ -106,6 +111,29 @@ class HomeDetailViewController : UIViewController {
             
         }
         
+    }
+    
+}
+
+/**
+ This extension allows for the download and automatic update of a image linked to by a URL.
+ */
+extension UIImageView {
+    
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                        // Can create a notification or print to notify of success
+                        print("Successfully downloaded the image set to \(image)")
+                    }
+                }else{
+                    print("Cannot download image")
+                }
+            }
+        }
     }
     
 }
