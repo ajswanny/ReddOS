@@ -28,13 +28,15 @@ class HomeDetailViewController : UIViewController {
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //handle case where submission has no text
         if(submission!.selftext == ""){
-            bodySummarySubmission.text = "This submission has no text."
-            bodySummarySubmission.font = bodySummarySubmission.font.withSize(32)
+            bodySummarySubmission.text = submission.urlValue
+            bodySummarySubmission.font = bodySummarySubmission.font.withSize(18)
+            bodySummarySubmission.textColor = .link
             bodySummarySubmission.textAlignment = .center
         }
         else{
@@ -52,6 +54,11 @@ class HomeDetailViewController : UIViewController {
             let url = URL(string: submission.urlValue)!
             subImagee.load(url: url)
         }
+        
+        // This is the key
+           let tap = UITapGestureRecognizer(target: self, action: #selector(self.onClickLabel(sender:)))
+           bodySummarySubmission.isUserInteractionEnabled = true
+           bodySummarySubmission.addGestureRecognizer(tap)
     }
     
     
@@ -123,6 +130,22 @@ class HomeDetailViewController : UIViewController {
             
         }
         
+    }
+    
+    
+    // And that's the function :)
+    @objc func onClickLabel(sender:UITapGestureRecognizer) {
+        openUrl(urlString: submission.urlValue)
+    }
+    
+    
+    func openUrl(urlString:String!) {
+        let url = URL(string: urlString)!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
     
 }
