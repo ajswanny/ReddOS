@@ -2,12 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hit-ho-SKw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Account View Controller-->
         <scene sceneID="AHN-eM-pQR">
             <objects>
                 <viewController id="hit-ho-SKw" customClass="AccountViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,31 +15,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9TT-YF-nZl">
-                                <rect key="frame" x="188" y="390" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9TT-YF-nZl">
+                                <rect key="frame" x="188" y="433" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="testLoggingInForNewUser:" destination="hit-ho-SKw" eventType="touchUpInside" id="XpC-GJ-j5d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-XW-tfg">
-                                <rect key="frame" x="180" y="467" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abx-ga-GpZ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem id="WBZ-CT-Kpj">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="uix-Ez-Cgy">
+                                            <connections>
+                                                <action selector="didTapMenu:" destination="hit-ho-SKw" id="15E-qE-E6U"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-XW-tfg">
+                                <rect key="frame" x="173" y="471" width="68" height="30"/>
                                 <state key="normal" title="Log Out"/>
+                                <state key="disabled" title="Log Out"/>
                                 <connections>
                                     <action selector="testLoggingOutForUser:" destination="hit-ho-SKw" eventType="touchUpInside" id="DlJ-6f-y0G"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9TT-YF-nZl" firstAttribute="centerY" secondItem="mtb-bA-mRQ" secondAttribute="centerY" id="JAJ-dy-NQ8"/>
+                            <constraint firstItem="BmT-XW-tfg" firstAttribute="top" secondItem="9TT-YF-nZl" secondAttribute="bottom" constant="8" id="WDj-26-pVZ"/>
+                            <constraint firstItem="5x4-ed-6E5" firstAttribute="trailing" secondItem="BmT-XW-tfg" secondAttribute="trailing" constant="173" id="XmG-i5-IqA"/>
+                            <constraint firstItem="abx-ga-GpZ" firstAttribute="top" secondItem="5x4-ed-6E5" secondAttribute="top" id="as4-zI-lLB"/>
+                            <constraint firstItem="9TT-YF-nZl" firstAttribute="centerX" secondItem="abx-ga-GpZ" secondAttribute="centerX" id="dJQ-TB-bPz"/>
+                            <constraint firstItem="9TT-YF-nZl" firstAttribute="centerX" secondItem="mtb-bA-mRQ" secondAttribute="centerX" id="fjc-p9-ouh"/>
+                            <constraint firstItem="BmT-XW-tfg" firstAttribute="leading" secondItem="5x4-ed-6E5" secondAttribute="leading" constant="173" id="hYf-pm-OvM"/>
+                            <constraint firstItem="abx-ga-GpZ" firstAttribute="leading" secondItem="5x4-ed-6E5" secondAttribute="leading" id="oll-vf-Wr0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5x4-ed-6E5"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="D1A-5E-k99"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tu4-87-ZKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="682.60869565217399" y="386.38392857142856"/>
         </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="Y9u-8p-aCl">
+            <objects>
+                <tableViewController storyboardIdentifier="MenuViewController" id="WCs-zG-cJv" customClass="MenuViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zut-IY-Dic">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="WCs-zG-cJv" id="ouD-DZ-Y4Z"/>
+                            <outlet property="delegate" destination="WCs-zG-cJv" id="qbT-Mv-XEr"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xa3-FC-1Sr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1508.6956521739132" y="384.375"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
+    </resources>
 </document>

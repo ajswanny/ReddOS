@@ -9,8 +9,11 @@
 import UIKit
 import AuthenticationServices
 
-class AccountViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
+class AccountViewController: UIViewController, ASWebAuthenticationPresentationContextProviding, UIViewControllerTransitioningDelegate {
     
+    let transiton = SlideInTransition()
+    var topView: UIView?
+
     /// Is set to true when it is ok to make API calls.
     var canMakeAPICalls: Bool = false
     
@@ -24,7 +27,6 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         NotificationCenter.default.addObserver(self, selector: #selector(exampleAuthenticationCompleteListener), name: .onAuthenticated, object: nil)
         
     }
-    
     /**
      An example listener for an 'onAuthenticated' notification. The AuthenticationController posts this notification and adding a listener allows one to know when the app has logged in, thus being
      able to then perform API calls. Essentially, this notification acts as a greenlight to now perform API calls.
@@ -83,7 +85,17 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         return view.window!
     }
     
+    /**
+     Menu View
+     */
     
+    @IBAction func didTapMenu(_ sender: UIBarButtonItem) {
+            guard let menuViewController = storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else { return }
+            menuViewController.modalPresentationStyle = .overCurrentContext
+            menuViewController.transitioningDelegate = self
+            present(menuViewController, animated: true)
+        }
 }
+
 
 
