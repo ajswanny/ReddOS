@@ -119,7 +119,7 @@ public class APIEndpoint {
     }
     
     /// The list of parameters to be included as query parameters in the final URL
-    var parameters: [String: String]?
+    public var parameters: [String: String]?
     
     // MARK: Initialization
     /**

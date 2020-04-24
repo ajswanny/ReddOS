@@ -11,11 +11,18 @@ import Foundation
 /**
  Defines the properties that a Comment or Submission must have.
  */
-class RedditContent: Replyable {
+class RedditContent {
     
     // MARK: Properties
+    /// The type of reddit content.
+    var redditContentType: RedditContentType
+    
     /// A necessary ID to identify this object and allow the API to interact with it
     var id: String
+    
+    var fullname: String {
+        return redditContentType.rawValue + self.id
+    }
     
     /// The score respective to the user
     var userScore: Int
@@ -49,7 +56,8 @@ class RedditContent: Replyable {
     /**
      Default init
      */
-    init(id: String, userScore: Int, totalScore: Int) {
+    init(contentType: RedditContentType, id: String, userScore: Int, totalScore: Int) {
+        self.redditContentType = contentType
         self.id = id
         self.userScore = userScore
         self.totalScore = totalScore

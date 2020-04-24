@@ -34,7 +34,7 @@ class Comment: RedditContent {
         self.authorName = authorName
         self.body = body
         self.submission = submission
-        super.init(id: id, userScore: userScore, totalScore: totalScore)
+        super.init(contentType: .comment, id: id, userScore: userScore, totalScore: totalScore)
     }
     
 }
