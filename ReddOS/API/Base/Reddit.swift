@@ -425,7 +425,9 @@ class Reddit {
     private var requestObservation: NSKeyValueObservation?
     func changeHandler(progress: Progress, observedChange: NSKeyValueObservedChange<Double>) {
         #if DEBUG
-        print("Progress for \(progress.fileURL?.absoluteString ?? "unknown resource"): ", progress.fractionCompleted)
+        print(
+            "Progress for \(progress.fileURL?.absoluteString ?? "unknown resource"): ",
+            progress.fractionCompleted)
         #endif
         if progress.fractionCompleted == 1.0 {
             requestObservation?.invalidate()

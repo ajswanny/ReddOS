@@ -44,9 +44,6 @@ class User {
     /// List of redditors' names this user has blocked
     var blockedRedditors: [String]?
     
-    /// Reference to the user's Inbox instance
-    var inbox: Inbox?
-    
     /// The front page (the 'BEST' Submissions)
     var front: [Submission]?
     
@@ -60,11 +57,10 @@ class User {
     /**
      
      */
-    init(username: String, karma: Int, friends: [String], subscriptions: [Subreddit], blockedRedditors: [String], front: [Submission], inbox: Inbox) {
+    init(username: String, karma: Int, friends: [String], subscriptions: [Subreddit], blockedRedditors: [String], front: [Submission]) {
         self.subscriptions = subscriptions
         self.blockedRedditors = blockedRedditors
         self.front = front
-        self.inbox = inbox
         self.friends = friends
     }
     
