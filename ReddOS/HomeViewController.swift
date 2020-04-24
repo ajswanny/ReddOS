@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewController: UITableViewController {
     
-    var hotSubmissions: [Submission]!
+    var hotSubmissions: [Submission] = [Submission]()
 
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
