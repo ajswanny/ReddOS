@@ -40,8 +40,6 @@
 		14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F56464242533E0009A0AD6 /* RedditAccounts.swift */; };
 		14F564702425BD99009A0AD6 /* RedditContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5646F2425BD99009A0AD6 /* RedditContent.swift */; };
 		940E9FBB2446083D009CE7C5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E9FBA2446083D009CE7C5 /* AccountViewController.swift */; };
-		94EB50952450A2AB00D33321 /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EB50942450A2AB00D33321 /* SlideInTransition.swift */; };
-		94EB50992450A2F000D33321 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EB50982450A2F000D33321 /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,8 +100,6 @@
 		14F5646624256C9E009A0AD6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14F5646F2425BD99009A0AD6 /* RedditContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditContent.swift; sourceTree = "<group>"; };
 		940E9FBA2446083D009CE7C5 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		94EB50942450A2AB00D33321 /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
-		94EB50982450A2F000D33321 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,8 +207,6 @@
 				148B7F5823E0AB0600BECD84 /* SampleViewController.swift */,
 				940E9FBA2446083D009CE7C5 /* AccountViewController.swift */,
 				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
-				94EB50982450A2F000D33321 /* MenuViewController.swift */,
-				94EB50942450A2AB00D33321 /* SlideInTransition.swift */,
 				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
 				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
 				148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */,
@@ -394,7 +388,6 @@
 				148B7F5923E0AB0600BECD84 /* SampleViewController.swift in Sources */,
 				14652544241C3A890038181E /* Reddit.swift in Sources */,
 				14F564702425BD99009A0AD6 /* RedditContent.swift in Sources */,
-				94EB50952450A2AB00D33321 /* SlideInTransition.swift in Sources */,
 				14861D522408189000D18976 /* SampleData.swift in Sources */,
 				14B9B6A82428F944002DC903 /* HomeViewController.swift in Sources */,
 				14F56465242533E0009A0AD6 /* RedditAccounts.swift in Sources */,
@@ -408,7 +401,6 @@
 				14861D4424079C3300D18976 /* Subreddit.swift in Sources */,
 				14861D5024080F5C00D18976 /* User.swift in Sources */,
 				14861D4A2407A32400D18976 /* Comment.swift in Sources */,
-				94EB50992450A2F000D33321 /* MenuViewController.swift in Sources */,
 				14861D4C2407A89000D18976 /* Inbox.swift in Sources */,
 				146B1A1B2427E3380034D92E /* HTTPRequestType.swift in Sources */,
 				1428804E2426C427007BDEE2 /* Replyable.swift in Sources */,

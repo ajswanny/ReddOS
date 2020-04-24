@@ -19,6 +19,7 @@
                                 <rect key="frame" x="188" y="433" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
+                                    <action selector="login:" destination="hit-ho-SKw" eventType="touchUpInside" id="aii-kw-I0p"/>
                                     <action selector="testLoggingInForNewUser:" destination="hit-ho-SKw" eventType="touchUpInside" id="XpC-GJ-j5d"/>
                                 </connections>
                             </button>
@@ -28,58 +29,79 @@
                                     <navigationItem id="WBZ-CT-Kpj">
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="uix-Ez-Cgy">
                                             <connections>
-                                                <action selector="didTapMenu:" destination="hit-ho-SKw" id="15E-qE-E6U"/>
+                                                <action selector="listButton:" destination="hit-ho-SKw" id="u2L-Pz-QBn"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-XW-tfg">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-XW-tfg">
                                 <rect key="frame" x="173" y="471" width="68" height="30"/>
                                 <state key="normal" title="Log Out"/>
                                 <state key="disabled" title="Log Out"/>
                                 <connections>
+                                    <action selector="logout:" destination="hit-ho-SKw" eventType="touchUpInside" id="epf-Hk-dWD"/>
                                     <action selector="testLoggingOutForUser:" destination="hit-ho-SKw" eventType="touchUpInside" id="DlJ-6f-y0G"/>
+                                    <segue destination="hit-ho-SKw" kind="popoverPresentation" popoverAnchorView="BmT-XW-tfg" id="QjB-bL-BaV">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oD3-hq-tix">
+                                <rect key="frame" x="0.0" y="88" width="240" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="N2o-nf-3Lo">
+                                        <rect key="frame" x="0.0" y="28" width="240" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N2o-nf-3Lo" id="Kwo-b3-z42">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jny-V4-M6a">
+                                                    <rect key="frame" x="16" y="11" width="208" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="hit-ho-SKw" id="bLt-1S-U4e"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="9TT-YF-nZl" firstAttribute="centerY" secondItem="mtb-bA-mRQ" secondAttribute="centerY" id="JAJ-dy-NQ8"/>
                             <constraint firstItem="BmT-XW-tfg" firstAttribute="top" secondItem="9TT-YF-nZl" secondAttribute="bottom" constant="8" id="WDj-26-pVZ"/>
                             <constraint firstItem="5x4-ed-6E5" firstAttribute="trailing" secondItem="BmT-XW-tfg" secondAttribute="trailing" constant="173" id="XmG-i5-IqA"/>
+                            <constraint firstItem="5x4-ed-6E5" firstAttribute="trailing" secondItem="oD3-hq-tix" secondAttribute="trailing" constant="174" id="Xvq-Ew-q4x"/>
                             <constraint firstItem="abx-ga-GpZ" firstAttribute="top" secondItem="5x4-ed-6E5" secondAttribute="top" id="as4-zI-lLB"/>
                             <constraint firstItem="9TT-YF-nZl" firstAttribute="centerX" secondItem="abx-ga-GpZ" secondAttribute="centerX" id="dJQ-TB-bPz"/>
                             <constraint firstItem="9TT-YF-nZl" firstAttribute="centerX" secondItem="mtb-bA-mRQ" secondAttribute="centerX" id="fjc-p9-ouh"/>
+                            <constraint firstItem="oD3-hq-tix" firstAttribute="leading" secondItem="5x4-ed-6E5" secondAttribute="leading" id="gdf-J6-K4t"/>
                             <constraint firstItem="BmT-XW-tfg" firstAttribute="leading" secondItem="5x4-ed-6E5" secondAttribute="leading" constant="173" id="hYf-pm-OvM"/>
+                            <constraint firstItem="oD3-hq-tix" firstAttribute="top" secondItem="abx-ga-GpZ" secondAttribute="bottom" id="jG7-bB-MUW"/>
                             <constraint firstItem="abx-ga-GpZ" firstAttribute="leading" secondItem="5x4-ed-6E5" secondAttribute="leading" id="oll-vf-Wr0"/>
+                            <constraint firstItem="oD3-hq-tix" firstAttribute="bottom" secondItem="5x4-ed-6E5" secondAttribute="bottom" id="zf6-gE-G6p"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5x4-ed-6E5"/>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="loginButton" destination="9TT-YF-nZl" id="aX7-6v-ick"/>
+                        <outlet property="logoutButton" destination="BmT-XW-tfg" id="9eB-dI-4T3"/>
+                        <outlet property="table" destination="oD3-hq-tix" id="EJi-1M-nCe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tu4-87-ZKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682.60869565217399" y="386.38392857142856"/>
-        </scene>
-        <!--Menu View Controller-->
-        <scene sceneID="Y9u-8p-aCl">
-            <objects>
-                <tableViewController storyboardIdentifier="MenuViewController" id="WCs-zG-cJv" customClass="MenuViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zut-IY-Dic">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="WCs-zG-cJv" id="ouD-DZ-Y4Z"/>
-                            <outlet property="delegate" destination="WCs-zG-cJv" id="qbT-Mv-XEr"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xa3-FC-1Sr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1508.6956521739132" y="384.375"/>
+            <point key="canvasLocation" x="611.59420289855075" y="320.75892857142856"/>
         </scene>
     </scenes>
     <resources>

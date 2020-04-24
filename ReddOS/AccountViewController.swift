@@ -9,11 +9,30 @@
 import UIKit
 import AuthenticationServices
 
-class AccountViewController: UIViewController, ASWebAuthenticationPresentationContextProviding, UIViewControllerTransitioningDelegate {
+class AccountViewController: UIViewController, ASWebAuthenticationPresentationContextProviding, UIViewControllerTransitioningDelegate, UITableViewDataSource {
     
-    let transiton = SlideInTransition()
-    var topView: UIView?
-
+    var subReddits: [Subreddit] = []
+    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return subReddits.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        let(subReddit) = subReddits [indexPath.row]
+        
+        cell.textLabel?.text = subReddit.displayName
+        return cell
+    }
+    
     /// Is set to true when it is ok to make API calls.
     var canMakeAPICalls: Bool = false
     
@@ -40,7 +59,15 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         do {
             try delegate.reddit?.loadUserFront() { data, error in
                 print(data!.map { submission in submission.title })
+            
             }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        do {
+            try delegate.reddit?.loadUserSubscriptions(completionHandler: completionHandler(data:error:))
+            //.loadUserS(completionHandler:completionHandler(data:error:))
         } catch {
             print(error.localizedDescription)
         }
@@ -48,6 +75,32 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         // Or, call a function to load and present all data like:
         // func makeAPICallAndPresentDataInUI()
     }
+    
+    //take data optional and error otional
+    func completionHandler(data: [Subreddit]?, error: Error?) -> Void {
+        
+        // Validate data
+        guard let submissionList = data, error == nil else {
+            fatalError()
+        }
+        
+        // Redefine data
+        subReddits = submissionList
+        print(subReddits)
+        
+        // Reload UI
+        DispatchQueue.main.async {
+            self.table.reloadData()
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        table.reloadData()
+    }
+    
+    
     //subreddits objects classes and models
     
     /**
@@ -89,12 +142,24 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
      Menu View
      */
     
-    @IBAction func didTapMenu(_ sender: UIBarButtonItem) {
-            guard let menuViewController = storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else { return }
-            menuViewController.modalPresentationStyle = .overCurrentContext
-            menuViewController.transitioningDelegate = self
-            present(menuViewController, animated: true)
+    @IBAction func listButton(_ sender: UIBarButtonItem) {
+        if (table.isHidden){
+            table.isHidden = false
+        } else {
+            table.isHidden = true
         }
+    }
+    
+    @IBAction func login(_ sender: Any) {
+        loginButton.isHidden = true
+        logoutButton.isHidden = false
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        loginButton.isHidden = false
+        logoutButton.isHidden = true
+    }
+    
 }
 
 
