@@ -21,13 +21,11 @@ class HomeDetailViewController : UIViewController {
     var reddit: Reddit!
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
-    //TODO: put subreddit title on navigation bar
     var submission: Submission! {
         didSet{
             navigationItem.title = submission.parentSubredditName
         }
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

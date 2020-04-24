@@ -137,7 +137,7 @@ class AuthenticationController {
     /**
      Create a new authentication session for a new user
      */
-    public func authenticateNewUser(fromView presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
+    public func authenticateNewUser(fromView presentationContextProvider: AccountViewController) {
         
         // Validate the authorization URL
         guard let authorizationURL = URL(string: configuration.authorizationURL) else { fatalError() }
@@ -146,7 +146,6 @@ class AuthenticationController {
         let authorizationSession = ASWebAuthenticationSession(url: authorizationURL, callbackURLScheme: configuration.callbackURLScheme)
         { callbackURL, error in
         /// The completion closure for completion of the authorization session
-        /// TODO: Implement handling of a deny of access by the user
             
             // Validate the data sent through the callback
             guard
@@ -154,8 +153,10 @@ class AuthenticationController {
                 let callbackURL = callbackURL,
                 let queryItems: [String: String] = callbackURL.queryParameters
             else {
-                // TODO: Handle the error
-                fatalError()
+                let alert = UIAlertController(title: "Login Failed", message: "Login canceled or failed", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                presentationContextProvider.present(alert, animated: true, completion: nil)
+                return
             }
             
             // Fetch the code to eaxchange for a bearer token
