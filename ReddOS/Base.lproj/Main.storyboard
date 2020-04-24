@@ -16,7 +16,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="aCl-4r-dUg" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="iJO-jA-8vl" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="SYS-Qg-S1B" kind="relationship" relationship="viewControllers" id="QA8-iJ-9DV"/>
                     </connections>
                 </tabBarController>
@@ -25,24 +25,28 @@
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
         <!--HomeView-->
-        <scene sceneID="p42-dB-Slh">
+        <scene sceneID="jhg-G9-VAu">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SampleView" storyboardName="HomeView" id="aCl-4r-dUg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Zf9-9Z-MZ0"/>
+                <viewControllerPlaceholder storyboardIdentifier="HomeView" storyboardName="HomeView" id="iJO-jA-8vl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="first" id="MXY-NN-NOP"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rMh-Ez-osH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pb3-ib-Kd5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="-92"/>
+            <point key="canvasLocation" x="745" y="-98"/>
         </scene>
         <!--AccountView-->
         <scene sceneID="8Iy-OE-5ZN">
             <objects>
                 <viewControllerPlaceholder storyboardIdentifier="AccountView" storyboardName="AccountView" id="SYS-Qg-S1B" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="iLt-EN-YY4"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="second" selectedImage="second" id="iLt-EN-YY4"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whR-e1-DBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="745" y="90"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
+    </resources>
 </document>

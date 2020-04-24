@@ -74,7 +74,6 @@ class HomeDetailViewController : UIViewController {
     @IBAction func upVoteSub(_ upVote: UIButton){
         //if the totalScore is 0 or -1
         if(submission.userScore == 0 || submission.userScore == -1){
-            print(submission.userScore)
 
             //try to vote
             do {
@@ -94,10 +93,8 @@ class HomeDetailViewController : UIViewController {
                 submission.totalScore += 1
                 submission.userScore += 1
                 totalVotes.text = "\(submission.totalScore)"
-                print(submission.userScore)
                 upVote.isEnabled = false
                 downVote.isEnabled = true
-                //print(submission.totalScore)
             }
         }
     }
@@ -105,8 +102,6 @@ class HomeDetailViewController : UIViewController {
     @IBAction func downVoteSub(_ downVote: UIButton){
         //if the totalScore is 0 or 1
         if(submission.userScore == 0 || submission.userScore == 1){
-            print(submission.userScore)
-            
             
             //try to vote
             try! reddit.vote(onRedditContent: submission, inDirection: -1, completionHandler: VoteCompletionHandler(error:))
@@ -121,7 +116,6 @@ class HomeDetailViewController : UIViewController {
                 submission.totalScore -= 1
                 submission.userScore -= 1
                 totalVotes.text = "\(submission.totalScore)"
-                print(submission.totalScore)
                 downVote.isEnabled = false
                 upVote.isEnabled = true
                 //  downVote.isEnabled = false
@@ -166,7 +160,7 @@ extension UIImageView {
                         // Can create a notification or print to notify of success
                         print("Successfully downloaded the image set to \(image)")
                     }
-                }else{
+                } else {
                     print("Cannot download image")
                 }
             }
