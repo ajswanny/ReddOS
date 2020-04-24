@@ -109,7 +109,7 @@ public class APIEndpoint {
             }
             
             // Construct and return full url as string
-            let urlComponents = NSURLComponents(string: "\(host)\(baseEndpoint)")
+            let urlComponents = NSURLComponents(string: "\(host)\(baseEndpoint.rawValue)")
             // TODO: Improve validation
             return urlComponents?.url?.absoluteString ?? ""
         } else {
@@ -119,7 +119,7 @@ public class APIEndpoint {
     }
     
     /// The list of parameters to be included as query parameters in the final URL
-    var parameters: [String: String]?
+    public var parameters: [String: String]?
     
     // MARK: Initialization
     /**

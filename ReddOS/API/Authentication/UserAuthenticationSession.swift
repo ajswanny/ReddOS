@@ -8,11 +8,9 @@
 
 import Foundation
 
-class AuthenticationSession {
+class AuthenticationSession: NSObject, NSCoding, Codable {
     
     // MARK: Properties
-    /// Username of the authenticated account
-    var username: String?
     
     /// The refresh token retrieved during the initial request for an access token
     var refreshToken: String?
@@ -36,11 +34,52 @@ class AuthenticationSession {
     }
     
     // MARK: Initialization
-    init() {
+    /**
+     
+     */
+    override init() {
+        //
+    }
+//    
+//    init(refreshToken: ) {
+//        super.init()
+//        
+//    }
+    
+    /**
+     
+     */
+    
+    // MARK: Coding
+    /**
+     
+     */
+    func encode(with coder: NSCoder) {
+        coder.encode(refreshToken, forKey: "refreshToken")
+        coder.encode(accessToken, forKey: "accessToken")
+        coder.encode(tokenType, forKey: "tokenType")
+        coder.encode(expirationDate, forKey: "expirationDate")
     }
     
-    init(username: String) {
-        self.username = username
+    /**
+     
+     */
+    required init?(coder: NSCoder) {
+        self.refreshToken = coder.decodeObject(forKey: "refreshToken") as? String
+        self.accessToken = coder.decodeObject(forKey: "accessToken") as? String
+        self.tokenType = coder.decodeObject(forKey: "tokenType") as? String
+        self.expirationDate = coder.decodeObject(forKey: "expirationDate") as? Date
+    }
+    
+    // MARK: Logout
+    /**
+     
+     */
+    public func logout() {
+        refreshToken = nil
+        accessToken = nil
+        tokenType = nil
+        expirationDate = nil
     }
     
 }
