@@ -299,9 +299,6 @@ class Reddit {
         var hasImage = false
         if domain == imagesHost {
             hasImage = true
-            print("\(title): has image")
-        }else{
-            print("no image")
         }
         
         // Create the new submission object and return it
@@ -427,7 +424,9 @@ class Reddit {
     // MARK: Request Observation
     private var requestObservation: NSKeyValueObservation?
     func changeHandler(progress: Progress, observedChange: NSKeyValueObservedChange<Double>) {
+        #if DEBUG
         print("Progress for \(progress.fileURL?.absoluteString ?? "unknown resource"): ", progress.fractionCompleted)
+        #endif
         if progress.fractionCompleted == 1.0 {
             requestObservation?.invalidate()
         }

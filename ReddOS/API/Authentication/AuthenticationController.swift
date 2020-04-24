@@ -32,7 +32,9 @@ class AuthenticationController {
     var userSession: AuthenticationSession? {
         didSet {
             if userSession?.refreshToken != nil {
+                #if DEBUG
                 print("New value set for AuthenticationController.userSession; saving the object...")
+                #endif
                 saveUserSession()
             }
         }
@@ -110,12 +112,16 @@ class AuthenticationController {
             
             // Reauthenticate
             reauthenticateCurrentUser()
+            #if DEBUG
             print("Successfully reauthenticated")
+            #endif
             
         } else {
             // Create new session object
             self.previousUserSession = AuthenticationSession()
+            #if DEBUG
             print("User session is not authorized for authentication; foregoing re-authentication.")
+            #endif
         }
         
     }
@@ -334,25 +340,12 @@ class AuthenticationController {
         }
         UserDefaults.standard.set(encoded, forKey: "userSession")
         
-//        do {
-//            guard let userSession = self.userSession else { fatalError() }
-//            let data = try NSKeyedArchiver.archivedData(withRootObject: userSession, requiringSecureCoding: false)
-//            try data.write(to: userSessionDataStore)
-//            #if DEBUG
-//            print("Successfully serialized the user session object.")
-//            #endif
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-        
     }
     
     /**
      Reloads the stored user session
      */
     private func loadUserSession() -> AuthenticationSession {
-        
-        print(userSessionDataStore.absoluteString)
         
         do {
             let data = try Data(contentsOf: userSessionDataStore)
@@ -366,7 +359,6 @@ class AuthenticationController {
             #endif
             return object
         } catch {
-            print(error.localizedDescription)
             fatalError()
         }
         

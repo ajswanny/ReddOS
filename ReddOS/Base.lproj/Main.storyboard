@@ -16,7 +16,6 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="aCl-4r-dUg" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="iJO-jA-8vl" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="SYS-Qg-S1B" kind="relationship" relationship="viewControllers" id="QA8-iJ-9DV"/>
                     </connections>
@@ -25,31 +24,21 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--SampleView-->
-        <scene sceneID="p42-dB-Slh">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SampleView" storyboardName="SampleView" id="aCl-4r-dUg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inbox" image="message" catalog="system" id="Zf9-9Z-MZ0"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rMh-Ez-osH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="733" y="-92"/>
-        </scene>
         <!--HomeView-->
         <scene sceneID="jhg-G9-VAu">
             <objects>
                 <viewControllerPlaceholder storyboardIdentifier="HomeView" storyboardName="HomeView" id="iJO-jA-8vl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="flame" catalog="system" id="MXY-NN-NOP"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="first" id="MXY-NN-NOP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pb3-ib-Kd5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="0.0"/>
+            <point key="canvasLocation" x="745" y="-98"/>
         </scene>
         <!--AccountView-->
         <scene sceneID="8Iy-OE-5ZN">
             <objects>
                 <viewControllerPlaceholder storyboardIdentifier="AccountView" storyboardName="AccountView" id="SYS-Qg-S1B" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Account" image="person" catalog="system" selectedImage="person" id="iLt-EN-YY4"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="second" selectedImage="second" id="iLt-EN-YY4"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whR-e1-DBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,8 +46,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="flame" catalog="system" width="109" height="128"/>
-        <image name="message" catalog="system" width="128" height="113"/>
-        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
     </resources>
 </document>
