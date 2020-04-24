@@ -9,7 +9,30 @@
 import UIKit
 import AuthenticationServices
 
-class AccountViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
+class AccountViewController: UIViewController, ASWebAuthenticationPresentationContextProviding, UIViewControllerTransitioningDelegate, UITableViewDataSource {
+    
+    var subReddits: [Subreddit] = []
+    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var profilepic: UIImageView!
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return subReddits.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        let(subReddit) = subReddits [indexPath.row]
+        
+        cell.textLabel?.text = subReddit.displayName
+        return cell
+    }
     
     /// Is set to true when it is ok to make API calls.
     var canMakeAPICalls: Bool = false
@@ -24,7 +47,6 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         NotificationCenter.default.addObserver(self, selector: #selector(exampleAuthenticationCompleteListener), name: .onAuthenticated, object: nil)
         
     }
-    
     /**
      An example listener for an 'onAuthenticated' notification. The AuthenticationController posts this notification and adding a listener allows one to know when the app has logged in, thus being
      able to then perform API calls. Essentially, this notification acts as a greenlight to now perform API calls.
@@ -38,7 +60,14 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         do {
             try delegate.reddit?.loadUserFront() { data, error in
                 print(data!.map { submission in submission.title })
+            
             }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        do {
+            try delegate.reddit?.loadUserSubscriptions(completionHandler: completionHandler(data:error:))
         } catch {
             print(error.localizedDescription)
         }
@@ -46,6 +75,32 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         // Or, call a function to load and present all data like:
         // func makeAPICallAndPresentDataInUI()
     }
+    
+    //take data optional and error otional
+    func completionHandler(data: [Subreddit]?, error: Error?) -> Void {
+        
+        // Validate data
+        guard let submissionList = data, error == nil else {
+            fatalError()
+        }
+        
+        // Redefine data
+        subReddits = submissionList
+        print(subReddits)
+        
+        // Reload UI
+        DispatchQueue.main.async {
+            self.table.reloadData()
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        table.reloadData()
+    }
+    
+    
     //subreddits objects classes and models
     
     /**
@@ -83,7 +138,30 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         return view.window!
     }
     
+    /**
+     Menu View
+     */
+    
+    @IBAction func listButton(_ sender: UIBarButtonItem) {
+        if (table.isHidden){
+            table.isHidden = false
+        } else {
+            table.isHidden = true
+        }
+    }
+    
+    @IBAction func login(_ sender: Any) {
+        logoutButton.isHidden = false
+        
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        logoutButton.isHidden = true
+        subReddits.removeAll()
+        table.reloadData()
+    }
     
 }
+
 
 
