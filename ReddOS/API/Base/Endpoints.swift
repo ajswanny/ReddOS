@@ -109,7 +109,7 @@ public class APIEndpoint {
             }
             
             // Construct and return full url as string
-            let urlComponents = NSURLComponents(string: "\(host)\(baseEndpoint)")
+            let urlComponents = NSURLComponents(string: "\(host)\(baseEndpoint.rawValue)")
             // TODO: Improve validation
             return urlComponents?.url?.absoluteString ?? ""
         } else {

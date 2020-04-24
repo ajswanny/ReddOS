@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1410B379242ECD83004423E3 /* AuthenticationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */; };
+		14261450244611BB0099D410 /* HomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1426144F244611BB0099D410 /* HomeDetailViewController.swift */; };
 		1428804E2426C427007BDEE2 /* Replyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428804D2426C427007BDEE2 /* Replyable.swift */; };
 		145234CE23FEE3BB003D4B13 /* SampleView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145234CC23FEE3BB003D4B13 /* SampleView.storyboard */; };
 		145234D123FEE418003D4B13 /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145234CF23FEE418003D4B13 /* AccountView.storyboard */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationConfiguration.swift; sourceTree = "<group>"; };
+		1426144F244611BB0099D410 /* HomeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDetailViewController.swift; sourceTree = "<group>"; };
 		1428804D2426C427007BDEE2 /* Replyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Replyable.swift; sourceTree = "<group>"; };
 		145234CD23FEE3BB003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SampleView.storyboard; sourceTree = "<group>"; };
 		145234D023FEE418003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountView.storyboard; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
 				148B7F5823E0AB0600BECD84 /* SampleViewController.swift */,
 				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
+				1426144F244611BB0099D410 /* HomeDetailViewController.swift */,
 				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
 				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
 				148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */,
@@ -392,6 +395,7 @@
 				148B7F5F23E0AB0600BECD84 /* ReddOS.xcdatamodeld in Sources */,
 				146A5FAD24277DAF00F08D19 /* Endpoints.swift in Sources */,
 				148B7F5323E0AB0600BECD84 /* AppDelegate.swift in Sources */,
+				14261450244611BB0099D410 /* HomeDetailViewController.swift in Sources */,
 				148B7F5523E0AB0600BECD84 /* SceneDelegate.swift in Sources */,
 				14861D4E2407A91600D18976 /* Message.swift in Sources */,
 				14861D4424079C3300D18976 /* Subreddit.swift in Sources */,

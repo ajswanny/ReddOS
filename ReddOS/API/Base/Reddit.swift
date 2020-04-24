@@ -281,12 +281,12 @@ class Reddit {
         // User and total score
         var userScore: Int {
             if let value = submissionData["likes"] as? Bool {
-                if value {
-                    return 1
-                } else {
-                    return -1
-                }
+            if value {
+                return 1
             } else {
+                return -1
+                }
+            }else{
                 return 0
             }
         }
@@ -299,6 +299,9 @@ class Reddit {
         var hasImage = false
         if domain == imagesHost {
             hasImage = true
+            print("\(title): has image")
+        }else{
+            print("no image")
         }
         
         // Create the new submission object and return it
