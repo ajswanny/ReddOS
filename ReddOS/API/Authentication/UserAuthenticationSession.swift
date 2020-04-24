@@ -35,20 +35,11 @@ class AuthenticationSession: NSObject, NSCoding, Codable {
     
     // MARK: Initialization
     /**
-     
+    Default init
      */
     override init() {
-        //
+        super.init()
     }
-//    
-//    init(refreshToken: ) {
-//        super.init()
-//        
-//    }
-    
-    /**
-     
-     */
     
     // MARK: Coding
     /**

@@ -31,6 +31,8 @@
 		148B7F6F23E0AB0700BECD84 /* ReddOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F6E23E0AB0700BECD84 /* ReddOSTests.swift */; };
 		148B7F7A23E0AB0700BECD84 /* ReddOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */; };
 		14A105B724410952007426F9 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A105B624410952007426F9 /* Notifications.swift */; };
+		14B172952453AEEC00D309C0 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B172932453AEEC00D309C0 /* OpenSans-Bold.ttf */; };
+		14B172962453AEEC00D309C0 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B172942453AEEC00D309C0 /* OpenSans-Regular.ttf */; };
 		14B9B6A82428F944002DC903 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6A72428F944002DC903 /* HomeViewController.swift */; };
 		14B9B6AA24292EED002DC903 /* UserAuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */; };
 		14D8097A2440E11400CF6721 /* RedditContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D809792440E11400CF6721 /* RedditContentType.swift */; };
@@ -89,6 +91,8 @@
 		148B7F7923E0AB0700BECD84 /* ReddOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReddOSUITests.swift; sourceTree = "<group>"; };
 		148B7F7B23E0AB0700BECD84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A105B624410952007426F9 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		14B172932453AEEC00D309C0 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		14B172942453AEEC00D309C0 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14B9B6A72428F944002DC903 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationSession.swift; sourceTree = "<group>"; };
 		14D809792440E11400CF6721 /* RedditContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditContentType.swift; sourceTree = "<group>"; };
@@ -138,8 +142,8 @@
 		143788EA2408786700B66388 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */,
 				14652541241C24B20038181E /* AuthenticationController.swift */,
+				14B9B6A924292EED002DC903 /* UserAuthenticationSession.swift */,
 				1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */,
 				14DD20EF242186C300D6D487 /* AuthenticationEnums.swift */,
 				14F56464242533E0009A0AD6 /* RedditAccounts.swift */,
@@ -199,6 +203,7 @@
 		148B7F5123E0AB0600BECD84 /* ReddOS */ = {
 			isa = PBXGroup;
 			children = (
+				14B172922453AEEC00D309C0 /* Fonts */,
 				148B7F5223E0AB0600BECD84 /* AppDelegate.swift */,
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
 				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
@@ -231,6 +236,15 @@
 				148B7F7B23E0AB0700BECD84 /* Info.plist */,
 			);
 			path = ReddOSUITests;
+			sourceTree = "<group>";
+		};
+		14B172922453AEEC00D309C0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				14B172932453AEEC00D309C0 /* OpenSans-Bold.ttf */,
+				14B172942453AEEC00D309C0 /* OpenSans-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		14B9B6A42428F7A6002DC903 /* Storyboards */ = {
@@ -349,6 +363,8 @@
 			files = (
 				14E3900C242A6D63007CEFE2 /* HomeView.storyboard in Resources */,
 				148B7F6423E0AB0600BECD84 /* LaunchScreen.storyboard in Resources */,
+				14B172952453AEEC00D309C0 /* OpenSans-Bold.ttf in Resources */,
+				14B172962453AEEC00D309C0 /* OpenSans-Regular.ttf in Resources */,
 				148B7F6123E0AB0600BECD84 /* Assets.xcassets in Resources */,
 				145234D123FEE418003D4B13 /* AccountView.storyboard in Resources */,
 				148B7F5C23E0AB0600BECD84 /* Main.storyboard in Resources */,
