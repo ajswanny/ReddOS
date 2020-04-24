@@ -15,6 +15,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var profilepic: UIImageView!
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -67,7 +68,6 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         
         do {
             try delegate.reddit?.loadUserSubscriptions(completionHandler: completionHandler(data:error:))
-            //.loadUserS(completionHandler:completionHandler(data:error:))
         } catch {
             print(error.localizedDescription)
         }
@@ -151,13 +151,14 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
     }
     
     @IBAction func login(_ sender: Any) {
-        loginButton.isHidden = true
         logoutButton.isHidden = false
+        
     }
     
     @IBAction func logout(_ sender: Any) {
-        loginButton.isHidden = false
         logoutButton.isHidden = true
+        subReddits.removeAll()
+        table.reloadData()
     }
     
 }
