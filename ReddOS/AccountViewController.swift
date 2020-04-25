@@ -49,9 +49,14 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
             print(error.localizedDescription)
         }
         
-        let url = URL(string: (delegate.reddit?.user?.profilePictureUrl)!)!
-
-        profilepic.load(url: url)
+        if let profilePicURLValue = delegate.reddit?.user?.profilePictureUrl,
+            let profilePicURL = URL(string: profilePicURLValue) {
+            profilepic.load(url: profilePicURL)
+        } else {
+            #if DEBUG
+            print("Could not load user's profile picture")
+            #endif
+        }
         
     }
     /**
