@@ -43,38 +43,19 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // An example notification listener
-        NotificationCenter.default.addObserver(self, selector: #selector(exampleAuthenticationCompleteListener), name: .onAuthenticated, object: nil)
+       do {
+            try delegate.reddit?.loadUserSubscriptions(completionHandler: completionHandler(data:error:))
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        profilepic.load(url: URL(delegate.reddit?.user?.profilePictureUrl))
         
     }
     /**
      An example listener for an 'onAuthenticated' notification. The AuthenticationController posts this notification and adding a listener allows one to know when the app has logged in, thus being
      able to then perform API calls. Essentially, this notification acts as a greenlight to now perform API calls.
      */
-    @objc private func exampleAuthenticationCompleteListener(notification: NSNotification) {
-        
-        // Set an instance variable to indicate successful retrieval of notification
-        canMakeAPICalls = true
-        
-        // Perform some example calls
-        do {
-            try delegate.reddit?.loadUserFront() { data, error in
-                print(data!.map { submission in submission.title })
-            
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        do {
-            try delegate.reddit?.loadUserSubscriptions(completionHandler: completionHandler(data:error:))
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        // Or, call a function to load and present all data like:
-        // func makeAPICallAndPresentDataInUI()
-    }
     
     //take data optional and error otional
     func completionHandler(data: [Subreddit]?, error: Error?) -> Void {
@@ -149,19 +130,11 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
             table.isHidden = true
         }
     }
-    
-    @IBAction func login(_ sender: Any) {
-        logoutButton.isHidden = false
-        
-    }
-    
-    @IBAction func logout(_ sender: Any) {
-        logoutButton.isHidden = true
-        subReddits.removeAll()
-        table.reloadData()
-    }
-    
 }
 
+//MARK: - Image
+/**
+ This extension allows for the download and automatic update of a image linked to by a URL.
+ */
 
 
