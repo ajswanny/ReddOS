@@ -47,6 +47,7 @@ class Reddit {
     public init(authenticationController: AuthenticationController) {
         self.authenticationController = authenticationController
         self.user = User()
+        NotificationCenter.default.addObserver(self, selector: #selector(initializeUserData), name: .onAuthenticated, object: nil)
     }
     
     /**
@@ -76,7 +77,7 @@ class Reddit {
      - Parameters:
         - completionHandler: The callback for when this request completes
      */
-    public func initializeUserData(completionHandler: @escaping InitUserDataCompletionHandler) throws {
+    @objc private func initializeUserData() throws {
         
         // Validate session
         try validateUserSession()
@@ -103,11 +104,11 @@ class Reddit {
                 self.user?.username = username
                 self.user?.karma = linkKarma + commentKarma
                 self.user?.profilePictureUrl = profilePictureURL
-                let userData: [String: Any] = ["username": username, "karma": linkKarma + commentKarma, "profilePictureURL": profilePictureURL]
-                completionHandler(userData, nil)
                 
             } else {
-                completionHandler(nil, error)
+                #if DEBUG
+                print("Could not initialize user data")
+                #endif
             }
         }
         
