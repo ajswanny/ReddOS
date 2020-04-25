@@ -49,17 +49,23 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
             print(error.localizedDescription)
         }
         
+        presentUserData()
+        setupLoginButtons()
+        
+    }
+    
+    func presentUserData() {
+        
         if let profilePicURLValue = delegate.reddit?.user?.profilePictureUrl,
             let profilePicURL = URL(string: profilePicURLValue) {
             profilepic.load(url: profilePicURL)
         } else {
             #if DEBUG
             print("Could not load user's profile picture")
+            profilepic.isHidden = true
             #endif
             
         }
-        
-        setupLoginButtons()
         
     }
     
@@ -99,6 +105,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         table.reloadData()
+        presentUserData()
         setupLoginButtons()
     }
     
