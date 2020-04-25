@@ -60,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationConfiguration.swift; sourceTree = "<group>"; };
+		14128C032453BEC500788E79 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1426144F244611BB0099D410 /* HomeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDetailViewController.swift; sourceTree = "<group>"; };
 		1428804D2426C427007BDEE2 /* Replyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Replyable.swift; sourceTree = "<group>"; };
 		145234D023FEE418003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountView.storyboard; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 		148B7F4623E0AB0600BECD84 = {
 			isa = PBXGroup;
 			children = (
+				14128C032453BEC500788E79 /* README.md */,
 				148B7F5123E0AB0600BECD84 /* ReddOS */,
 				148B7F6D23E0AB0700BECD84 /* ReddOSTests */,
 				148B7F7823E0AB0700BECD84 /* ReddOSUITests */,
