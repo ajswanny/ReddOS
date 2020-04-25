@@ -49,7 +49,9 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
             print(error.localizedDescription)
         }
         
-        profilepic.load(url: URL(delegate.reddit?.user?.profilePictureUrl))
+        let url = URL(string: (delegate.reddit?.user?.profilePictureUrl)!)!
+
+        profilepic.load(url: url)
         
     }
     /**
@@ -131,10 +133,5 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
         }
     }
 }
-
-//MARK: - Image
-/**
- This extension allows for the download and automatic update of a image linked to by a URL.
- */
 
 
