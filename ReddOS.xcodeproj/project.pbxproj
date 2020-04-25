@@ -60,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		1410B378242ECD83004423E3 /* AuthenticationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationConfiguration.swift; sourceTree = "<group>"; };
+		14128C032453BEC500788E79 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1426144F244611BB0099D410 /* HomeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDetailViewController.swift; sourceTree = "<group>"; };
 		1428804D2426C427007BDEE2 /* Replyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Replyable.swift; sourceTree = "<group>"; };
 		145234D023FEE418003D4B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountView.storyboard; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 		148B7F4623E0AB0600BECD84 = {
 			isa = PBXGroup;
 			children = (
+				14128C032453BEC500788E79 /* README.md */,
 				148B7F5123E0AB0600BECD84 /* ReddOS */,
 				148B7F6D23E0AB0700BECD84 /* ReddOSTests */,
 				148B7F7823E0AB0700BECD84 /* ReddOSUITests */,
@@ -200,13 +202,11 @@
 				148B7F5223E0AB0600BECD84 /* AppDelegate.swift */,
 				148B7F5423E0AB0600BECD84 /* SceneDelegate.swift */,
 				148B7F5A23E0AB0600BECD84 /* Main.storyboard */,
-				940E9FBA2446083D009CE7C5 /* AccountViewController.swift */,
-				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
-				1426144F244611BB0099D410 /* HomeDetailViewController.swift */,
-				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
 				148B7F6223E0AB0600BECD84 /* LaunchScreen.storyboard */,
 				148B7F6523E0AB0600BECD84 /* Info.plist */,
 				148B7F5D23E0AB0600BECD84 /* ReddOS.xcdatamodeld */,
+				148B7F6023E0AB0600BECD84 /* Assets.xcassets */,
+				14B172972453BB5A00D309C0 /* ViewControllers */,
 				14B9B6A42428F7A6002DC903 /* Storyboards */,
 				143788E9240877CC00B66388 /* API */,
 				14B172922453AEEC00D309C0 /* Fonts */,
@@ -239,6 +239,24 @@
 				14B172942453AEEC00D309C0 /* OpenSans-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		14B172972453BB5A00D309C0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				14B172982453BC6200D309C0 /* HomeView */,
+				940E9FBA2446083D009CE7C5 /* AccountViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		14B172982453BC6200D309C0 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				14B9B6A72428F944002DC903 /* HomeViewController.swift */,
+				1426144F244611BB0099D410 /* HomeDetailViewController.swift */,
+			);
+			path = HomeView;
 			sourceTree = "<group>";
 		};
 		14B9B6A42428F7A6002DC903 /* Storyboards */ = {

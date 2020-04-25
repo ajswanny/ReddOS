@@ -49,20 +49,39 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
             print(error.localizedDescription)
         }
         
+        presentUserData()
+        setupLoginButtons()
+        
+    }
+    
+    func presentUserData() {
+        
         if let profilePicURLValue = delegate.reddit?.user?.profilePictureUrl,
             let profilePicURL = URL(string: profilePicURLValue) {
             profilepic.load(url: profilePicURL)
         } else {
             #if DEBUG
             print("Could not load user's profile picture")
+            profilepic.isHidden = true
             #endif
+            
         }
         
     }
-    /**
-     An example listener for an 'onAuthenticated' notification. The AuthenticationController posts this notification and adding a listener allows one to know when the app has logged in, thus being
-     able to then perform API calls. Essentially, this notification acts as a greenlight to now perform API calls.
-     */
+    
+    func setupLoginButtons() {
+        if let auth = delegate.authenticationController?.userIsAuthorizedForAuthentication {
+            if auth {
+                loginButton.isHidden = true
+                logoutButton.isHidden = false
+                return
+            }
+        }
+        
+        loginButton.isHidden = false
+        logoutButton.isHidden = true
+        
+    }
     
     //take data optional and error otional
     func completionHandler(data: [Subreddit]?, error: Error?) -> Void {
@@ -86,6 +105,8 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         table.reloadData()
+        presentUserData()
+        setupLoginButtons()
     }
     
     
@@ -96,6 +117,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
      */
     @IBAction func testLoggingInForNewUser(_ sender: Any) {
         delegate.authenticationController?.authenticateNewUser(fromView: self)
+        setupLoginButtons()
     }
     
     /**
@@ -103,7 +125,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
      */
     @IBAction func testLoggingOutForUser(_ sender: Any) {
         delegate.authenticationController?.logoutUserSession()
-        print("log out")
+        setupLoginButtons()
     }
     
     /**
