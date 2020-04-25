@@ -131,6 +131,7 @@ class AuthenticationController {
      */
     public func logoutUserSession() {
         userSession?.logout()
+        UserDefaults.standard.removeObject(forKey: "userSession")
     }
     
     // MARK: New User Authentication

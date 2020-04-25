@@ -117,6 +117,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
      */
     @IBAction func testLoggingInForNewUser(_ sender: Any) {
         delegate.authenticationController?.authenticateNewUser(fromView: self)
+        setupLoginButtons()
     }
     
     /**
@@ -124,7 +125,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
      */
     @IBAction func testLoggingOutForUser(_ sender: Any) {
         delegate.authenticationController?.logoutUserSession()
-        print("log out")
+        setupLoginButtons()
     }
     
     /**
