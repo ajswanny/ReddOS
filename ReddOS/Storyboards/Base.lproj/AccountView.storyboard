@@ -2,12 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hit-ho-SKw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Account View Controller-->
+        <!--Account-->
         <scene sceneID="AHN-eM-pQR">
             <objects>
                 <viewController id="hit-ho-SKw" customClass="AccountViewController" customModule="ReddOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -49,10 +49,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="N2o-nf-3Lo">
-                                        <rect key="frame" x="0.0" y="28" width="240" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="240" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N2o-nf-3Lo" id="Kwo-b3-z42">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jny-V4-M6a">
@@ -100,8 +100,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5x4-ed-6E5"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Account" image="person.circle" catalog="system" id="EKI-am-Hcs"/>
                     <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="loginButton" destination="9TT-YF-nZl" id="aX7-6v-ick"/>
                         <outlet property="logoutButton" destination="BmT-XW-tfg" id="9eB-dI-4T3"/>
@@ -116,5 +117,6 @@
     </scenes>
     <resources>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

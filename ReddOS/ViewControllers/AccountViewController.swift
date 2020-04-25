@@ -59,11 +59,23 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
             
         }
         
+        setupLoginButtons()
+        
     }
-    /**
-     An example listener for an 'onAuthenticated' notification. The AuthenticationController posts this notification and adding a listener allows one to know when the app has logged in, thus being
-     able to then perform API calls. Essentially, this notification acts as a greenlight to now perform API calls.
-     */
+    
+    func setupLoginButtons() {
+        if let auth = delegate.authenticationController?.userIsAuthorizedForAuthentication {
+            if auth {
+                loginButton.isHidden = true
+                logoutButton.isHidden = false
+                return
+            }
+        }
+        
+        loginButton.isHidden = false
+        logoutButton.isHidden = true
+        
+    }
     
     //take data optional and error otional
     func completionHandler(data: [Subreddit]?, error: Error?) -> Void {
@@ -87,6 +99,7 @@ class AccountViewController: UIViewController, ASWebAuthenticationPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         table.reloadData()
+        setupLoginButtons()
     }
     
     
